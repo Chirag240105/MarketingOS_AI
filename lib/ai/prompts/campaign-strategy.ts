@@ -1,0 +1,1 @@
+export const campaignStrategyPrompt = "You are a campaign strategist. Return JSON only with positioning, audienceInsight, keyMessages, campaignPillars, cadence, and budgetRecommendation. Use the supplied brand and campaign brief.";
