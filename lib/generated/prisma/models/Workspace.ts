@@ -230,6 +230,8 @@ export type WorkspaceWhereInput = {
   auditLogs?: Prisma.AuditLogListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
   aiUsage?: Prisma.AIUsageListRelationFilter
+  aiRecommendations?: Prisma.AIRecommendationListRelationFilter
+  metaCampaigns?: Prisma.MetaCampaignListRelationFilter
 }
 
 export type WorkspaceOrderByWithRelationInput = {
@@ -251,6 +253,8 @@ export type WorkspaceOrderByWithRelationInput = {
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
   aiUsage?: Prisma.AIUsageOrderByRelationAggregateInput
+  aiRecommendations?: Prisma.AIRecommendationOrderByRelationAggregateInput
+  metaCampaigns?: Prisma.MetaCampaignOrderByRelationAggregateInput
 }
 
 export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
@@ -275,6 +279,8 @@ export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
   auditLogs?: Prisma.AuditLogListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
   aiUsage?: Prisma.AIUsageListRelationFilter
+  aiRecommendations?: Prisma.AIRecommendationListRelationFilter
+  metaCampaigns?: Prisma.MetaCampaignListRelationFilter
 }, "id" | "slug">
 
 export type WorkspaceOrderByWithAggregationInput = {
@@ -327,6 +333,8 @@ export type WorkspaceCreateInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateInput = {
@@ -347,6 +355,8 @@ export type WorkspaceUncheckedCreateInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUpdateInput = {
@@ -367,6 +377,8 @@ export type WorkspaceUpdateInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateInput = {
@@ -387,6 +399,8 @@ export type WorkspaceUncheckedUpdateInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateManyInput = {
@@ -592,6 +606,20 @@ export type WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutCampaignsInput, Prisma.WorkspaceUpdateWithoutCampaignsInput>, Prisma.WorkspaceUncheckedUpdateWithoutCampaignsInput>
 }
 
+export type WorkspaceCreateNestedOneWithoutMetaCampaignsInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutMetaCampaignsInput, Prisma.WorkspaceUncheckedCreateWithoutMetaCampaignsInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutMetaCampaignsInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+}
+
+export type WorkspaceUpdateOneRequiredWithoutMetaCampaignsNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutMetaCampaignsInput, Prisma.WorkspaceUncheckedCreateWithoutMetaCampaignsInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutMetaCampaignsInput
+  upsert?: Prisma.WorkspaceUpsertWithoutMetaCampaignsInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutMetaCampaignsInput, Prisma.WorkspaceUpdateWithoutMetaCampaignsInput>, Prisma.WorkspaceUncheckedUpdateWithoutMetaCampaignsInput>
+}
+
 export type WorkspaceCreateNestedOneWithoutAiUsageInput = {
   create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutAiUsageInput, Prisma.WorkspaceUncheckedCreateWithoutAiUsageInput>
   connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutAiUsageInput
@@ -604,6 +632,20 @@ export type WorkspaceUpdateOneRequiredWithoutAiUsageNestedInput = {
   upsert?: Prisma.WorkspaceUpsertWithoutAiUsageInput
   connect?: Prisma.WorkspaceWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutAiUsageInput, Prisma.WorkspaceUpdateWithoutAiUsageInput>, Prisma.WorkspaceUncheckedUpdateWithoutAiUsageInput>
+}
+
+export type WorkspaceCreateNestedOneWithoutAiRecommendationsInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutAiRecommendationsInput, Prisma.WorkspaceUncheckedCreateWithoutAiRecommendationsInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutAiRecommendationsInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+}
+
+export type WorkspaceUpdateOneRequiredWithoutAiRecommendationsNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkspaceCreateWithoutAiRecommendationsInput, Prisma.WorkspaceUncheckedCreateWithoutAiRecommendationsInput>
+  connectOrCreate?: Prisma.WorkspaceCreateOrConnectWithoutAiRecommendationsInput
+  upsert?: Prisma.WorkspaceUpsertWithoutAiRecommendationsInput
+  connect?: Prisma.WorkspaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkspaceUpdateToOneWithWhereWithoutAiRecommendationsInput, Prisma.WorkspaceUpdateWithoutAiRecommendationsInput>, Prisma.WorkspaceUncheckedUpdateWithoutAiRecommendationsInput>
 }
 
 export type WorkspaceCreateNestedOneWithoutSubscriptionsInput = {
@@ -653,6 +695,8 @@ export type WorkspaceCreateWithoutOwnerInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutOwnerInput = {
@@ -672,6 +716,8 @@ export type WorkspaceUncheckedCreateWithoutOwnerInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutOwnerInput = {
@@ -733,6 +779,8 @@ export type WorkspaceCreateWithoutMembershipsInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutMembershipsInput = {
@@ -752,6 +800,8 @@ export type WorkspaceUncheckedCreateWithoutMembershipsInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutMembershipsInput = {
@@ -787,6 +837,8 @@ export type WorkspaceUpdateWithoutMembershipsInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutMembershipsInput = {
@@ -806,6 +858,8 @@ export type WorkspaceUncheckedUpdateWithoutMembershipsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutBrandProfileInput = {
@@ -825,6 +879,8 @@ export type WorkspaceCreateWithoutBrandProfileInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutBrandProfileInput = {
@@ -844,6 +900,8 @@ export type WorkspaceUncheckedCreateWithoutBrandProfileInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutBrandProfileInput = {
@@ -879,6 +937,8 @@ export type WorkspaceUpdateWithoutBrandProfileInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutBrandProfileInput = {
@@ -898,6 +958,8 @@ export type WorkspaceUncheckedUpdateWithoutBrandProfileInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutSocialAccountsInput = {
@@ -917,6 +979,8 @@ export type WorkspaceCreateWithoutSocialAccountsInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutSocialAccountsInput = {
@@ -936,6 +1000,8 @@ export type WorkspaceUncheckedCreateWithoutSocialAccountsInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutSocialAccountsInput = {
@@ -971,6 +1037,8 @@ export type WorkspaceUpdateWithoutSocialAccountsInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutSocialAccountsInput = {
@@ -990,6 +1058,8 @@ export type WorkspaceUncheckedUpdateWithoutSocialAccountsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutCampaignsInput = {
@@ -1009,6 +1079,8 @@ export type WorkspaceCreateWithoutCampaignsInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutCampaignsInput = {
@@ -1028,6 +1100,8 @@ export type WorkspaceUncheckedCreateWithoutCampaignsInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutCampaignsInput = {
@@ -1063,6 +1137,8 @@ export type WorkspaceUpdateWithoutCampaignsInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutCampaignsInput = {
@@ -1082,6 +1158,108 @@ export type WorkspaceUncheckedUpdateWithoutCampaignsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceCreateWithoutMetaCampaignsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  logo?: string | null
+  status?: $Enums.WorkspaceStatus
+  plan?: $Enums.Plan
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedWorkspacesInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutWorkspaceInput
+  brandProfile?: Prisma.BrandProfileCreateNestedOneWithoutWorkspaceInput
+  socialAccounts?: Prisma.SocialAccountCreateNestedManyWithoutWorkspaceInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutWorkspaceInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutWorkspaceInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutWorkspaceInput
+  aiUsage?: Prisma.AIUsageCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceUncheckedCreateWithoutMetaCampaignsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  logo?: string | null
+  status?: $Enums.WorkspaceStatus
+  plan?: $Enums.Plan
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutWorkspaceInput
+  brandProfile?: Prisma.BrandProfileUncheckedCreateNestedOneWithoutWorkspaceInput
+  socialAccounts?: Prisma.SocialAccountUncheckedCreateNestedManyWithoutWorkspaceInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutWorkspaceInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutWorkspaceInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceCreateOrConnectWithoutMetaCampaignsInput = {
+  where: Prisma.WorkspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutMetaCampaignsInput, Prisma.WorkspaceUncheckedCreateWithoutMetaCampaignsInput>
+}
+
+export type WorkspaceUpsertWithoutMetaCampaignsInput = {
+  update: Prisma.XOR<Prisma.WorkspaceUpdateWithoutMetaCampaignsInput, Prisma.WorkspaceUncheckedUpdateWithoutMetaCampaignsInput>
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutMetaCampaignsInput, Prisma.WorkspaceUncheckedCreateWithoutMetaCampaignsInput>
+  where?: Prisma.WorkspaceWhereInput
+}
+
+export type WorkspaceUpdateToOneWithWhereWithoutMetaCampaignsInput = {
+  where?: Prisma.WorkspaceWhereInput
+  data: Prisma.XOR<Prisma.WorkspaceUpdateWithoutMetaCampaignsInput, Prisma.WorkspaceUncheckedUpdateWithoutMetaCampaignsInput>
+}
+
+export type WorkspaceUpdateWithoutMetaCampaignsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumWorkspaceStatusFieldUpdateOperationsInput | $Enums.WorkspaceStatus
+  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedWorkspacesNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutWorkspaceNestedInput
+  brandProfile?: Prisma.BrandProfileUpdateOneWithoutWorkspaceNestedInput
+  socialAccounts?: Prisma.SocialAccountUpdateManyWithoutWorkspaceNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutWorkspaceNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutWorkspaceNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutWorkspaceNestedInput
+  aiUsage?: Prisma.AIUsageUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceUncheckedUpdateWithoutMetaCampaignsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumWorkspaceStatusFieldUpdateOperationsInput | $Enums.WorkspaceStatus
+  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutWorkspaceNestedInput
+  brandProfile?: Prisma.BrandProfileUncheckedUpdateOneWithoutWorkspaceNestedInput
+  socialAccounts?: Prisma.SocialAccountUncheckedUpdateManyWithoutWorkspaceNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutWorkspaceNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutAiUsageInput = {
@@ -1101,6 +1279,8 @@ export type WorkspaceCreateWithoutAiUsageInput = {
   campaigns?: Prisma.CampaignCreateNestedManyWithoutWorkspaceInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutAiUsageInput = {
@@ -1120,6 +1300,8 @@ export type WorkspaceUncheckedCreateWithoutAiUsageInput = {
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutWorkspaceInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutAiUsageInput = {
@@ -1155,6 +1337,8 @@ export type WorkspaceUpdateWithoutAiUsageInput = {
   campaigns?: Prisma.CampaignUpdateManyWithoutWorkspaceNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutAiUsageInput = {
@@ -1174,6 +1358,108 @@ export type WorkspaceUncheckedUpdateWithoutAiUsageInput = {
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceCreateWithoutAiRecommendationsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  logo?: string | null
+  status?: $Enums.WorkspaceStatus
+  plan?: $Enums.Plan
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedWorkspacesInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutWorkspaceInput
+  brandProfile?: Prisma.BrandProfileCreateNestedOneWithoutWorkspaceInput
+  socialAccounts?: Prisma.SocialAccountCreateNestedManyWithoutWorkspaceInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutWorkspaceInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutWorkspaceInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutWorkspaceInput
+  aiUsage?: Prisma.AIUsageCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceUncheckedCreateWithoutAiRecommendationsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  logo?: string | null
+  status?: $Enums.WorkspaceStatus
+  plan?: $Enums.Plan
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutWorkspaceInput
+  brandProfile?: Prisma.BrandProfileUncheckedCreateNestedOneWithoutWorkspaceInput
+  socialAccounts?: Prisma.SocialAccountUncheckedCreateNestedManyWithoutWorkspaceInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutWorkspaceInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutWorkspaceInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type WorkspaceCreateOrConnectWithoutAiRecommendationsInput = {
+  where: Prisma.WorkspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutAiRecommendationsInput, Prisma.WorkspaceUncheckedCreateWithoutAiRecommendationsInput>
+}
+
+export type WorkspaceUpsertWithoutAiRecommendationsInput = {
+  update: Prisma.XOR<Prisma.WorkspaceUpdateWithoutAiRecommendationsInput, Prisma.WorkspaceUncheckedUpdateWithoutAiRecommendationsInput>
+  create: Prisma.XOR<Prisma.WorkspaceCreateWithoutAiRecommendationsInput, Prisma.WorkspaceUncheckedCreateWithoutAiRecommendationsInput>
+  where?: Prisma.WorkspaceWhereInput
+}
+
+export type WorkspaceUpdateToOneWithWhereWithoutAiRecommendationsInput = {
+  where?: Prisma.WorkspaceWhereInput
+  data: Prisma.XOR<Prisma.WorkspaceUpdateWithoutAiRecommendationsInput, Prisma.WorkspaceUncheckedUpdateWithoutAiRecommendationsInput>
+}
+
+export type WorkspaceUpdateWithoutAiRecommendationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumWorkspaceStatusFieldUpdateOperationsInput | $Enums.WorkspaceStatus
+  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedWorkspacesNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutWorkspaceNestedInput
+  brandProfile?: Prisma.BrandProfileUpdateOneWithoutWorkspaceNestedInput
+  socialAccounts?: Prisma.SocialAccountUpdateManyWithoutWorkspaceNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutWorkspaceNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutWorkspaceNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutWorkspaceNestedInput
+  aiUsage?: Prisma.AIUsageUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type WorkspaceUncheckedUpdateWithoutAiRecommendationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumWorkspaceStatusFieldUpdateOperationsInput | $Enums.WorkspaceStatus
+  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutWorkspaceNestedInput
+  brandProfile?: Prisma.BrandProfileUncheckedUpdateOneWithoutWorkspaceNestedInput
+  socialAccounts?: Prisma.SocialAccountUncheckedUpdateManyWithoutWorkspaceNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutWorkspaceNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutSubscriptionsInput = {
@@ -1193,6 +1479,8 @@ export type WorkspaceCreateWithoutSubscriptionsInput = {
   campaigns?: Prisma.CampaignCreateNestedManyWithoutWorkspaceInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutSubscriptionsInput = {
@@ -1212,6 +1500,8 @@ export type WorkspaceUncheckedCreateWithoutSubscriptionsInput = {
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutWorkspaceInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutSubscriptionsInput = {
@@ -1247,6 +1537,8 @@ export type WorkspaceUpdateWithoutSubscriptionsInput = {
   campaigns?: Prisma.CampaignUpdateManyWithoutWorkspaceNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutSubscriptionsInput = {
@@ -1266,6 +1558,8 @@ export type WorkspaceUncheckedUpdateWithoutSubscriptionsInput = {
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateWithoutAuditLogsInput = {
@@ -1285,6 +1579,8 @@ export type WorkspaceCreateWithoutAuditLogsInput = {
   campaigns?: Prisma.CampaignCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceUncheckedCreateWithoutAuditLogsInput = {
@@ -1304,6 +1600,8 @@ export type WorkspaceUncheckedCreateWithoutAuditLogsInput = {
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutWorkspaceInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutWorkspaceInput
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutWorkspaceInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutWorkspaceInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type WorkspaceCreateOrConnectWithoutAuditLogsInput = {
@@ -1339,6 +1637,8 @@ export type WorkspaceUpdateWithoutAuditLogsInput = {
   campaigns?: Prisma.CampaignUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutAuditLogsInput = {
@@ -1358,6 +1658,8 @@ export type WorkspaceUncheckedUpdateWithoutAuditLogsInput = {
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceCreateManyOwnerInput = {
@@ -1389,6 +1691,8 @@ export type WorkspaceUpdateWithoutOwnerInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateWithoutOwnerInput = {
@@ -1408,6 +1712,8 @@ export type WorkspaceUncheckedUpdateWithoutOwnerInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutWorkspaceNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutWorkspaceNestedInput
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutWorkspaceNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutWorkspaceNestedInput
+  metaCampaigns?: Prisma.MetaCampaignUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type WorkspaceUncheckedUpdateManyWithoutOwnerInput = {
@@ -1434,6 +1740,8 @@ export type WorkspaceCountOutputType = {
   auditLogs: number
   subscriptions: number
   aiUsage: number
+  aiRecommendations: number
+  metaCampaigns: number
 }
 
 export type WorkspaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1443,6 +1751,8 @@ export type WorkspaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensi
   auditLogs?: boolean | WorkspaceCountOutputTypeCountAuditLogsArgs
   subscriptions?: boolean | WorkspaceCountOutputTypeCountSubscriptionsArgs
   aiUsage?: boolean | WorkspaceCountOutputTypeCountAiUsageArgs
+  aiRecommendations?: boolean | WorkspaceCountOutputTypeCountAiRecommendationsArgs
+  metaCampaigns?: boolean | WorkspaceCountOutputTypeCountMetaCampaignsArgs
 }
 
 /**
@@ -1497,6 +1807,20 @@ export type WorkspaceCountOutputTypeCountAiUsageArgs<ExtArgs extends runtime.Typ
   where?: Prisma.AIUsageWhereInput
 }
 
+/**
+ * WorkspaceCountOutputType without action
+ */
+export type WorkspaceCountOutputTypeCountAiRecommendationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AIRecommendationWhereInput
+}
+
+/**
+ * WorkspaceCountOutputType without action
+ */
+export type WorkspaceCountOutputTypeCountMetaCampaignsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MetaCampaignWhereInput
+}
+
 
 export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1517,6 +1841,8 @@ export type WorkspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   auditLogs?: boolean | Prisma.Workspace$auditLogsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.Workspace$subscriptionsArgs<ExtArgs>
   aiUsage?: boolean | Prisma.Workspace$aiUsageArgs<ExtArgs>
+  aiRecommendations?: boolean | Prisma.Workspace$aiRecommendationsArgs<ExtArgs>
+  metaCampaigns?: boolean | Prisma.Workspace$metaCampaignsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workspace"]>
 
@@ -1571,6 +1897,8 @@ export type WorkspaceInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   auditLogs?: boolean | Prisma.Workspace$auditLogsArgs<ExtArgs>
   subscriptions?: boolean | Prisma.Workspace$subscriptionsArgs<ExtArgs>
   aiUsage?: boolean | Prisma.Workspace$aiUsageArgs<ExtArgs>
+  aiRecommendations?: boolean | Prisma.Workspace$aiRecommendationsArgs<ExtArgs>
+  metaCampaigns?: boolean | Prisma.Workspace$metaCampaignsArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorkspaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1591,6 +1919,8 @@ export type $WorkspacePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
     aiUsage: Prisma.$AIUsagePayload<ExtArgs>[]
+    aiRecommendations: Prisma.$AIRecommendationPayload<ExtArgs>[]
+    metaCampaigns: Prisma.$MetaCampaignPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2005,6 +2335,8 @@ export interface Prisma__WorkspaceClient<T, Null = never, ExtArgs extends runtim
   auditLogs<T extends Prisma.Workspace$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptions<T extends Prisma.Workspace$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   aiUsage<T extends Prisma.Workspace$aiUsageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$aiUsageArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AIUsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  aiRecommendations<T extends Prisma.Workspace$aiRecommendationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$aiRecommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AIRecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  metaCampaigns<T extends Prisma.Workspace$metaCampaignsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Workspace$metaCampaignsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MetaCampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2605,6 +2937,54 @@ export type Workspace$aiUsageArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.AIUsageScalarFieldEnum | Prisma.AIUsageScalarFieldEnum[]
+}
+
+/**
+ * Workspace.aiRecommendations
+ */
+export type Workspace$aiRecommendationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AIRecommendation
+   */
+  select?: Prisma.AIRecommendationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AIRecommendation
+   */
+  omit?: Prisma.AIRecommendationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIRecommendationInclude<ExtArgs> | null
+  where?: Prisma.AIRecommendationWhereInput
+  orderBy?: Prisma.AIRecommendationOrderByWithRelationInput | Prisma.AIRecommendationOrderByWithRelationInput[]
+  cursor?: Prisma.AIRecommendationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AIRecommendationScalarFieldEnum | Prisma.AIRecommendationScalarFieldEnum[]
+}
+
+/**
+ * Workspace.metaCampaigns
+ */
+export type Workspace$metaCampaignsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MetaCampaign
+   */
+  select?: Prisma.MetaCampaignSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MetaCampaign
+   */
+  omit?: Prisma.MetaCampaignOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MetaCampaignInclude<ExtArgs> | null
+  where?: Prisma.MetaCampaignWhereInput
+  orderBy?: Prisma.MetaCampaignOrderByWithRelationInput | Prisma.MetaCampaignOrderByWithRelationInput[]
+  cursor?: Prisma.MetaCampaignWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MetaCampaignScalarFieldEnum | Prisma.MetaCampaignScalarFieldEnum[]
 }
 
 /**

@@ -1,35 +1,81 @@
+"use client";
+
 import Link from "next/link";
-import { BarChart3, CalendarDays, CheckSquare, Compass, FolderKanban, Plus, Settings, Sparkles, Users } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { BarChart3, CalendarClock, CheckSquare, CreditCard, LayoutDashboard, Megaphone, Palette, Settings, Share2, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
-const links = [
-  ["Overview", "", Compass],
-  ["Campaigns", "/campaigns", FolderKanban],
-  ["Calendar", "/calendar", CalendarDays],
-  ["Approvals", "/approvals", CheckSquare],
-  ["Analytics", "/analytics", BarChart3],
-  ["Brand", "/brand", Sparkles],
-  ["Social accounts", "/social-accounts", Users],
-  ["Settings", "/settings", Settings],
+const sections = [
+  { label: "", items: [["Overview", "", LayoutDashboard]] },
+  { label: "Campaigns", items: [["Campaigns", "/campaigns", Megaphone], ["Brand Profile", "/brand", Palette]] },
+  { label: "Content", items: [["Review Queue", "/approvals", CheckSquare], ["Scheduled", "/calendar", CalendarClock]] },
+  { label: "Publish", items: [["Social Accounts", "/social-accounts", Share2], ["Analytics", "/analytics", BarChart3]] },
+  { label: "Account", items: [["Settings", "/settings", Settings], ["Billing", "/settings/billing", CreditCard]] },
 ] as const;
 
-export function Sidebar({ workspaceSlug }: { workspaceSlug?: string }) {
+export function Sidebar({
+  workspaceSlug,
+  workspaceName,
+  userName,
+  pendingCount = 0,
+}: {
+  workspaceSlug?: string;
+  workspaceName?: string;
+  userName?: string | null;
+  pendingCount?: number;
+}) {
+  const pathname = usePathname();
   const prefix = workspaceSlug ? "/" + workspaceSlug : "";
+  const initials = (userName || workspaceName || "U").slice(0, 1).toUpperCase();
+
+  const renderItem = ([label, suffix, Icon]: (typeof sections)[number]["items"][number], compact = false) => {
+    const href = prefix + suffix;
+    const active = suffix === "" ? pathname === prefix : pathname.startsWith(href);
+    return (
+      <Link
+        key={label}
+        href={href}
+        prefetch={true}
+        className={cn(
+          "flex h-10 items-center gap-3 rounded-lg px-3 text-sm transition-colors duration-150",
+          active ? "border-l-2 border-indigo-500 bg-accent-glow font-medium text-indigo-400" : "text-slate-400 hover:bg-bg-elevated hover:text-white",
+          !workspaceSlug && "pointer-events-none opacity-50",
+          compact && "h-12 flex-1 flex-col justify-center gap-1 px-1 text-[10px]",
+        )}
+      >
+        <Icon className={compact ? "size-4" : "size-4 shrink-0"} />
+        <span className={compact ? "truncate" : "flex-1"}>{label}</span>
+        {!compact && label === "Review Queue" && pendingCount > 0 ? <span className="rounded-full bg-indigo-500 px-1.5 py-0.5 text-[10px] text-white">{pendingCount}</span> : null}
+      </Link>
+    );
+  };
+
   return (
-    <aside className="hidden w-64 shrink-0 border-r border-white/8 bg-slate-950/30 p-4 lg:flex lg:flex-col">
-      <Link href="/" className="flex items-center gap-2 px-2 py-3 text-sm font-semibold text-white"><span className="grid size-8 place-items-center rounded-lg bg-indigo-400 text-slate-950"><Sparkles className="size-4" /></span>MarketingOS AI</Link>
-      <nav className="mt-7 space-y-1">
-        {links.map(([label, suffix, Icon]) => (
-          <Link key={label} href={prefix + suffix} className={cn("flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-slate-400 transition hover:bg-white/6 hover:text-white", !workspaceSlug && "pointer-events-none opacity-50")}>
-            <Icon className="size-4" />{label}
-          </Link>
-        ))}
+    <>
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-border bg-bg-base p-4 md:flex">
+        <Link href={prefix || "/"} className="flex items-center gap-2 px-2 py-3 font-display text-lg font-bold text-white">
+          <span className="grid size-8 place-items-center rounded-lg bg-accent text-white"><Sparkles className="size-4" /></span>
+          MarketingOS
+        </Link>
+        <nav className="mt-6 flex-1 space-y-1">
+          {sections.map((section) => (
+            <div key={section.label || "overview"}>
+              {section.label ? <p className="mb-1 mt-6 px-3 text-[10px] font-semibold uppercase tracking-widest text-slate-600">{section.label}</p> : null}
+              <div className="space-y-1">{section.items.map((item) => renderItem(item))}</div>
+            </div>
+          ))}
+        </nav>
+        <div className="rounded-xl border border-border bg-bg-surface p-3">
+          <p className="truncate text-sm font-medium text-white">{workspaceName || "Workspace"}</p>
+          <div className="mt-3 flex items-center gap-2">
+            <span className="grid size-8 place-items-center rounded-full bg-accent text-xs font-semibold text-white">{initials}</span>
+            <span className="truncate text-xs text-slate-500">{userName || "Marketing lead"}</span>
+          </div>
+        </div>
+      </aside>
+      <nav className="fixed inset-x-0 bottom-0 z-40 flex border-t border-border bg-bg-base/95 px-2 py-2 backdrop-blur md:hidden">
+        {[sections[0].items[0], sections[1].items[0], sections[2].items[0], sections[3].items[1]].map((item) => renderItem(item, true))}
       </nav>
-      {workspaceSlug ? <Link href={"/" + workspaceSlug + "/campaigns/new"} className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-500 px-3 py-2.5 text-sm font-medium text-white hover:bg-indigo-400"><Plus className="size-4" />New campaign</Link> : null}
-      <div className="mt-auto rounded-2xl border border-white/8 bg-white/[0.03] p-3">
-        <p className="text-xs font-medium text-slate-200">Aurora-ready architecture</p>
-        <p className="mt-1 text-xs leading-5 text-slate-500">Local Docker now. Amazon Aurora PostgreSQL when you ship.</p>
-      </div>
-    </aside>
+    </>
   );
 }

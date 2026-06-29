@@ -28,7 +28,7 @@ export default async function OnboardingPage() {
           </Card>
         ))}
       </div>
-      <div className="mt-8 flex items-center gap-2 text-sm text-slate-500"><Sparkles className="size-4 text-indigo-300" />Mock agent mode is enabled until you add an OpenAI API key.</div>
+      <div className="mt-8 flex items-center gap-2 text-sm text-slate-500"><Sparkles className="size-4 text-indigo-300" />Add an AI provider key to generate your first campaign.</div>
     </section>
   );
 }

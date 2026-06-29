@@ -20,8 +20,18 @@ export type BrandProfileModel = runtime.Types.Result.DefaultSelection<Prisma.$Br
 
 export type AggregateBrandProfile = {
   _count: BrandProfileCountAggregateOutputType | null
+  _avg: BrandProfileAvgAggregateOutputType | null
+  _sum: BrandProfileSumAggregateOutputType | null
   _min: BrandProfileMinAggregateOutputType | null
   _max: BrandProfileMaxAggregateOutputType | null
+}
+
+export type BrandProfileAvgAggregateOutputType = {
+  budget: runtime.Decimal | null
+}
+
+export type BrandProfileSumAggregateOutputType = {
+  budget: runtime.Decimal | null
 }
 
 export type BrandProfileMinAggregateOutputType = {
@@ -35,6 +45,10 @@ export type BrandProfileMinAggregateOutputType = {
   toneOfVoice: string | null
   logoUrl: string | null
   industry: string | null
+  primaryGoal: string | null
+  budget: runtime.Decimal | null
+  location: string | null
+  lastAnalyzedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +64,10 @@ export type BrandProfileMaxAggregateOutputType = {
   toneOfVoice: string | null
   logoUrl: string | null
   industry: string | null
+  primaryGoal: string | null
+  budget: runtime.Decimal | null
+  location: string | null
+  lastAnalyzedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -68,13 +86,27 @@ export type BrandProfileCountAggregateOutputType = {
   brandColors: number
   logoUrl: number
   industry: number
+  primaryGoal: number
+  budget: number
+  location: number
+  productsServices: number
   competitors: number
   hashtags: number
+  lastAnalyzedAt: number
+  analysisSummary: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
+
+export type BrandProfileAvgAggregateInputType = {
+  budget?: true
+}
+
+export type BrandProfileSumAggregateInputType = {
+  budget?: true
+}
 
 export type BrandProfileMinAggregateInputType = {
   id?: true
@@ -87,6 +119,10 @@ export type BrandProfileMinAggregateInputType = {
   toneOfVoice?: true
   logoUrl?: true
   industry?: true
+  primaryGoal?: true
+  budget?: true
+  location?: true
+  lastAnalyzedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -102,6 +138,10 @@ export type BrandProfileMaxAggregateInputType = {
   toneOfVoice?: true
   logoUrl?: true
   industry?: true
+  primaryGoal?: true
+  budget?: true
+  location?: true
+  lastAnalyzedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -120,8 +160,14 @@ export type BrandProfileCountAggregateInputType = {
   brandColors?: true
   logoUrl?: true
   industry?: true
+  primaryGoal?: true
+  budget?: true
+  location?: true
+  productsServices?: true
   competitors?: true
   hashtags?: true
+  lastAnalyzedAt?: true
+  analysisSummary?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -165,6 +211,18 @@ export type BrandProfileAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: BrandProfileAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: BrandProfileSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: BrandProfileMinAggregateInputType
@@ -195,6 +253,8 @@ export type BrandProfileGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: BrandProfileCountAggregateInputType | true
+  _avg?: BrandProfileAvgAggregateInputType
+  _sum?: BrandProfileSumAggregateInputType
   _min?: BrandProfileMinAggregateInputType
   _max?: BrandProfileMaxAggregateInputType
 }
@@ -213,11 +273,19 @@ export type BrandProfileGroupByOutputType = {
   brandColors: runtime.JsonValue | null
   logoUrl: string | null
   industry: string | null
+  primaryGoal: string | null
+  budget: runtime.Decimal | null
+  location: string | null
+  productsServices: string[]
   competitors: string[]
   hashtags: string[]
+  lastAnalyzedAt: Date | null
+  analysisSummary: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: BrandProfileCountAggregateOutputType | null
+  _avg: BrandProfileAvgAggregateOutputType | null
+  _sum: BrandProfileSumAggregateOutputType | null
   _min: BrandProfileMinAggregateOutputType | null
   _max: BrandProfileMaxAggregateOutputType | null
 }
@@ -254,8 +322,14 @@ export type BrandProfileWhereInput = {
   brandColors?: Prisma.JsonNullableFilter<"BrandProfile">
   logoUrl?: Prisma.StringNullableFilter<"BrandProfile"> | string | null
   industry?: Prisma.StringNullableFilter<"BrandProfile"> | string | null
+  primaryGoal?: Prisma.StringNullableFilter<"BrandProfile"> | string | null
+  budget?: Prisma.DecimalNullableFilter<"BrandProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: Prisma.StringNullableFilter<"BrandProfile"> | string | null
+  productsServices?: Prisma.StringNullableListFilter<"BrandProfile">
   competitors?: Prisma.StringNullableListFilter<"BrandProfile">
   hashtags?: Prisma.StringNullableListFilter<"BrandProfile">
+  lastAnalyzedAt?: Prisma.DateTimeNullableFilter<"BrandProfile"> | Date | string | null
+  analysisSummary?: Prisma.JsonNullableFilter<"BrandProfile">
   createdAt?: Prisma.DateTimeFilter<"BrandProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BrandProfile"> | Date | string
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
@@ -275,8 +349,14 @@ export type BrandProfileOrderByWithRelationInput = {
   brandColors?: Prisma.SortOrderInput | Prisma.SortOrder
   logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   industry?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryGoal?: Prisma.SortOrderInput | Prisma.SortOrder
+  budget?: Prisma.SortOrderInput | Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
+  productsServices?: Prisma.SortOrder
   competitors?: Prisma.SortOrder
   hashtags?: Prisma.SortOrder
+  lastAnalyzedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  analysisSummary?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   workspace?: Prisma.WorkspaceOrderByWithRelationInput
@@ -299,8 +379,14 @@ export type BrandProfileWhereUniqueInput = Prisma.AtLeast<{
   brandColors?: Prisma.JsonNullableFilter<"BrandProfile">
   logoUrl?: Prisma.StringNullableFilter<"BrandProfile"> | string | null
   industry?: Prisma.StringNullableFilter<"BrandProfile"> | string | null
+  primaryGoal?: Prisma.StringNullableFilter<"BrandProfile"> | string | null
+  budget?: Prisma.DecimalNullableFilter<"BrandProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: Prisma.StringNullableFilter<"BrandProfile"> | string | null
+  productsServices?: Prisma.StringNullableListFilter<"BrandProfile">
   competitors?: Prisma.StringNullableListFilter<"BrandProfile">
   hashtags?: Prisma.StringNullableListFilter<"BrandProfile">
+  lastAnalyzedAt?: Prisma.DateTimeNullableFilter<"BrandProfile"> | Date | string | null
+  analysisSummary?: Prisma.JsonNullableFilter<"BrandProfile">
   createdAt?: Prisma.DateTimeFilter<"BrandProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BrandProfile"> | Date | string
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.WorkspaceWhereInput>
@@ -320,13 +406,21 @@ export type BrandProfileOrderByWithAggregationInput = {
   brandColors?: Prisma.SortOrderInput | Prisma.SortOrder
   logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   industry?: Prisma.SortOrderInput | Prisma.SortOrder
+  primaryGoal?: Prisma.SortOrderInput | Prisma.SortOrder
+  budget?: Prisma.SortOrderInput | Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
+  productsServices?: Prisma.SortOrder
   competitors?: Prisma.SortOrder
   hashtags?: Prisma.SortOrder
+  lastAnalyzedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  analysisSummary?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BrandProfileCountOrderByAggregateInput
+  _avg?: Prisma.BrandProfileAvgOrderByAggregateInput
   _max?: Prisma.BrandProfileMaxOrderByAggregateInput
   _min?: Prisma.BrandProfileMinOrderByAggregateInput
+  _sum?: Prisma.BrandProfileSumOrderByAggregateInput
 }
 
 export type BrandProfileScalarWhereWithAggregatesInput = {
@@ -346,8 +440,14 @@ export type BrandProfileScalarWhereWithAggregatesInput = {
   brandColors?: Prisma.JsonNullableWithAggregatesFilter<"BrandProfile">
   logoUrl?: Prisma.StringNullableWithAggregatesFilter<"BrandProfile"> | string | null
   industry?: Prisma.StringNullableWithAggregatesFilter<"BrandProfile"> | string | null
+  primaryGoal?: Prisma.StringNullableWithAggregatesFilter<"BrandProfile"> | string | null
+  budget?: Prisma.DecimalNullableWithAggregatesFilter<"BrandProfile"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: Prisma.StringNullableWithAggregatesFilter<"BrandProfile"> | string | null
+  productsServices?: Prisma.StringNullableListFilter<"BrandProfile">
   competitors?: Prisma.StringNullableListFilter<"BrandProfile">
   hashtags?: Prisma.StringNullableListFilter<"BrandProfile">
+  lastAnalyzedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"BrandProfile"> | Date | string | null
+  analysisSummary?: Prisma.JsonNullableWithAggregatesFilter<"BrandProfile">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BrandProfile"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"BrandProfile"> | Date | string
 }
@@ -365,8 +465,14 @@ export type BrandProfileCreateInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: string | null
   industry?: string | null
+  primaryGoal?: string | null
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: string | null
+  productsServices?: Prisma.BrandProfileCreateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileCreatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileCreatehashtagsInput | string[]
+  lastAnalyzedAt?: Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutBrandProfileInput
@@ -386,8 +492,14 @@ export type BrandProfileUncheckedCreateInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: string | null
   industry?: string | null
+  primaryGoal?: string | null
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: string | null
+  productsServices?: Prisma.BrandProfileCreateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileCreatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileCreatehashtagsInput | string[]
+  lastAnalyzedAt?: Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -405,8 +517,14 @@ export type BrandProfileUpdateInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsServices?: Prisma.BrandProfileUpdateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileUpdatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileUpdatehashtagsInput | string[]
+  lastAnalyzedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutBrandProfileNestedInput
@@ -426,8 +544,14 @@ export type BrandProfileUncheckedUpdateInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsServices?: Prisma.BrandProfileUpdateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileUpdatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileUpdatehashtagsInput | string[]
+  lastAnalyzedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -446,8 +570,14 @@ export type BrandProfileCreateManyInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: string | null
   industry?: string | null
+  primaryGoal?: string | null
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: string | null
+  productsServices?: Prisma.BrandProfileCreateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileCreatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileCreatehashtagsInput | string[]
+  lastAnalyzedAt?: Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -465,8 +595,14 @@ export type BrandProfileUpdateManyMutationInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsServices?: Prisma.BrandProfileUpdateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileUpdatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileUpdatehashtagsInput | string[]
+  lastAnalyzedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -485,8 +621,14 @@ export type BrandProfileUncheckedUpdateManyInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsServices?: Prisma.BrandProfileUpdateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileUpdatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileUpdatehashtagsInput | string[]
+  lastAnalyzedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -518,10 +660,20 @@ export type BrandProfileCountOrderByAggregateInput = {
   brandColors?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
   industry?: Prisma.SortOrder
+  primaryGoal?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  productsServices?: Prisma.SortOrder
   competitors?: Prisma.SortOrder
   hashtags?: Prisma.SortOrder
+  lastAnalyzedAt?: Prisma.SortOrder
+  analysisSummary?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type BrandProfileAvgOrderByAggregateInput = {
+  budget?: Prisma.SortOrder
 }
 
 export type BrandProfileMaxOrderByAggregateInput = {
@@ -535,6 +687,10 @@ export type BrandProfileMaxOrderByAggregateInput = {
   toneOfVoice?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
   industry?: Prisma.SortOrder
+  primaryGoal?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  lastAnalyzedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -550,8 +706,16 @@ export type BrandProfileMinOrderByAggregateInput = {
   toneOfVoice?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
   industry?: Prisma.SortOrder
+  primaryGoal?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  location?: Prisma.SortOrder
+  lastAnalyzedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type BrandProfileSumOrderByAggregateInput = {
+  budget?: Prisma.SortOrder
 }
 
 export type BrandProfileCreateNestedOneWithoutWorkspaceInput = {
@@ -590,6 +754,10 @@ export type BrandProfileCreatevaluesInput = {
   set: string[]
 }
 
+export type BrandProfileCreateproductsServicesInput = {
+  set: string[]
+}
+
 export type BrandProfileCreatecompetitorsInput = {
   set: string[]
 }
@@ -599,6 +767,19 @@ export type BrandProfileCreatehashtagsInput = {
 }
 
 export type BrandProfileUpdatevaluesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type BrandProfileUpdateproductsServicesInput = {
   set?: string[]
   push?: string | string[]
 }
@@ -626,8 +807,14 @@ export type BrandProfileCreateWithoutWorkspaceInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: string | null
   industry?: string | null
+  primaryGoal?: string | null
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: string | null
+  productsServices?: Prisma.BrandProfileCreateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileCreatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileCreatehashtagsInput | string[]
+  lastAnalyzedAt?: Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -645,8 +832,14 @@ export type BrandProfileUncheckedCreateWithoutWorkspaceInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: string | null
   industry?: string | null
+  primaryGoal?: string | null
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: string | null
+  productsServices?: Prisma.BrandProfileCreateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileCreatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileCreatehashtagsInput | string[]
+  lastAnalyzedAt?: Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -680,8 +873,14 @@ export type BrandProfileUpdateWithoutWorkspaceInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsServices?: Prisma.BrandProfileUpdateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileUpdatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileUpdatehashtagsInput | string[]
+  lastAnalyzedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -699,8 +898,14 @@ export type BrandProfileUncheckedUpdateWithoutWorkspaceInput = {
   brandColors?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   industry?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primaryGoal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsServices?: Prisma.BrandProfileUpdateproductsServicesInput | string[]
   competitors?: Prisma.BrandProfileUpdatecompetitorsInput | string[]
   hashtags?: Prisma.BrandProfileUpdatehashtagsInput | string[]
+  lastAnalyzedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  analysisSummary?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -721,8 +926,14 @@ export type BrandProfileSelect<ExtArgs extends runtime.Types.Extensions.Internal
   brandColors?: boolean
   logoUrl?: boolean
   industry?: boolean
+  primaryGoal?: boolean
+  budget?: boolean
+  location?: boolean
+  productsServices?: boolean
   competitors?: boolean
   hashtags?: boolean
+  lastAnalyzedAt?: boolean
+  analysisSummary?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
@@ -742,8 +953,14 @@ export type BrandProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   brandColors?: boolean
   logoUrl?: boolean
   industry?: boolean
+  primaryGoal?: boolean
+  budget?: boolean
+  location?: boolean
+  productsServices?: boolean
   competitors?: boolean
   hashtags?: boolean
+  lastAnalyzedAt?: boolean
+  analysisSummary?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
@@ -763,8 +980,14 @@ export type BrandProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   brandColors?: boolean
   logoUrl?: boolean
   industry?: boolean
+  primaryGoal?: boolean
+  budget?: boolean
+  location?: boolean
+  productsServices?: boolean
   competitors?: boolean
   hashtags?: boolean
+  lastAnalyzedAt?: boolean
+  analysisSummary?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
@@ -784,13 +1007,19 @@ export type BrandProfileSelectScalar = {
   brandColors?: boolean
   logoUrl?: boolean
   industry?: boolean
+  primaryGoal?: boolean
+  budget?: boolean
+  location?: boolean
+  productsServices?: boolean
   competitors?: boolean
   hashtags?: boolean
+  lastAnalyzedAt?: boolean
+  analysisSummary?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BrandProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "workspaceId" | "companyName" | "website" | "description" | "mission" | "vision" | "values" | "toneOfVoice" | "targetAudience" | "brandColors" | "logoUrl" | "industry" | "competitors" | "hashtags" | "createdAt" | "updatedAt", ExtArgs["result"]["brandProfile"]>
+export type BrandProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "workspaceId" | "companyName" | "website" | "description" | "mission" | "vision" | "values" | "toneOfVoice" | "targetAudience" | "brandColors" | "logoUrl" | "industry" | "primaryGoal" | "budget" | "location" | "productsServices" | "competitors" | "hashtags" | "lastAnalyzedAt" | "analysisSummary" | "createdAt" | "updatedAt", ExtArgs["result"]["brandProfile"]>
 export type BrandProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
 }
@@ -820,8 +1049,14 @@ export type $BrandProfilePayload<ExtArgs extends runtime.Types.Extensions.Intern
     brandColors: runtime.JsonValue | null
     logoUrl: string | null
     industry: string | null
+    primaryGoal: string | null
+    budget: runtime.Decimal | null
+    location: string | null
+    productsServices: string[]
     competitors: string[]
     hashtags: string[]
+    lastAnalyzedAt: Date | null
+    analysisSummary: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["brandProfile"]>
@@ -1261,8 +1496,14 @@ export interface BrandProfileFieldRefs {
   readonly brandColors: Prisma.FieldRef<"BrandProfile", 'Json'>
   readonly logoUrl: Prisma.FieldRef<"BrandProfile", 'String'>
   readonly industry: Prisma.FieldRef<"BrandProfile", 'String'>
+  readonly primaryGoal: Prisma.FieldRef<"BrandProfile", 'String'>
+  readonly budget: Prisma.FieldRef<"BrandProfile", 'Decimal'>
+  readonly location: Prisma.FieldRef<"BrandProfile", 'String'>
+  readonly productsServices: Prisma.FieldRef<"BrandProfile", 'String[]'>
   readonly competitors: Prisma.FieldRef<"BrandProfile", 'String[]'>
   readonly hashtags: Prisma.FieldRef<"BrandProfile", 'String[]'>
+  readonly lastAnalyzedAt: Prisma.FieldRef<"BrandProfile", 'DateTime'>
+  readonly analysisSummary: Prisma.FieldRef<"BrandProfile", 'Json'>
   readonly createdAt: Prisma.FieldRef<"BrandProfile", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"BrandProfile", 'DateTime'>
 }

@@ -63,6 +63,71 @@ export type SocialAccount = Prisma.SocialAccountModel
  */
 export type Campaign = Prisma.CampaignModel
 /**
+ * Model CampaignPlatform
+ * 
+ */
+export type CampaignPlatform = Prisma.CampaignPlatformModel
+/**
+ * Model AgentRun
+ * 
+ */
+export type AgentRun = Prisma.AgentRunModel
+/**
+ * Model BrandAnalysis
+ * 
+ */
+export type BrandAnalysis = Prisma.BrandAnalysisModel
+/**
+ * Model CompetitorAnalysis
+ * 
+ */
+export type CompetitorAnalysis = Prisma.CompetitorAnalysisModel
+/**
+ * Model CampaignStrategy
+ * 
+ */
+export type CampaignStrategy = Prisma.CampaignStrategyModel
+/**
+ * Model CampaignCopy
+ * 
+ */
+export type CampaignCopy = Prisma.CampaignCopyModel
+/**
+ * Model CreativeBrief
+ * 
+ */
+export type CreativeBrief = Prisma.CreativeBriefModel
+/**
+ * Model GeneratedAsset
+ * 
+ */
+export type GeneratedAsset = Prisma.GeneratedAssetModel
+/**
+ * Model PublishingPlan
+ * 
+ */
+export type PublishingPlan = Prisma.PublishingPlanModel
+/**
+ * Model CampaignDraft
+ * 
+ */
+export type CampaignDraft = Prisma.CampaignDraftModel
+/**
+ * Model MetaCampaign
+ * 
+ */
+export type MetaCampaign = Prisma.MetaCampaignModel
+/**
+ * Model MetaAdSet
+ * 
+ */
+export type MetaAdSet = Prisma.MetaAdSetModel
+/**
+ * Model MetaAd
+ * 
+ */
+export type MetaAd = Prisma.MetaAdModel
+/**
  * Model GeneratedPost
  * 
  */
@@ -93,6 +158,26 @@ export type PublishedPost = Prisma.PublishedPostModel
  */
 export type AnalyticsSnapshot = Prisma.AnalyticsSnapshotModel
 /**
+ * Model CampaignAnalytics
+ * 
+ */
+export type CampaignAnalytics = Prisma.CampaignAnalyticsModel
+/**
+ * Model CampaignRecommendation
+ * 
+ */
+export type CampaignRecommendation = Prisma.CampaignRecommendationModel
+/**
+ * Model LearningInsight
+ * 
+ */
+export type LearningInsight = Prisma.LearningInsightModel
+/**
+ * Model CampaignHistory
+ * 
+ */
+export type CampaignHistory = Prisma.CampaignHistoryModel
+/**
  * Model AIJob
  * 
  */
@@ -102,6 +187,11 @@ export type AIJob = Prisma.AIJobModel
  * 
  */
 export type AIUsage = Prisma.AIUsageModel
+/**
+ * Model AIRecommendation
+ * 
+ */
+export type AIRecommendation = Prisma.AIRecommendationModel
 /**
  * Model Subscription
  * 

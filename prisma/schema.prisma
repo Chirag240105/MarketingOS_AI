@@ -12,7 +12,6 @@ datasource db {
   provider = "postgresql"
 }
 
-
 // ============================================
 // ENUMS
 // ============================================
@@ -81,6 +80,16 @@ enum CampaignStatus {
   DRAFT
   PLANNING
   GENERATING
+  BRAND_ANALYZED
+  COMPETITOR_ANALYZED
+  STRATEGY_READY
+  COPY_READY
+  CREATIVE_READY
+  READY_TO_PUBLISH
+  PUBLISHED
+  ANALYZED
+  LEARNING_UPDATED
+  FAILED
   REVIEW
   SCHEDULED
   ACTIVE
@@ -177,6 +186,7 @@ enum PublishStatus {
 
 enum AIAgentType {
   BUSINESS_ANALYZER
+  COMPETITOR_ANALYZER
   CAMPAIGN_STRATEGIST
   COPYWRITER
   VISUAL_CREATIVE
@@ -197,6 +207,33 @@ enum AIJobStatus {
   RETRYING
 
   @@map("ai_job_statuses")
+}
+
+enum AgentRunStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  RETRYING
+  SKIPPED
+
+  @@map("agent_run_statuses")
+}
+
+enum GeneratedAssetType {
+  IMAGE
+  VIDEO
+
+  @@map("generated_asset_types")
+}
+
+enum GeneratedAssetStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+
+  @@map("generated_asset_statuses")
 }
 
 enum SubscriptionStatus {
@@ -243,24 +280,25 @@ model User {
   emailVerified DateTime? @map("email_verified")
   name          String?
   image         String?
-  password      String?   // For credentials provider
+  password      String? // For credentials provider
   role          UserRole  @default(USER)
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
 
   // Relations
-  accounts      Account[]
-  sessions      Session[]
-  memberships   Membership[]
-  ownedWorkspaces Workspace[] @relation("WorkspaceOwner")
-  auditLogs     AuditLog[]
-  aiUsage       AIUsage[]
-  createdCampaigns Campaign[] @relation("CampaignCreator")
-  approvals     Approval[]
+  accounts         Account[]
+  sessions         Session[]
+  memberships      Membership[]
+  ownedWorkspaces  Workspace[]       @relation("WorkspaceOwner")
+  auditLogs        AuditLog[]
+  aiUsage          AIUsage[]
+  createdCampaigns Campaign[]        @relation("CampaignCreator")
+  approvals        Approval[]
+  campaignHistory  CampaignHistory[]
 
-  @@map("users")
   @@index([email])
   @@index([role])
+  @@map("users")
 }
 
 model Account {
@@ -280,8 +318,8 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@map("accounts")
   @@index([userId])
+  @@map("accounts")
 }
 
 model Session {
@@ -291,8 +329,8 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("sessions")
   @@index([userId])
+  @@map("sessions")
 }
 
 model VerificationToken {
@@ -321,19 +359,21 @@ model Workspace {
   updatedAt   DateTime        @updatedAt @map("updated_at")
 
   // Relations
-  owner       User           @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
-  memberships Membership[]
-  brandProfile BrandProfile?
-  socialAccounts SocialAccount[]
-  campaigns   Campaign[]
-  auditLogs   AuditLog[]
-  subscriptions Subscription[]
-  aiUsage     AIUsage[]
+  owner             User               @relation("WorkspaceOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  memberships       Membership[]
+  brandProfile      BrandProfile?
+  socialAccounts    SocialAccount[]
+  campaigns         Campaign[]
+  auditLogs         AuditLog[]
+  subscriptions     Subscription[]
+  aiUsage           AIUsage[]
+  aiRecommendations AIRecommendation[]
+  metaCampaigns     MetaCampaign[]
 
-  @@map("workspaces")
   @@index([slug])
   @@index([ownerId])
   @@index([status])
+  @@map("workspaces")
 }
 
 model Membership {
@@ -348,9 +388,9 @@ model Membership {
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
   @@unique([userId, workspaceId])
-  @@map("memberships")
   @@index([userId])
   @@index([workspaceId])
+  @@map("memberships")
 }
 
 // ============================================
@@ -358,54 +398,60 @@ model Membership {
 // ============================================
 
 model BrandProfile {
-  id              String   @id @default(cuid())
-  workspaceId     String   @unique @map("workspace_id")
-  companyName     String   @map("company_name")
-  website         String?
-  description     String?  @db.Text
-  mission         String?  @db.Text
-  vision          String?  @db.Text
-  values          String[] @default([])
-  toneOfVoice     String?  @map("tone_of_voice")
-  targetAudience  Json?    @map("target_audience")
-  brandColors     Json?    @map("brand_colors")
-  logoUrl         String?  @map("logo_url")
-  industry        String?
-  competitors     String[] @default([])
-  hashtags        String[] @default([])
-  createdAt       DateTime @default(now()) @map("created_at")
-  updatedAt       DateTime @updatedAt @map("updated_at")
+  id               String    @id @default(cuid())
+  workspaceId      String    @unique @map("workspace_id")
+  companyName      String    @map("company_name")
+  website          String?
+  description      String?   @db.Text
+  mission          String?   @db.Text
+  vision           String?   @db.Text
+  values           String[]  @default([])
+  toneOfVoice      String?   @map("tone_of_voice")
+  targetAudience   Json?     @map("target_audience")
+  brandColors      Json?     @map("brand_colors")
+  logoUrl          String?   @map("logo_url")
+  industry         String?
+  primaryGoal      String?   @map("primary_goal")
+  budget           Decimal?  @db.Decimal(10, 2)
+  location         String?
+  productsServices String[]  @default([]) @map("products_services")
+  competitors      String[]  @default([])
+  hashtags         String[]  @default([])
+  lastAnalyzedAt   DateTime? @map("last_analyzed_at")
+  analysisSummary  Json?     @map("analysis_summary")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
-  @@map("brand_profiles")
   @@index([workspaceId])
   @@index([industry])
+  @@map("brand_profiles")
 }
 
 model SocialAccount {
-  id          String         @id @default(cuid())
-  workspaceId String         @map("workspace_id")
-  platform    SocialPlatform
-  accountName String         @map("account_name")
-  handle      String?
-  profileUrl  String?        @map("profile_url")
-  followerCount Int?         @default(0) @map("follower_count")
-  accessToken String?          @map("access_token") @db.Text
-  refreshToken String?         @map("refresh_token") @db.Text
-  tokenExpiresAt DateTime?    @map("token_expires_at")
-  isConnected Boolean         @default(false) @map("is_connected")
-  metadata    Json?
-  createdAt   DateTime         @default(now()) @map("created_at")
-  updatedAt   DateTime         @updatedAt @map("updated_at")
+  id             String         @id @default(cuid())
+  workspaceId    String         @map("workspace_id")
+  platform       SocialPlatform
+  accountName    String         @map("account_name")
+  handle         String?
+  profileUrl     String?        @map("profile_url")
+  followerCount  Int?           @default(0) @map("follower_count")
+  accessToken    String?        @map("access_token") @db.Text
+  refreshToken   String?        @map("refresh_token") @db.Text
+  tokenExpiresAt DateTime?      @map("token_expires_at")
+  isConnected    Boolean        @default(false) @map("is_connected")
+  metadata       Json?
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
 
-  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspace      Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   publishedPosts PublishedPost[]
 
-  @@map("social_accounts")
   @@index([workspaceId])
   @@index([platform])
   @@index([isConnected])
+  @@map("social_accounts")
 }
 
 // ============================================
@@ -413,86 +459,360 @@ model SocialAccount {
 // ============================================
 
 model Campaign {
-  id          String         @id @default(cuid())
-  workspaceId String         @map("workspace_id")
-  name        String
-  description String?        @db.Text
-  goal        CampaignGoal
-  status      CampaignStatus @default(DRAFT)
-  budget      Decimal?       @db.Decimal(10, 2)
-  startDate   DateTime?      @map("start_date")
-  endDate     DateTime?      @map("end_date")
-  targetAudience Json?      @map("target_audience")
-  platforms   SocialPlatform[]
-  aiStrategy  Json?          @map("ai_strategy")
-  createdBy   String         @map("created_by")
-  createdAt   DateTime       @default(now()) @map("created_at")
-  updatedAt   DateTime       @updatedAt @map("updated_at")
+  id             String           @id @default(cuid())
+  workspaceId    String           @map("workspace_id")
+  name           String
+  description    String?          @db.Text
+  goal           CampaignGoal
+  status         CampaignStatus   @default(DRAFT)
+  budget         Decimal?         @db.Decimal(10, 2)
+  startDate      DateTime?        @map("start_date")
+  endDate        DateTime?        @map("end_date")
+  targetAudience Json?            @map("target_audience")
+  platforms      SocialPlatform[]
+  offer          String?          @db.Text
+  notes          String?          @db.Text
+  aiStrategy     Json?            @map("ai_strategy")
+  aiStrategyPlan Json?            @map("ai_strategy_plan")
+  generateVideo  Boolean          @default(false) @map("generate_video")
+  createdBy      String           @map("created_by")
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
 
-  workspace     Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  creator       User           @relation("CampaignCreator", fields: [createdBy], references: [id], onDelete: Cascade)
-  generatedPosts GeneratedPost[]
-  campaignAssets CampaignAsset[]
-  scheduledPosts ScheduledPost[]
-  publishedPosts PublishedPost[]
-  analyticsSnapshots AnalyticsSnapshot[]
-  aiJobs        AIJob[]
+  workspace               Workspace                @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  creator                 User                     @relation("CampaignCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+  generatedPosts          GeneratedPost[]
+  campaignAssets          CampaignAsset[]
+  scheduledPosts          ScheduledPost[]
+  publishedPosts          PublishedPost[]
+  analyticsSnapshots      AnalyticsSnapshot[]
+  aiJobs                  AIJob[]
+  campaignPlatforms       CampaignPlatform[]
+  agentRuns               AgentRun[]
+  brandAnalysis           BrandAnalysis?
+  competitorAnalysis      CompetitorAnalysis?
+  campaignStrategy        CampaignStrategy?
+  campaignCopy            CampaignCopy?
+  creativeBrief           CreativeBrief?
+  generatedAssets         GeneratedAsset[]
+  publishingPlan          PublishingPlan?
+  learningInsights        LearningInsight[]
+  aiRecommendations       AIRecommendation[]
+  drafts                  CampaignDraft[]
+  campaignAnalytics       CampaignAnalytics[]
+  campaignRecommendations CampaignRecommendation[]
+  history                 CampaignHistory[]
+  metaCampaign            MetaCampaign?
 
-  @@map("campaigns")
   @@index([workspaceId])
   @@index([status])
   @@index([createdBy])
   @@index([startDate, endDate])
+  @@map("campaigns")
+}
+
+model CampaignPlatform {
+  id         String         @id @default(cuid())
+  campaignId String         @map("campaign_id")
+  platform   SocialPlatform
+  createdAt  DateTime       @default(now()) @map("created_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@unique([campaignId, platform])
+  @@index([campaignId])
+  @@index([platform])
+  @@map("campaign_platforms")
+}
+
+model AgentRun {
+  id           String         @id @default(cuid())
+  campaignId   String         @map("campaign_id")
+  agentName    String         @map("agent_name")
+  modelUsed    String         @map("model_used")
+  input        Json
+  output       Json?
+  status       AgentRunStatus @default(PENDING)
+  errorMessage String?        @map("error_message") @db.Text
+  retryCount   Int            @default(0) @map("retry_count")
+  startedAt    DateTime?      @map("started_at")
+  completedAt  DateTime?      @map("completed_at")
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([agentName])
+  @@index([status])
+  @@index([createdAt])
+  @@map("agent_runs")
+}
+
+model BrandAnalysis {
+  id         String   @id @default(cuid())
+  campaignId String   @unique @map("campaign_id")
+  profile    Json
+  summary    String?  @db.Text
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@map("brand_analyses")
+}
+
+model CompetitorAnalysis {
+  id            String   @id @default(cuid())
+  campaignId    String   @unique @map("campaign_id")
+  competitors   Json
+  opportunities String[] @default([])
+  summary       String?  @db.Text
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@map("competitor_analyses")
+}
+
+model CampaignStrategy {
+  id               String   @id @default(cuid())
+  campaignId       String   @unique @map("campaign_id")
+  strategy         Json
+  contentCalendar  Json?    @map("content_calendar")
+  budgetAllocation Json?    @map("budget_allocation")
+  summary          String?  @db.Text
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@map("campaign_strategies")
+}
+
+model CampaignCopy {
+  id         String   @id @default(cuid())
+  campaignId String   @unique @map("campaign_id")
+  copy       Json
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@map("campaign_copies")
+}
+
+model CreativeBrief {
+  id          String   @id @default(cuid())
+  campaignId  String   @unique @map("campaign_id")
+  brief       Json
+  imagePrompt String   @map("image_prompt") @db.Text
+  videoPrompt String   @map("video_prompt") @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@map("creative_briefs")
+}
+
+model GeneratedAsset {
+  id               String               @id @default(cuid())
+  campaignId       String               @map("campaign_id")
+  type             GeneratedAssetType
+  status           GeneratedAssetStatus @default(PENDING)
+  provider         String
+  url              String?              @db.Text
+  base64Ref        String?              @map("base64_ref") @db.Text
+  externalJobId    String?              @map("external_job_id")
+  prompt           String?              @db.Text
+  negativePrompt   String?              @map("negative_prompt") @db.Text
+  model            String?
+  metadata         Json?
+  providerResponse Json?                @map("provider_response")
+  errorMessage     String?              @map("error_message") @db.Text
+  createdAt        DateTime             @default(now()) @map("created_at")
+  updatedAt        DateTime             @updatedAt @map("updated_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([type])
+  @@index([status])
+  @@index([externalJobId])
+  @@map("generated_assets")
+}
+
+model PublishingPlan {
+  id         String   @id @default(cuid())
+  campaignId String   @unique @map("campaign_id")
+  plan       Json
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@map("publishing_plans")
+}
+
+model CampaignDraft {
+  id                   String     @id @default(cuid())
+  campaignId           String     @map("campaign_id")
+  version              Int        @default(1)
+  name                 String
+  primaryText          String     @map("primary_text") @db.Text
+  headline             String
+  description          String     @db.Text
+  callToAction         String     @map("call_to_action")
+  instagramCaption     String     @map("instagram_caption") @db.Text
+  facebookCaption      String     @map("facebook_caption") @db.Text
+  hashtags             String[]
+  pinterestTitle       String     @map("pinterest_title")
+  pinterestDescription String     @map("pinterest_description") @db.Text
+  altText              String     @map("alt_text") @db.Text
+  creativeDirection    String     @map("creative_direction") @db.Text
+  status               PostStatus @default(GENERATED)
+  createdAt            DateTime   @default(now()) @map("created_at")
+  updatedAt            DateTime   @updatedAt @map("updated_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([status])
+  @@map("campaign_drafts")
+}
+
+model MetaCampaign {
+  id          String   @id @default(cuid())
+  campaignId  String   @unique @map("campaign_id")
+  workspaceId String   @map("workspace_id")
+  externalId  String?  @unique @map("external_id")
+  objective   String
+  status      String   @default("PAUSED")
+  budget      Decimal? @db.Decimal(10, 2)
+  rawResponse Json?    @map("raw_response")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  campaign  Campaign    @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  workspace Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  adSets    MetaAdSet[]
+  ads       MetaAd[]
+
+  @@index([workspaceId])
+  @@index([status])
+  @@map("meta_campaigns")
+}
+
+model MetaAdSet {
+  id             String   @id @default(cuid())
+  metaCampaignId String   @map("meta_campaign_id")
+  externalId     String?  @unique @map("external_id")
+  name           String
+  status         String   @default("PAUSED")
+  dailyBudget    Decimal? @map("daily_budget") @db.Decimal(10, 2)
+  targeting      Json?
+  rawResponse    Json?    @map("raw_response")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  metaCampaign MetaCampaign @relation(fields: [metaCampaignId], references: [id], onDelete: Cascade)
+  ads          MetaAd[]
+
+  @@index([metaCampaignId])
+  @@index([status])
+  @@map("meta_ad_sets")
+}
+
+model MetaAd {
+  id              String   @id @default(cuid())
+  metaCampaignId  String   @map("meta_campaign_id")
+  metaAdSetId     String?  @map("meta_ad_set_id")
+  generatedPostId String?  @map("generated_post_id")
+  externalId      String?  @unique @map("external_id")
+  creativeId      String?  @map("creative_id")
+  name            String
+  status          String   @default("PAUSED")
+  rawResponse     Json?    @map("raw_response")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  metaCampaign  MetaCampaign   @relation(fields: [metaCampaignId], references: [id], onDelete: Cascade)
+  metaAdSet     MetaAdSet?     @relation(fields: [metaAdSetId], references: [id], onDelete: SetNull)
+  generatedPost GeneratedPost? @relation(fields: [generatedPostId], references: [id], onDelete: SetNull)
+
+  @@index([metaCampaignId])
+  @@index([metaAdSetId])
+  @@index([generatedPostId])
+  @@index([status])
+  @@map("meta_ads")
 }
 
 model GeneratedPost {
-  id          String         @id @default(cuid())
-  campaignId  String         @map("campaign_id")
-  platform    SocialPlatform
-  contentType ContentType
-  title       String?
-  body        String         @db.Text
-  caption     String?        @db.Text
-  hashtags    String[]
-  mentions    String[]
-  mediaUrls   String[]       @default([]) @map("media_urls")
-  mediaType   MediaType?     @map("media_type")
-  callToAction String?       @map("call_to_action")
+  id           String         @id @default(cuid())
+  campaignId   String         @map("campaign_id")
+  platform     SocialPlatform
+  contentType  ContentType
+  title        String?
+  body         String         @db.Text
+  caption      String?        @db.Text
+  hashtags     String[]
+  mentions     String[]
+  mediaUrls    String[]       @default([]) @map("media_urls")
+  mediaType    MediaType?     @map("media_type")
+  callToAction String?        @map("call_to_action")
   aiConfidence Float?         @map("ai_confidence")
-  aiReasoning String?        @db.Text @map("ai_reasoning")
-  status      PostStatus     @default(GENERATED)
-  version     Int            @default(1)
-  parentId    String?        @map("parent_id")
-  createdAt   DateTime       @default(now()) @map("created_at")
-  updatedAt   DateTime       @updatedAt @map("updated_at")
+  aiReasoning  String?        @map("ai_reasoning") @db.Text
+  status       PostStatus     @default(GENERATED)
+  adCampaignId String?        @map("ad_campaign_id")
+  adSetId      String?        @map("ad_set_id")
+  adCreativeId String?        @map("ad_creative_id")
+  adId         String?        @map("ad_id")
+  adStatus     String?        @map("ad_status")
+  version      Int            @default(1)
+  parentId     String?        @map("parent_id")
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
 
-  campaign    Campaign   @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  approvals   Approval[]
+  campaign      Campaign       @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  approvals     Approval[]
   scheduledPost ScheduledPost?
   publishedPost PublishedPost?
+  metaAds       MetaAd[]
 
-  @@map("generated_posts")
   @@index([campaignId])
   @@index([platform])
   @@index([status])
   @@index([contentType])
+  @@map("generated_posts")
 }
 
 model CampaignAsset {
-  id          String   @id @default(cuid())
-  campaignId  String   @map("campaign_id")
-  name        String
-  type        AssetType
-  url         String
-  thumbnailUrl String? @map("thumbnail_url")
-  metadata    Json?
-  createdAt   DateTime @default(now()) @map("created_at")
+  id               String    @id @default(cuid())
+  campaignId       String    @map("campaign_id")
+  name             String
+  type             AssetType
+  url              String
+  thumbnailUrl     String?   @map("thumbnail_url")
+  metadata         Json?
+  prompt           String?   @db.Text
+  generationModel  String?   @map("generation_model")
+  generationCost   Decimal?  @map("generation_cost") @db.Decimal(10, 6)
+  providerResponse Json?     @map("provider_response")
+  createdAt        DateTime  @default(now()) @map("created_at")
 
   campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 
-  @@map("campaign_assets")
   @@index([campaignId])
   @@index([type])
+  @@map("campaign_assets")
 }
 
 // ============================================
@@ -500,76 +820,76 @@ model CampaignAsset {
 // ============================================
 
 model Approval {
-  id          String         @id @default(cuid())
-  postId      String         @map("post_id")
-  reviewerId  String         @map("reviewer_id")
-  status      ApprovalStatus @default(PENDING_REVIEW)
-  feedback    String?        @db.Text
-  reviewedAt  DateTime?      @map("reviewed_at")
-  createdAt   DateTime       @default(now()) @map("created_at")
-  updatedAt   DateTime       @updatedAt @map("updated_at")
+  id         String         @id @default(cuid())
+  postId     String         @map("post_id")
+  reviewerId String         @map("reviewer_id")
+  status     ApprovalStatus @default(PENDING_REVIEW)
+  feedback   String?        @db.Text
+  reviewedAt DateTime?      @map("reviewed_at")
+  createdAt  DateTime       @default(now()) @map("created_at")
+  updatedAt  DateTime       @updatedAt @map("updated_at")
 
   post     GeneratedPost @relation(fields: [postId], references: [id], onDelete: Cascade)
   reviewer User          @relation(fields: [reviewerId], references: [id], onDelete: Cascade)
 
   @@unique([postId, reviewerId])
-  @@map("approvals")
   @@index([postId])
   @@index([reviewerId])
   @@index([status])
+  @@map("approvals")
 }
 
 model ScheduledPost {
-  id          String         @id @default(cuid())
-  postId      String         @unique @map("post_id")
-  campaignId  String         @map("campaign_id")
-  platform    SocialPlatform
-  scheduledAt DateTime       @map("scheduled_at")
-  timezone    String         @default("UTC")
-  status      ScheduleStatus @default(SCHEDULED)
-  publishedAt DateTime?      @map("published_at")
+  id           String         @id @default(cuid())
+  postId       String         @unique @map("post_id")
+  campaignId   String         @map("campaign_id")
+  platform     SocialPlatform
+  scheduledAt  DateTime       @map("scheduled_at")
+  timezone     String         @default("UTC")
+  status       ScheduleStatus @default(SCHEDULED)
+  publishedAt  DateTime?      @map("published_at")
   errorMessage String?        @map("error_message")
-  retryCount  Int            @default(0) @map("retry_count")
-  createdAt   DateTime       @default(now()) @map("created_at")
-  updatedAt   DateTime       @updatedAt @map("updated_at")
+  retryCount   Int            @default(0) @map("retry_count")
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
 
-  post     GeneratedPost @relation(fields: [postId], references: [id], onDelete: Cascade)
-  campaign Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  post          GeneratedPost  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  campaign      Campaign       @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   publishedPost PublishedPost?
 
-  @@map("scheduled_posts")
   @@index([campaignId])
   @@index([scheduledAt])
   @@index([status])
   @@index([platform])
+  @@map("scheduled_posts")
 }
 
 model PublishedPost {
-  id          String         @id @default(cuid())
-  postId      String         @unique @map("post_id")
-  scheduledPostId String?    @unique @map("scheduled_post_id")
-  campaignId  String         @map("campaign_id")
-  socialAccountId String     @map("social_account_id")
-  platform    SocialPlatform
-  externalId  String?        @map("external_id")
-  externalUrl String?        @map("external_url")
-  publishedAt DateTime       @default(now()) @map("published_at")
-  status      PublishStatus  @default(PUBLISHED)
-  errorMessage String?        @map("error_message")
-  metadata    Json?
-  createdAt   DateTime       @default(now()) @map("created_at")
+  id              String         @id @default(cuid())
+  postId          String         @unique @map("post_id")
+  scheduledPostId String?        @unique @map("scheduled_post_id")
+  campaignId      String         @map("campaign_id")
+  socialAccountId String         @map("social_account_id")
+  platform        SocialPlatform
+  externalId      String?        @map("external_id")
+  externalUrl     String?        @map("external_url")
+  publishedAt     DateTime       @default(now()) @map("published_at")
+  status          PublishStatus  @default(PUBLISHED)
+  errorMessage    String?        @map("error_message")
+  metadata        Json?
+  createdAt       DateTime       @default(now()) @map("created_at")
 
-  post          GeneratedPost   @relation(fields: [postId], references: [id], onDelete: Cascade)
-  scheduledPost ScheduledPost?  @relation(fields: [scheduledPostId], references: [id])
-  campaign      Campaign        @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  socialAccount SocialAccount   @relation(fields: [socialAccountId], references: [id], onDelete: Cascade)
+  post          GeneratedPost       @relation(fields: [postId], references: [id], onDelete: Cascade)
+  scheduledPost ScheduledPost?      @relation(fields: [scheduledPostId], references: [id])
+  campaign      Campaign            @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  socialAccount SocialAccount       @relation(fields: [socialAccountId], references: [id], onDelete: Cascade)
   analytics     AnalyticsSnapshot[]
 
-  @@map("published_posts")
   @@index([campaignId])
   @@index([socialAccountId])
   @@index([platform])
   @@index([publishedAt])
+  @@map("published_posts")
 }
 
 // ============================================
@@ -577,39 +897,119 @@ model PublishedPost {
 // ============================================
 
 model AnalyticsSnapshot {
-  id              String   @id @default(cuid())
-  campaignId      String   @map("campaign_id")
-  publishedPostId String?  @map("published_post_id")
-  platform        SocialPlatform
-  impressions     Int      @default(0)
-  reach           Int      @default(0)
-  engagement      Int      @default(0)
-  likes           Int      @default(0)
-  comments        Int      @default(0)
-  shares          Int      @default(0)
-  clicks          Int      @default(0)
-  saves           Int      @default(0)
-  videoViews      Int      @default(0) @map("video_views")
-  watchTime       Int      @default(0) @map("watch_time")
-  followerGrowth  Int      @default(0) @map("follower_growth")
-  ctr             Float?   @map("click_through_rate")
-  cpc             Decimal? @db.Decimal(10, 4) @map("cost_per_click")
-  demographics    Json?
-  topHashtags     Json?    @map("top_hashtags")
-  bestPostTime    String?  @map("best_post_time")
-  aiInsights      String?  @db.Text @map("ai_insights")
-  snapshotDate    DateTime @default(now()) @map("snapshot_date")
-  createdAt       DateTime @default(now()) @map("created_at")
+  id               String         @id @default(cuid())
+  campaignId       String         @map("campaign_id")
+  publishedPostId  String?        @map("published_post_id")
+  platform         SocialPlatform
+  impressions      Int            @default(0)
+  reach            Int            @default(0)
+  engagement       Int            @default(0)
+  likes            Int            @default(0)
+  comments         Int            @default(0)
+  shares           Int            @default(0)
+  clicks           Int            @default(0)
+  saves            Int            @default(0)
+  videoViews       Int            @default(0) @map("video_views")
+  watchTime        Int            @default(0) @map("watch_time")
+  followerGrowth   Int            @default(0) @map("follower_growth")
+  ctr              Float?         @map("click_through_rate")
+  cpc              Decimal?       @map("cost_per_click") @db.Decimal(10, 4)
+  demographics     Json?
+  topHashtags      Json?          @map("top_hashtags")
+  bestPostTime     String?        @map("best_post_time")
+  aiInsights       String?        @map("ai_insights") @db.Text
+  providerResponse Json?          @map("provider_response")
+  snapshotDate     DateTime       @default(now()) @map("snapshot_date")
+  createdAt        DateTime       @default(now()) @map("created_at")
 
   campaign      Campaign?      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   publishedPost PublishedPost? @relation(fields: [publishedPostId], references: [id], onDelete: SetNull)
 
-  @@map("analytics_snapshots")
   @@index([campaignId])
   @@index([publishedPostId])
   @@index([platform])
   @@index([snapshotDate])
   @@index([campaignId, snapshotDate])
+  @@map("analytics_snapshots")
+}
+
+model CampaignAnalytics {
+  id               String   @id @default(cuid())
+  campaignId       String   @map("campaign_id")
+  spend            Decimal  @default(0) @db.Decimal(12, 2)
+  reach            Int      @default(0)
+  impressions      Int      @default(0)
+  clicks           Int      @default(0)
+  ctr              Float?
+  cpm              Decimal? @db.Decimal(10, 4)
+  cpc              Decimal? @db.Decimal(10, 4)
+  frequency        Float?
+  conversions      Int      @default(0)
+  roas             Float?
+  engagement       Int      @default(0)
+  comments         Int      @default(0)
+  shares           Int      @default(0)
+  likes            Int      @default(0)
+  source           String   @default("meta")
+  providerResponse Json?    @map("provider_response")
+  snapshotDate     DateTime @default(now()) @map("snapshot_date")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId, snapshotDate])
+  @@index([source])
+  @@map("campaign_analytics")
+}
+
+model CampaignRecommendation {
+  id             String   @id @default(cuid())
+  campaignId     String   @map("campaign_id")
+  summary        String   @db.Text
+  recommendation String   @db.Text
+  metric         String?
+  severity       String   @default("info")
+  status         String   @default("open")
+  source         String   @default("rule_based")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId, createdAt])
+  @@index([status])
+  @@index([severity])
+  @@map("campaign_recommendations")
+}
+
+model LearningInsight {
+  id              String   @id @default(cuid())
+  campaignId      String   @map("campaign_id")
+  summary         String   @db.Text
+  recommendations String[]
+  output          Json
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId, createdAt])
+  @@map("learning_insights")
+}
+
+model CampaignHistory {
+  id         String   @id @default(cuid())
+  campaignId String   @map("campaign_id")
+  userId     String?  @map("user_id")
+  action     String
+  details    Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  user     User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([campaignId, createdAt])
+  @@index([userId])
+  @@index([action])
+  @@map("campaign_history")
 }
 
 // ============================================
@@ -626,7 +1026,7 @@ model AIJob {
   error       String?     @db.Text
   tokensUsed  Int         @default(0) @map("tokens_used")
   cost        Decimal?    @db.Decimal(10, 6)
-  duration    Int?        // milliseconds
+  duration    Int? // milliseconds
   startedAt   DateTime?   @map("started_at")
   completedAt DateTime?   @map("completed_at")
   createdAt   DateTime    @default(now()) @map("created_at")
@@ -634,11 +1034,11 @@ model AIJob {
 
   campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 
-  @@map("ai_jobs")
   @@index([campaignId])
   @@index([agentType])
   @@index([status])
   @@index([createdAt])
+  @@map("ai_jobs")
 }
 
 model AIUsage {
@@ -654,10 +1054,29 @@ model AIUsage {
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
-  @@map("ai_usage")
   @@index([userId])
   @@index([workspaceId])
   @@index([createdAt])
+  @@map("ai_usage")
+}
+
+model AIRecommendation {
+  id                  String   @id @default(cuid())
+  campaignId          String   @map("campaign_id")
+  workspaceId         String   @map("workspace_id")
+  summary             String   @db.Text
+  wins                String[]
+  opportunities       String[]
+  nextExperiments     String[] @map("next_experiments")
+  sourceSnapshotCount Int      @default(0) @map("source_snapshot_count")
+  createdAt           DateTime @default(now()) @map("created_at")
+
+  campaign  Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId, createdAt])
+  @@index([workspaceId, createdAt])
+  @@map("ai_recommendations")
 }
 
 // ============================================
@@ -665,25 +1084,25 @@ model AIUsage {
 // ============================================
 
 model Subscription {
-  id                String             @id @default(cuid())
-  workspaceId       String             @map("workspace_id")
-  stripeCustomerId  String             @map("stripe_customer_id")
-  stripeSubscriptionId String?         @map("stripe_subscription_id")
-  stripePriceId     String?            @map("stripe_price_id")
-  status            SubscriptionStatus @default(INCOMPLETE)
-  plan              Plan
-  currentPeriodStart DateTime?          @map("current_period_start")
-  currentPeriodEnd   DateTime?          @map("current_period_end")
-  cancelAtPeriodEnd  Boolean            @default(false) @map("cancel_at_period_end")
-  createdAt         DateTime           @default(now()) @map("created_at")
-  updatedAt         DateTime           @updatedAt @map("updated_at")
+  id                   String             @id @default(cuid())
+  workspaceId          String             @map("workspace_id")
+  stripeCustomerId     String             @map("stripe_customer_id")
+  stripeSubscriptionId String?            @map("stripe_subscription_id")
+  stripePriceId        String?            @map("stripe_price_id")
+  status               SubscriptionStatus @default(INCOMPLETE)
+  plan                 Plan
+  currentPeriodStart   DateTime?          @map("current_period_start")
+  currentPeriodEnd     DateTime?          @map("current_period_end")
+  cancelAtPeriodEnd    Boolean            @default(false) @map("cancel_at_period_end")
+  createdAt            DateTime           @default(now()) @map("created_at")
+  updatedAt            DateTime           @updatedAt @map("updated_at")
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
-  @@map("subscriptions")
   @@index([workspaceId])
   @@index([stripeCustomerId])
   @@index([status])
+  @@map("subscriptions")
 }
 
 // ============================================
@@ -705,10 +1124,10 @@ model AuditLog {
   workspace Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)
   user      User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
 
-  @@map("audit_logs")
   @@index([workspaceId])
   @@index([userId])
   @@index([action])
   @@index([entityType, entityId])
   @@index([createdAt])
+  @@map("audit_logs")
 }

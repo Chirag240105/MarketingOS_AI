@@ -60,14 +60,32 @@ export const ModelName = {
   BrandProfile: 'BrandProfile',
   SocialAccount: 'SocialAccount',
   Campaign: 'Campaign',
+  CampaignPlatform: 'CampaignPlatform',
+  AgentRun: 'AgentRun',
+  BrandAnalysis: 'BrandAnalysis',
+  CompetitorAnalysis: 'CompetitorAnalysis',
+  CampaignStrategy: 'CampaignStrategy',
+  CampaignCopy: 'CampaignCopy',
+  CreativeBrief: 'CreativeBrief',
+  GeneratedAsset: 'GeneratedAsset',
+  PublishingPlan: 'PublishingPlan',
+  CampaignDraft: 'CampaignDraft',
+  MetaCampaign: 'MetaCampaign',
+  MetaAdSet: 'MetaAdSet',
+  MetaAd: 'MetaAd',
   GeneratedPost: 'GeneratedPost',
   CampaignAsset: 'CampaignAsset',
   Approval: 'Approval',
   ScheduledPost: 'ScheduledPost',
   PublishedPost: 'PublishedPost',
   AnalyticsSnapshot: 'AnalyticsSnapshot',
+  CampaignAnalytics: 'CampaignAnalytics',
+  CampaignRecommendation: 'CampaignRecommendation',
+  LearningInsight: 'LearningInsight',
+  CampaignHistory: 'CampaignHistory',
   AIJob: 'AIJob',
   AIUsage: 'AIUsage',
+  AIRecommendation: 'AIRecommendation',
   Subscription: 'Subscription',
   AuditLog: 'AuditLog'
 } as const
@@ -182,8 +200,14 @@ export const BrandProfileScalarFieldEnum = {
   brandColors: 'brandColors',
   logoUrl: 'logoUrl',
   industry: 'industry',
+  primaryGoal: 'primaryGoal',
+  budget: 'budget',
+  location: 'location',
+  productsServices: 'productsServices',
   competitors: 'competitors',
   hashtags: 'hashtags',
+  lastAnalyzedAt: 'lastAnalyzedAt',
+  analysisSummary: 'analysisSummary',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -223,13 +247,215 @@ export const CampaignScalarFieldEnum = {
   endDate: 'endDate',
   targetAudience: 'targetAudience',
   platforms: 'platforms',
+  offer: 'offer',
+  notes: 'notes',
   aiStrategy: 'aiStrategy',
+  aiStrategyPlan: 'aiStrategyPlan',
+  generateVideo: 'generateVideo',
   createdBy: 'createdBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CampaignScalarFieldEnum = (typeof CampaignScalarFieldEnum)[keyof typeof CampaignScalarFieldEnum]
+
+
+export const CampaignPlatformScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  platform: 'platform',
+  createdAt: 'createdAt'
+} as const
+
+export type CampaignPlatformScalarFieldEnum = (typeof CampaignPlatformScalarFieldEnum)[keyof typeof CampaignPlatformScalarFieldEnum]
+
+
+export const AgentRunScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  agentName: 'agentName',
+  modelUsed: 'modelUsed',
+  input: 'input',
+  output: 'output',
+  status: 'status',
+  errorMessage: 'errorMessage',
+  retryCount: 'retryCount',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AgentRunScalarFieldEnum = (typeof AgentRunScalarFieldEnum)[keyof typeof AgentRunScalarFieldEnum]
+
+
+export const BrandAnalysisScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  profile: 'profile',
+  summary: 'summary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BrandAnalysisScalarFieldEnum = (typeof BrandAnalysisScalarFieldEnum)[keyof typeof BrandAnalysisScalarFieldEnum]
+
+
+export const CompetitorAnalysisScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  competitors: 'competitors',
+  opportunities: 'opportunities',
+  summary: 'summary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CompetitorAnalysisScalarFieldEnum = (typeof CompetitorAnalysisScalarFieldEnum)[keyof typeof CompetitorAnalysisScalarFieldEnum]
+
+
+export const CampaignStrategyScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  strategy: 'strategy',
+  contentCalendar: 'contentCalendar',
+  budgetAllocation: 'budgetAllocation',
+  summary: 'summary',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampaignStrategyScalarFieldEnum = (typeof CampaignStrategyScalarFieldEnum)[keyof typeof CampaignStrategyScalarFieldEnum]
+
+
+export const CampaignCopyScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  copy: 'copy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampaignCopyScalarFieldEnum = (typeof CampaignCopyScalarFieldEnum)[keyof typeof CampaignCopyScalarFieldEnum]
+
+
+export const CreativeBriefScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  brief: 'brief',
+  imagePrompt: 'imagePrompt',
+  videoPrompt: 'videoPrompt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CreativeBriefScalarFieldEnum = (typeof CreativeBriefScalarFieldEnum)[keyof typeof CreativeBriefScalarFieldEnum]
+
+
+export const GeneratedAssetScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  type: 'type',
+  status: 'status',
+  provider: 'provider',
+  url: 'url',
+  base64Ref: 'base64Ref',
+  externalJobId: 'externalJobId',
+  prompt: 'prompt',
+  negativePrompt: 'negativePrompt',
+  model: 'model',
+  metadata: 'metadata',
+  providerResponse: 'providerResponse',
+  errorMessage: 'errorMessage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GeneratedAssetScalarFieldEnum = (typeof GeneratedAssetScalarFieldEnum)[keyof typeof GeneratedAssetScalarFieldEnum]
+
+
+export const PublishingPlanScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  plan: 'plan',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PublishingPlanScalarFieldEnum = (typeof PublishingPlanScalarFieldEnum)[keyof typeof PublishingPlanScalarFieldEnum]
+
+
+export const CampaignDraftScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  version: 'version',
+  name: 'name',
+  primaryText: 'primaryText',
+  headline: 'headline',
+  description: 'description',
+  callToAction: 'callToAction',
+  instagramCaption: 'instagramCaption',
+  facebookCaption: 'facebookCaption',
+  hashtags: 'hashtags',
+  pinterestTitle: 'pinterestTitle',
+  pinterestDescription: 'pinterestDescription',
+  altText: 'altText',
+  creativeDirection: 'creativeDirection',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampaignDraftScalarFieldEnum = (typeof CampaignDraftScalarFieldEnum)[keyof typeof CampaignDraftScalarFieldEnum]
+
+
+export const MetaCampaignScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  workspaceId: 'workspaceId',
+  externalId: 'externalId',
+  objective: 'objective',
+  status: 'status',
+  budget: 'budget',
+  rawResponse: 'rawResponse',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MetaCampaignScalarFieldEnum = (typeof MetaCampaignScalarFieldEnum)[keyof typeof MetaCampaignScalarFieldEnum]
+
+
+export const MetaAdSetScalarFieldEnum = {
+  id: 'id',
+  metaCampaignId: 'metaCampaignId',
+  externalId: 'externalId',
+  name: 'name',
+  status: 'status',
+  dailyBudget: 'dailyBudget',
+  targeting: 'targeting',
+  rawResponse: 'rawResponse',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MetaAdSetScalarFieldEnum = (typeof MetaAdSetScalarFieldEnum)[keyof typeof MetaAdSetScalarFieldEnum]
+
+
+export const MetaAdScalarFieldEnum = {
+  id: 'id',
+  metaCampaignId: 'metaCampaignId',
+  metaAdSetId: 'metaAdSetId',
+  generatedPostId: 'generatedPostId',
+  externalId: 'externalId',
+  creativeId: 'creativeId',
+  name: 'name',
+  status: 'status',
+  rawResponse: 'rawResponse',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MetaAdScalarFieldEnum = (typeof MetaAdScalarFieldEnum)[keyof typeof MetaAdScalarFieldEnum]
 
 
 export const GeneratedPostScalarFieldEnum = {
@@ -248,6 +474,11 @@ export const GeneratedPostScalarFieldEnum = {
   aiConfidence: 'aiConfidence',
   aiReasoning: 'aiReasoning',
   status: 'status',
+  adCampaignId: 'adCampaignId',
+  adSetId: 'adSetId',
+  adCreativeId: 'adCreativeId',
+  adId: 'adId',
+  adStatus: 'adStatus',
   version: 'version',
   parentId: 'parentId',
   createdAt: 'createdAt',
@@ -265,6 +496,10 @@ export const CampaignAssetScalarFieldEnum = {
   url: 'url',
   thumbnailUrl: 'thumbnailUrl',
   metadata: 'metadata',
+  prompt: 'prompt',
+  generationModel: 'generationModel',
+  generationCost: 'generationCost',
+  providerResponse: 'providerResponse',
   createdAt: 'createdAt'
 } as const
 
@@ -344,11 +579,77 @@ export const AnalyticsSnapshotScalarFieldEnum = {
   topHashtags: 'topHashtags',
   bestPostTime: 'bestPostTime',
   aiInsights: 'aiInsights',
+  providerResponse: 'providerResponse',
   snapshotDate: 'snapshotDate',
   createdAt: 'createdAt'
 } as const
 
 export type AnalyticsSnapshotScalarFieldEnum = (typeof AnalyticsSnapshotScalarFieldEnum)[keyof typeof AnalyticsSnapshotScalarFieldEnum]
+
+
+export const CampaignAnalyticsScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  spend: 'spend',
+  reach: 'reach',
+  impressions: 'impressions',
+  clicks: 'clicks',
+  ctr: 'ctr',
+  cpm: 'cpm',
+  cpc: 'cpc',
+  frequency: 'frequency',
+  conversions: 'conversions',
+  roas: 'roas',
+  engagement: 'engagement',
+  comments: 'comments',
+  shares: 'shares',
+  likes: 'likes',
+  source: 'source',
+  providerResponse: 'providerResponse',
+  snapshotDate: 'snapshotDate',
+  createdAt: 'createdAt'
+} as const
+
+export type CampaignAnalyticsScalarFieldEnum = (typeof CampaignAnalyticsScalarFieldEnum)[keyof typeof CampaignAnalyticsScalarFieldEnum]
+
+
+export const CampaignRecommendationScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  summary: 'summary',
+  recommendation: 'recommendation',
+  metric: 'metric',
+  severity: 'severity',
+  status: 'status',
+  source: 'source',
+  createdAt: 'createdAt'
+} as const
+
+export type CampaignRecommendationScalarFieldEnum = (typeof CampaignRecommendationScalarFieldEnum)[keyof typeof CampaignRecommendationScalarFieldEnum]
+
+
+export const LearningInsightScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  summary: 'summary',
+  recommendations: 'recommendations',
+  output: 'output',
+  createdAt: 'createdAt'
+} as const
+
+export type LearningInsightScalarFieldEnum = (typeof LearningInsightScalarFieldEnum)[keyof typeof LearningInsightScalarFieldEnum]
+
+
+export const CampaignHistoryScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  userId: 'userId',
+  action: 'action',
+  details: 'details',
+  createdAt: 'createdAt'
+} as const
+
+export type CampaignHistoryScalarFieldEnum = (typeof CampaignHistoryScalarFieldEnum)[keyof typeof CampaignHistoryScalarFieldEnum]
 
 
 export const AIJobScalarFieldEnum = {
@@ -383,6 +684,21 @@ export const AIUsageScalarFieldEnum = {
 } as const
 
 export type AIUsageScalarFieldEnum = (typeof AIUsageScalarFieldEnum)[keyof typeof AIUsageScalarFieldEnum]
+
+
+export const AIRecommendationScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  workspaceId: 'workspaceId',
+  summary: 'summary',
+  wins: 'wins',
+  opportunities: 'opportunities',
+  nextExperiments: 'nextExperiments',
+  sourceSnapshotCount: 'sourceSnapshotCount',
+  createdAt: 'createdAt'
+} as const
+
+export type AIRecommendationScalarFieldEnum = (typeof AIRecommendationScalarFieldEnum)[keyof typeof AIRecommendationScalarFieldEnum]
 
 
 export const SubscriptionScalarFieldEnum = {
@@ -433,6 +749,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

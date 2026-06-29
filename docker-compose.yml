@@ -17,5 +17,20 @@ services:
       timeout: 5s
       retries: 20
 
+  redis:
+    image: redis:7-alpine
+    container_name: marketingos-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - marketingos_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
 volumes:
   marketingos_postgres_data:
+  marketingos_redis_data:

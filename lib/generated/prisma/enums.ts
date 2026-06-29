@@ -79,6 +79,16 @@ export const CampaignStatus = {
   DRAFT: 'DRAFT',
   PLANNING: 'PLANNING',
   GENERATING: 'GENERATING',
+  BRAND_ANALYZED: 'BRAND_ANALYZED',
+  COMPETITOR_ANALYZED: 'COMPETITOR_ANALYZED',
+  STRATEGY_READY: 'STRATEGY_READY',
+  COPY_READY: 'COPY_READY',
+  CREATIVE_READY: 'CREATIVE_READY',
+  READY_TO_PUBLISH: 'READY_TO_PUBLISH',
+  PUBLISHED: 'PUBLISHED',
+  ANALYZED: 'ANALYZED',
+  LEARNING_UPDATED: 'LEARNING_UPDATED',
+  FAILED: 'FAILED',
   REVIEW: 'REVIEW',
   SCHEDULED: 'SCHEDULED',
   ACTIVE: 'ACTIVE',
@@ -183,6 +193,7 @@ export type PublishStatus = (typeof PublishStatus)[keyof typeof PublishStatus]
 
 export const AIAgentType = {
   BUSINESS_ANALYZER: 'BUSINESS_ANALYZER',
+  COMPETITOR_ANALYZER: 'COMPETITOR_ANALYZER',
   CAMPAIGN_STRATEGIST: 'CAMPAIGN_STRATEGIST',
   COPYWRITER: 'COPYWRITER',
   VISUAL_CREATIVE: 'VISUAL_CREATIVE',
@@ -205,6 +216,36 @@ export const AIJobStatus = {
 } as const
 
 export type AIJobStatus = (typeof AIJobStatus)[keyof typeof AIJobStatus]
+
+
+export const AgentRunStatus = {
+  PENDING: 'PENDING',
+  RUNNING: 'RUNNING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  RETRYING: 'RETRYING',
+  SKIPPED: 'SKIPPED'
+} as const
+
+export type AgentRunStatus = (typeof AgentRunStatus)[keyof typeof AgentRunStatus]
+
+
+export const GeneratedAssetType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+} as const
+
+export type GeneratedAssetType = (typeof GeneratedAssetType)[keyof typeof GeneratedAssetType]
+
+
+export const GeneratedAssetStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const
+
+export type GeneratedAssetStatus = (typeof GeneratedAssetStatus)[keyof typeof GeneratedAssetStatus]
 
 
 export const SubscriptionStatus = {

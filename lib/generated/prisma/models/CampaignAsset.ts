@@ -20,8 +20,18 @@ export type CampaignAssetModel = runtime.Types.Result.DefaultSelection<Prisma.$C
 
 export type AggregateCampaignAsset = {
   _count: CampaignAssetCountAggregateOutputType | null
+  _avg: CampaignAssetAvgAggregateOutputType | null
+  _sum: CampaignAssetSumAggregateOutputType | null
   _min: CampaignAssetMinAggregateOutputType | null
   _max: CampaignAssetMaxAggregateOutputType | null
+}
+
+export type CampaignAssetAvgAggregateOutputType = {
+  generationCost: runtime.Decimal | null
+}
+
+export type CampaignAssetSumAggregateOutputType = {
+  generationCost: runtime.Decimal | null
 }
 
 export type CampaignAssetMinAggregateOutputType = {
@@ -31,6 +41,9 @@ export type CampaignAssetMinAggregateOutputType = {
   type: $Enums.AssetType | null
   url: string | null
   thumbnailUrl: string | null
+  prompt: string | null
+  generationModel: string | null
+  generationCost: runtime.Decimal | null
   createdAt: Date | null
 }
 
@@ -41,6 +54,9 @@ export type CampaignAssetMaxAggregateOutputType = {
   type: $Enums.AssetType | null
   url: string | null
   thumbnailUrl: string | null
+  prompt: string | null
+  generationModel: string | null
+  generationCost: runtime.Decimal | null
   createdAt: Date | null
 }
 
@@ -52,10 +68,22 @@ export type CampaignAssetCountAggregateOutputType = {
   url: number
   thumbnailUrl: number
   metadata: number
+  prompt: number
+  generationModel: number
+  generationCost: number
+  providerResponse: number
   createdAt: number
   _all: number
 }
 
+
+export type CampaignAssetAvgAggregateInputType = {
+  generationCost?: true
+}
+
+export type CampaignAssetSumAggregateInputType = {
+  generationCost?: true
+}
 
 export type CampaignAssetMinAggregateInputType = {
   id?: true
@@ -64,6 +92,9 @@ export type CampaignAssetMinAggregateInputType = {
   type?: true
   url?: true
   thumbnailUrl?: true
+  prompt?: true
+  generationModel?: true
+  generationCost?: true
   createdAt?: true
 }
 
@@ -74,6 +105,9 @@ export type CampaignAssetMaxAggregateInputType = {
   type?: true
   url?: true
   thumbnailUrl?: true
+  prompt?: true
+  generationModel?: true
+  generationCost?: true
   createdAt?: true
 }
 
@@ -85,6 +119,10 @@ export type CampaignAssetCountAggregateInputType = {
   url?: true
   thumbnailUrl?: true
   metadata?: true
+  prompt?: true
+  generationModel?: true
+  generationCost?: true
+  providerResponse?: true
   createdAt?: true
   _all?: true
 }
@@ -127,6 +165,18 @@ export type CampaignAssetAggregateArgs<ExtArgs extends runtime.Types.Extensions.
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: CampaignAssetAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: CampaignAssetSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: CampaignAssetMinAggregateInputType
@@ -157,6 +207,8 @@ export type CampaignAssetGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   _count?: CampaignAssetCountAggregateInputType | true
+  _avg?: CampaignAssetAvgAggregateInputType
+  _sum?: CampaignAssetSumAggregateInputType
   _min?: CampaignAssetMinAggregateInputType
   _max?: CampaignAssetMaxAggregateInputType
 }
@@ -169,8 +221,14 @@ export type CampaignAssetGroupByOutputType = {
   url: string
   thumbnailUrl: string | null
   metadata: runtime.JsonValue | null
+  prompt: string | null
+  generationModel: string | null
+  generationCost: runtime.Decimal | null
+  providerResponse: runtime.JsonValue | null
   createdAt: Date
   _count: CampaignAssetCountAggregateOutputType | null
+  _avg: CampaignAssetAvgAggregateOutputType | null
+  _sum: CampaignAssetSumAggregateOutputType | null
   _min: CampaignAssetMinAggregateOutputType | null
   _max: CampaignAssetMaxAggregateOutputType | null
 }
@@ -201,6 +259,10 @@ export type CampaignAssetWhereInput = {
   url?: Prisma.StringFilter<"CampaignAsset"> | string
   thumbnailUrl?: Prisma.StringNullableFilter<"CampaignAsset"> | string | null
   metadata?: Prisma.JsonNullableFilter<"CampaignAsset">
+  prompt?: Prisma.StringNullableFilter<"CampaignAsset"> | string | null
+  generationModel?: Prisma.StringNullableFilter<"CampaignAsset"> | string | null
+  generationCost?: Prisma.DecimalNullableFilter<"CampaignAsset"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.JsonNullableFilter<"CampaignAsset">
   createdAt?: Prisma.DateTimeFilter<"CampaignAsset"> | Date | string
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
 }
@@ -213,6 +275,10 @@ export type CampaignAssetOrderByWithRelationInput = {
   url?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
+  prompt?: Prisma.SortOrderInput | Prisma.SortOrder
+  generationModel?: Prisma.SortOrderInput | Prisma.SortOrder
+  generationCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerResponse?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   campaign?: Prisma.CampaignOrderByWithRelationInput
 }
@@ -228,6 +294,10 @@ export type CampaignAssetWhereUniqueInput = Prisma.AtLeast<{
   url?: Prisma.StringFilter<"CampaignAsset"> | string
   thumbnailUrl?: Prisma.StringNullableFilter<"CampaignAsset"> | string | null
   metadata?: Prisma.JsonNullableFilter<"CampaignAsset">
+  prompt?: Prisma.StringNullableFilter<"CampaignAsset"> | string | null
+  generationModel?: Prisma.StringNullableFilter<"CampaignAsset"> | string | null
+  generationCost?: Prisma.DecimalNullableFilter<"CampaignAsset"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.JsonNullableFilter<"CampaignAsset">
   createdAt?: Prisma.DateTimeFilter<"CampaignAsset"> | Date | string
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
 }, "id">
@@ -240,10 +310,16 @@ export type CampaignAssetOrderByWithAggregationInput = {
   url?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
+  prompt?: Prisma.SortOrderInput | Prisma.SortOrder
+  generationModel?: Prisma.SortOrderInput | Prisma.SortOrder
+  generationCost?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerResponse?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.CampaignAssetCountOrderByAggregateInput
+  _avg?: Prisma.CampaignAssetAvgOrderByAggregateInput
   _max?: Prisma.CampaignAssetMaxOrderByAggregateInput
   _min?: Prisma.CampaignAssetMinOrderByAggregateInput
+  _sum?: Prisma.CampaignAssetSumOrderByAggregateInput
 }
 
 export type CampaignAssetScalarWhereWithAggregatesInput = {
@@ -257,6 +333,10 @@ export type CampaignAssetScalarWhereWithAggregatesInput = {
   url?: Prisma.StringWithAggregatesFilter<"CampaignAsset"> | string
   thumbnailUrl?: Prisma.StringNullableWithAggregatesFilter<"CampaignAsset"> | string | null
   metadata?: Prisma.JsonNullableWithAggregatesFilter<"CampaignAsset">
+  prompt?: Prisma.StringNullableWithAggregatesFilter<"CampaignAsset"> | string | null
+  generationModel?: Prisma.StringNullableWithAggregatesFilter<"CampaignAsset"> | string | null
+  generationCost?: Prisma.DecimalNullableWithAggregatesFilter<"CampaignAsset"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.JsonNullableWithAggregatesFilter<"CampaignAsset">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CampaignAsset"> | Date | string
 }
 
@@ -267,6 +347,10 @@ export type CampaignAssetCreateInput = {
   url: string
   thumbnailUrl?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: string | null
+  generationModel?: string | null
+  generationCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   campaign: Prisma.CampaignCreateNestedOneWithoutCampaignAssetsInput
 }
@@ -279,6 +363,10 @@ export type CampaignAssetUncheckedCreateInput = {
   url: string
   thumbnailUrl?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: string | null
+  generationModel?: string | null
+  generationCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -289,6 +377,10 @@ export type CampaignAssetUpdateInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutCampaignAssetsNestedInput
 }
@@ -301,6 +393,10 @@ export type CampaignAssetUncheckedUpdateInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -312,6 +408,10 @@ export type CampaignAssetCreateManyInput = {
   url: string
   thumbnailUrl?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: string | null
+  generationModel?: string | null
+  generationCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -322,6 +422,10 @@ export type CampaignAssetUpdateManyMutationInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -333,6 +437,10 @@ export type CampaignAssetUncheckedUpdateManyInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -354,7 +462,15 @@ export type CampaignAssetCountOrderByAggregateInput = {
   url?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
+  prompt?: Prisma.SortOrder
+  generationModel?: Prisma.SortOrder
+  generationCost?: Prisma.SortOrder
+  providerResponse?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type CampaignAssetAvgOrderByAggregateInput = {
+  generationCost?: Prisma.SortOrder
 }
 
 export type CampaignAssetMaxOrderByAggregateInput = {
@@ -364,6 +480,9 @@ export type CampaignAssetMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   url?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
+  prompt?: Prisma.SortOrder
+  generationModel?: Prisma.SortOrder
+  generationCost?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -374,7 +493,14 @@ export type CampaignAssetMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   url?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
+  prompt?: Prisma.SortOrder
+  generationModel?: Prisma.SortOrder
+  generationCost?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type CampaignAssetSumOrderByAggregateInput = {
+  generationCost?: Prisma.SortOrder
 }
 
 export type CampaignAssetCreateNestedManyWithoutCampaignInput = {
@@ -430,6 +556,10 @@ export type CampaignAssetCreateWithoutCampaignInput = {
   url: string
   thumbnailUrl?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: string | null
+  generationModel?: string | null
+  generationCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -440,6 +570,10 @@ export type CampaignAssetUncheckedCreateWithoutCampaignInput = {
   url: string
   thumbnailUrl?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: string | null
+  generationModel?: string | null
+  generationCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -480,6 +614,10 @@ export type CampaignAssetScalarWhereInput = {
   url?: Prisma.StringFilter<"CampaignAsset"> | string
   thumbnailUrl?: Prisma.StringNullableFilter<"CampaignAsset"> | string | null
   metadata?: Prisma.JsonNullableFilter<"CampaignAsset">
+  prompt?: Prisma.StringNullableFilter<"CampaignAsset"> | string | null
+  generationModel?: Prisma.StringNullableFilter<"CampaignAsset"> | string | null
+  generationCost?: Prisma.DecimalNullableFilter<"CampaignAsset"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.JsonNullableFilter<"CampaignAsset">
   createdAt?: Prisma.DateTimeFilter<"CampaignAsset"> | Date | string
 }
 
@@ -490,6 +628,10 @@ export type CampaignAssetCreateManyCampaignInput = {
   url: string
   thumbnailUrl?: string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: string | null
+  generationModel?: string | null
+  generationCost?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -500,6 +642,10 @@ export type CampaignAssetUpdateWithoutCampaignInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -510,6 +656,10 @@ export type CampaignAssetUncheckedUpdateWithoutCampaignInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -520,6 +670,10 @@ export type CampaignAssetUncheckedUpdateManyWithoutCampaignInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   metadata?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  prompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  generationCost?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -533,6 +687,10 @@ export type CampaignAssetSelect<ExtArgs extends runtime.Types.Extensions.Interna
   url?: boolean
   thumbnailUrl?: boolean
   metadata?: boolean
+  prompt?: boolean
+  generationModel?: boolean
+  generationCost?: boolean
+  providerResponse?: boolean
   createdAt?: boolean
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["campaignAsset"]>
@@ -545,6 +703,10 @@ export type CampaignAssetSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   url?: boolean
   thumbnailUrl?: boolean
   metadata?: boolean
+  prompt?: boolean
+  generationModel?: boolean
+  generationCost?: boolean
+  providerResponse?: boolean
   createdAt?: boolean
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["campaignAsset"]>
@@ -557,6 +719,10 @@ export type CampaignAssetSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   url?: boolean
   thumbnailUrl?: boolean
   metadata?: boolean
+  prompt?: boolean
+  generationModel?: boolean
+  generationCost?: boolean
+  providerResponse?: boolean
   createdAt?: boolean
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["campaignAsset"]>
@@ -569,10 +735,14 @@ export type CampaignAssetSelectScalar = {
   url?: boolean
   thumbnailUrl?: boolean
   metadata?: boolean
+  prompt?: boolean
+  generationModel?: boolean
+  generationCost?: boolean
+  providerResponse?: boolean
   createdAt?: boolean
 }
 
-export type CampaignAssetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "campaignId" | "name" | "type" | "url" | "thumbnailUrl" | "metadata" | "createdAt", ExtArgs["result"]["campaignAsset"]>
+export type CampaignAssetOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "campaignId" | "name" | "type" | "url" | "thumbnailUrl" | "metadata" | "prompt" | "generationModel" | "generationCost" | "providerResponse" | "createdAt", ExtArgs["result"]["campaignAsset"]>
 export type CampaignAssetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
 }
@@ -596,6 +766,10 @@ export type $CampaignAssetPayload<ExtArgs extends runtime.Types.Extensions.Inter
     url: string
     thumbnailUrl: string | null
     metadata: runtime.JsonValue | null
+    prompt: string | null
+    generationModel: string | null
+    generationCost: runtime.Decimal | null
+    providerResponse: runtime.JsonValue | null
     createdAt: Date
   }, ExtArgs["result"]["campaignAsset"]>
   composites: {}
@@ -1028,6 +1202,10 @@ export interface CampaignAssetFieldRefs {
   readonly url: Prisma.FieldRef<"CampaignAsset", 'String'>
   readonly thumbnailUrl: Prisma.FieldRef<"CampaignAsset", 'String'>
   readonly metadata: Prisma.FieldRef<"CampaignAsset", 'Json'>
+  readonly prompt: Prisma.FieldRef<"CampaignAsset", 'String'>
+  readonly generationModel: Prisma.FieldRef<"CampaignAsset", 'String'>
+  readonly generationCost: Prisma.FieldRef<"CampaignAsset", 'Decimal'>
+  readonly providerResponse: Prisma.FieldRef<"CampaignAsset", 'Json'>
   readonly createdAt: Prisma.FieldRef<"CampaignAsset", 'DateTime'>
 }
     

@@ -3,12 +3,26 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
+function withSslRootCert(databaseUrl?: string) {
+  if (!databaseUrl) return databaseUrl;
+
+  const sslRootCert = process.env.PGSSLROOTCERT || process.env.DATABASE_CA_CERT_PATH;
+  if (!sslRootCert) return databaseUrl;
+
+  const url = new URL(databaseUrl);
+  if (!url.searchParams.has("sslrootcert")) {
+    url.searchParams.set("sslrootcert", sslRootCert);
+  }
+
+  return url.toString();
+}
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    url: withSslRootCert(process.env.DATABASE_URL),
   },
 });

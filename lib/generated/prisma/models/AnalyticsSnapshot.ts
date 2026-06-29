@@ -128,6 +128,7 @@ export type AnalyticsSnapshotCountAggregateOutputType = {
   topHashtags: number
   bestPostTime: number
   aiInsights: number
+  providerResponse: number
   snapshotDate: number
   createdAt: number
   _all: number
@@ -236,6 +237,7 @@ export type AnalyticsSnapshotCountAggregateInputType = {
   topHashtags?: true
   bestPostTime?: true
   aiInsights?: true
+  providerResponse?: true
   snapshotDate?: true
   createdAt?: true
   _all?: true
@@ -349,6 +351,7 @@ export type AnalyticsSnapshotGroupByOutputType = {
   topHashtags: runtime.JsonValue | null
   bestPostTime: string | null
   aiInsights: string | null
+  providerResponse: runtime.JsonValue | null
   snapshotDate: Date
   createdAt: Date
   _count: AnalyticsSnapshotCountAggregateOutputType | null
@@ -398,6 +401,7 @@ export type AnalyticsSnapshotWhereInput = {
   topHashtags?: Prisma.JsonNullableFilter<"AnalyticsSnapshot">
   bestPostTime?: Prisma.StringNullableFilter<"AnalyticsSnapshot"> | string | null
   aiInsights?: Prisma.StringNullableFilter<"AnalyticsSnapshot"> | string | null
+  providerResponse?: Prisma.JsonNullableFilter<"AnalyticsSnapshot">
   snapshotDate?: Prisma.DateTimeFilter<"AnalyticsSnapshot"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"AnalyticsSnapshot"> | Date | string
   campaign?: Prisma.XOR<Prisma.CampaignNullableScalarRelationFilter, Prisma.CampaignWhereInput> | null
@@ -426,6 +430,7 @@ export type AnalyticsSnapshotOrderByWithRelationInput = {
   topHashtags?: Prisma.SortOrderInput | Prisma.SortOrder
   bestPostTime?: Prisma.SortOrderInput | Prisma.SortOrder
   aiInsights?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerResponse?: Prisma.SortOrderInput | Prisma.SortOrder
   snapshotDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   campaign?: Prisma.CampaignOrderByWithRelationInput
@@ -457,6 +462,7 @@ export type AnalyticsSnapshotWhereUniqueInput = Prisma.AtLeast<{
   topHashtags?: Prisma.JsonNullableFilter<"AnalyticsSnapshot">
   bestPostTime?: Prisma.StringNullableFilter<"AnalyticsSnapshot"> | string | null
   aiInsights?: Prisma.StringNullableFilter<"AnalyticsSnapshot"> | string | null
+  providerResponse?: Prisma.JsonNullableFilter<"AnalyticsSnapshot">
   snapshotDate?: Prisma.DateTimeFilter<"AnalyticsSnapshot"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"AnalyticsSnapshot"> | Date | string
   campaign?: Prisma.XOR<Prisma.CampaignNullableScalarRelationFilter, Prisma.CampaignWhereInput> | null
@@ -485,6 +491,7 @@ export type AnalyticsSnapshotOrderByWithAggregationInput = {
   topHashtags?: Prisma.SortOrderInput | Prisma.SortOrder
   bestPostTime?: Prisma.SortOrderInput | Prisma.SortOrder
   aiInsights?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerResponse?: Prisma.SortOrderInput | Prisma.SortOrder
   snapshotDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.AnalyticsSnapshotCountOrderByAggregateInput
@@ -519,6 +526,7 @@ export type AnalyticsSnapshotScalarWhereWithAggregatesInput = {
   topHashtags?: Prisma.JsonNullableWithAggregatesFilter<"AnalyticsSnapshot">
   bestPostTime?: Prisma.StringNullableWithAggregatesFilter<"AnalyticsSnapshot"> | string | null
   aiInsights?: Prisma.StringNullableWithAggregatesFilter<"AnalyticsSnapshot"> | string | null
+  providerResponse?: Prisma.JsonNullableWithAggregatesFilter<"AnalyticsSnapshot">
   snapshotDate?: Prisma.DateTimeWithAggregatesFilter<"AnalyticsSnapshot"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"AnalyticsSnapshot"> | Date | string
 }
@@ -543,6 +551,7 @@ export type AnalyticsSnapshotCreateInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: string | null
   aiInsights?: string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Date | string
   createdAt?: Date | string
   campaign?: Prisma.CampaignCreateNestedOneWithoutAnalyticsSnapshotsInput
@@ -571,6 +580,7 @@ export type AnalyticsSnapshotUncheckedCreateInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: string | null
   aiInsights?: string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Date | string
   createdAt?: Date | string
 }
@@ -595,6 +605,7 @@ export type AnalyticsSnapshotUpdateInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiInsights?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaign?: Prisma.CampaignUpdateOneWithoutAnalyticsSnapshotsNestedInput
@@ -623,6 +634,7 @@ export type AnalyticsSnapshotUncheckedUpdateInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiInsights?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -649,6 +661,7 @@ export type AnalyticsSnapshotCreateManyInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: string | null
   aiInsights?: string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Date | string
   createdAt?: Date | string
 }
@@ -673,6 +686,7 @@ export type AnalyticsSnapshotUpdateManyMutationInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiInsights?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -699,6 +713,7 @@ export type AnalyticsSnapshotUncheckedUpdateManyInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiInsights?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -735,6 +750,7 @@ export type AnalyticsSnapshotCountOrderByAggregateInput = {
   topHashtags?: Prisma.SortOrder
   bestPostTime?: Prisma.SortOrder
   aiInsights?: Prisma.SortOrder
+  providerResponse?: Prisma.SortOrder
   snapshotDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -923,6 +939,7 @@ export type AnalyticsSnapshotCreateWithoutCampaignInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: string | null
   aiInsights?: string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Date | string
   createdAt?: Date | string
   publishedPost?: Prisma.PublishedPostCreateNestedOneWithoutAnalyticsInput
@@ -949,6 +966,7 @@ export type AnalyticsSnapshotUncheckedCreateWithoutCampaignInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: string | null
   aiInsights?: string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Date | string
   createdAt?: Date | string
 }
@@ -1004,6 +1022,7 @@ export type AnalyticsSnapshotScalarWhereInput = {
   topHashtags?: Prisma.JsonNullableFilter<"AnalyticsSnapshot">
   bestPostTime?: Prisma.StringNullableFilter<"AnalyticsSnapshot"> | string | null
   aiInsights?: Prisma.StringNullableFilter<"AnalyticsSnapshot"> | string | null
+  providerResponse?: Prisma.JsonNullableFilter<"AnalyticsSnapshot">
   snapshotDate?: Prisma.DateTimeFilter<"AnalyticsSnapshot"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"AnalyticsSnapshot"> | Date | string
 }
@@ -1028,6 +1047,7 @@ export type AnalyticsSnapshotCreateWithoutPublishedPostInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: string | null
   aiInsights?: string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Date | string
   createdAt?: Date | string
   campaign?: Prisma.CampaignCreateNestedOneWithoutAnalyticsSnapshotsInput
@@ -1054,6 +1074,7 @@ export type AnalyticsSnapshotUncheckedCreateWithoutPublishedPostInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: string | null
   aiInsights?: string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Date | string
   createdAt?: Date | string
 }
@@ -1105,6 +1126,7 @@ export type AnalyticsSnapshotCreateManyCampaignInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: string | null
   aiInsights?: string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Date | string
   createdAt?: Date | string
 }
@@ -1129,6 +1151,7 @@ export type AnalyticsSnapshotUpdateWithoutCampaignInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiInsights?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   publishedPost?: Prisma.PublishedPostUpdateOneWithoutAnalyticsNestedInput
@@ -1155,6 +1178,7 @@ export type AnalyticsSnapshotUncheckedUpdateWithoutCampaignInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiInsights?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1180,6 +1204,7 @@ export type AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiInsights?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1205,6 +1230,7 @@ export type AnalyticsSnapshotCreateManyPublishedPostInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: string | null
   aiInsights?: string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Date | string
   createdAt?: Date | string
 }
@@ -1229,6 +1255,7 @@ export type AnalyticsSnapshotUpdateWithoutPublishedPostInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiInsights?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaign?: Prisma.CampaignUpdateOneWithoutAnalyticsSnapshotsNestedInput
@@ -1255,6 +1282,7 @@ export type AnalyticsSnapshotUncheckedUpdateWithoutPublishedPostInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiInsights?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1280,6 +1308,7 @@ export type AnalyticsSnapshotUncheckedUpdateManyWithoutPublishedPostInput = {
   topHashtags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   bestPostTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiInsights?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerResponse?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshotDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1308,6 +1337,7 @@ export type AnalyticsSnapshotSelect<ExtArgs extends runtime.Types.Extensions.Int
   topHashtags?: boolean
   bestPostTime?: boolean
   aiInsights?: boolean
+  providerResponse?: boolean
   snapshotDate?: boolean
   createdAt?: boolean
   campaign?: boolean | Prisma.AnalyticsSnapshot$campaignArgs<ExtArgs>
@@ -1336,6 +1366,7 @@ export type AnalyticsSnapshotSelectCreateManyAndReturn<ExtArgs extends runtime.T
   topHashtags?: boolean
   bestPostTime?: boolean
   aiInsights?: boolean
+  providerResponse?: boolean
   snapshotDate?: boolean
   createdAt?: boolean
   campaign?: boolean | Prisma.AnalyticsSnapshot$campaignArgs<ExtArgs>
@@ -1364,6 +1395,7 @@ export type AnalyticsSnapshotSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   topHashtags?: boolean
   bestPostTime?: boolean
   aiInsights?: boolean
+  providerResponse?: boolean
   snapshotDate?: boolean
   createdAt?: boolean
   campaign?: boolean | Prisma.AnalyticsSnapshot$campaignArgs<ExtArgs>
@@ -1392,11 +1424,12 @@ export type AnalyticsSnapshotSelectScalar = {
   topHashtags?: boolean
   bestPostTime?: boolean
   aiInsights?: boolean
+  providerResponse?: boolean
   snapshotDate?: boolean
   createdAt?: boolean
 }
 
-export type AnalyticsSnapshotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "campaignId" | "publishedPostId" | "platform" | "impressions" | "reach" | "engagement" | "likes" | "comments" | "shares" | "clicks" | "saves" | "videoViews" | "watchTime" | "followerGrowth" | "ctr" | "cpc" | "demographics" | "topHashtags" | "bestPostTime" | "aiInsights" | "snapshotDate" | "createdAt", ExtArgs["result"]["analyticsSnapshot"]>
+export type AnalyticsSnapshotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "campaignId" | "publishedPostId" | "platform" | "impressions" | "reach" | "engagement" | "likes" | "comments" | "shares" | "clicks" | "saves" | "videoViews" | "watchTime" | "followerGrowth" | "ctr" | "cpc" | "demographics" | "topHashtags" | "bestPostTime" | "aiInsights" | "providerResponse" | "snapshotDate" | "createdAt", ExtArgs["result"]["analyticsSnapshot"]>
 export type AnalyticsSnapshotInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campaign?: boolean | Prisma.AnalyticsSnapshot$campaignArgs<ExtArgs>
   publishedPost?: boolean | Prisma.AnalyticsSnapshot$publishedPostArgs<ExtArgs>
@@ -1438,6 +1471,7 @@ export type $AnalyticsSnapshotPayload<ExtArgs extends runtime.Types.Extensions.I
     topHashtags: runtime.JsonValue | null
     bestPostTime: string | null
     aiInsights: string | null
+    providerResponse: runtime.JsonValue | null
     snapshotDate: Date
     createdAt: Date
   }, ExtArgs["result"]["analyticsSnapshot"]>
@@ -1886,6 +1920,7 @@ export interface AnalyticsSnapshotFieldRefs {
   readonly topHashtags: Prisma.FieldRef<"AnalyticsSnapshot", 'Json'>
   readonly bestPostTime: Prisma.FieldRef<"AnalyticsSnapshot", 'String'>
   readonly aiInsights: Prisma.FieldRef<"AnalyticsSnapshot", 'String'>
+  readonly providerResponse: Prisma.FieldRef<"AnalyticsSnapshot", 'Json'>
   readonly snapshotDate: Prisma.FieldRef<"AnalyticsSnapshot", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"AnalyticsSnapshot", 'DateTime'>
 }

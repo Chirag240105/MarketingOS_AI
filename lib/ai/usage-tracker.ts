@@ -7,6 +7,7 @@ export async function trackAiUsage(input: {
   agentType: AIAgentType;
   tokensUsed?: number;
   cost?: number;
+  model?: string;
 }) {
   return prisma.aIUsage.create({
     data: {
@@ -15,7 +16,7 @@ export async function trackAiUsage(input: {
       agentType: input.agentType,
       tokensUsed: input.tokensUsed ?? 0,
       cost: input.cost,
-      model: process.env.OPENROUTER_MODEL || process.env.OPENAI_MODEL || ((process.env.OPENROUTER_API_KEY || process.env.OPENAI_API_KEY) ? "gpt-4.1-mini" : "mock"),
+      model: input.model || process.env.GROQ_MODEL || process.env.GEMINI_MODEL || process.env.MISTRAL_MODEL || "unknown",
     },
   });
 }

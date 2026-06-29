@@ -44,6 +44,9 @@ export type CampaignMinAggregateOutputType = {
   budget: runtime.Decimal | null
   startDate: Date | null
   endDate: Date | null
+  offer: string | null
+  notes: string | null
+  generateVideo: boolean | null
   createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -59,6 +62,9 @@ export type CampaignMaxAggregateOutputType = {
   budget: runtime.Decimal | null
   startDate: Date | null
   endDate: Date | null
+  offer: string | null
+  notes: string | null
+  generateVideo: boolean | null
   createdBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -76,7 +82,11 @@ export type CampaignCountAggregateOutputType = {
   endDate: number
   targetAudience: number
   platforms: number
+  offer: number
+  notes: number
   aiStrategy: number
+  aiStrategyPlan: number
+  generateVideo: number
   createdBy: number
   createdAt: number
   updatedAt: number
@@ -102,6 +112,9 @@ export type CampaignMinAggregateInputType = {
   budget?: true
   startDate?: true
   endDate?: true
+  offer?: true
+  notes?: true
+  generateVideo?: true
   createdBy?: true
   createdAt?: true
   updatedAt?: true
@@ -117,6 +130,9 @@ export type CampaignMaxAggregateInputType = {
   budget?: true
   startDate?: true
   endDate?: true
+  offer?: true
+  notes?: true
+  generateVideo?: true
   createdBy?: true
   createdAt?: true
   updatedAt?: true
@@ -134,7 +150,11 @@ export type CampaignCountAggregateInputType = {
   endDate?: true
   targetAudience?: true
   platforms?: true
+  offer?: true
+  notes?: true
   aiStrategy?: true
+  aiStrategyPlan?: true
+  generateVideo?: true
   createdBy?: true
   createdAt?: true
   updatedAt?: true
@@ -239,7 +259,11 @@ export type CampaignGroupByOutputType = {
   endDate: Date | null
   targetAudience: runtime.JsonValue | null
   platforms: $Enums.SocialPlatform[]
+  offer: string | null
+  notes: string | null
   aiStrategy: runtime.JsonValue | null
+  aiStrategyPlan: runtime.JsonValue | null
+  generateVideo: boolean
   createdBy: string
   createdAt: Date
   updatedAt: Date
@@ -280,7 +304,11 @@ export type CampaignWhereInput = {
   endDate?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
   targetAudience?: Prisma.JsonNullableFilter<"Campaign">
   platforms?: Prisma.EnumSocialPlatformNullableListFilter<"Campaign">
+  offer?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  notes?: Prisma.StringNullableFilter<"Campaign"> | string | null
   aiStrategy?: Prisma.JsonNullableFilter<"Campaign">
+  aiStrategyPlan?: Prisma.JsonNullableFilter<"Campaign">
+  generateVideo?: Prisma.BoolFilter<"Campaign"> | boolean
   createdBy?: Prisma.StringFilter<"Campaign"> | string
   createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
@@ -292,6 +320,22 @@ export type CampaignWhereInput = {
   publishedPosts?: Prisma.PublishedPostListRelationFilter
   analyticsSnapshots?: Prisma.AnalyticsSnapshotListRelationFilter
   aiJobs?: Prisma.AIJobListRelationFilter
+  campaignPlatforms?: Prisma.CampaignPlatformListRelationFilter
+  agentRuns?: Prisma.AgentRunListRelationFilter
+  brandAnalysis?: Prisma.XOR<Prisma.BrandAnalysisNullableScalarRelationFilter, Prisma.BrandAnalysisWhereInput> | null
+  competitorAnalysis?: Prisma.XOR<Prisma.CompetitorAnalysisNullableScalarRelationFilter, Prisma.CompetitorAnalysisWhereInput> | null
+  campaignStrategy?: Prisma.XOR<Prisma.CampaignStrategyNullableScalarRelationFilter, Prisma.CampaignStrategyWhereInput> | null
+  campaignCopy?: Prisma.XOR<Prisma.CampaignCopyNullableScalarRelationFilter, Prisma.CampaignCopyWhereInput> | null
+  creativeBrief?: Prisma.XOR<Prisma.CreativeBriefNullableScalarRelationFilter, Prisma.CreativeBriefWhereInput> | null
+  generatedAssets?: Prisma.GeneratedAssetListRelationFilter
+  publishingPlan?: Prisma.XOR<Prisma.PublishingPlanNullableScalarRelationFilter, Prisma.PublishingPlanWhereInput> | null
+  learningInsights?: Prisma.LearningInsightListRelationFilter
+  aiRecommendations?: Prisma.AIRecommendationListRelationFilter
+  drafts?: Prisma.CampaignDraftListRelationFilter
+  campaignAnalytics?: Prisma.CampaignAnalyticsListRelationFilter
+  campaignRecommendations?: Prisma.CampaignRecommendationListRelationFilter
+  history?: Prisma.CampaignHistoryListRelationFilter
+  metaCampaign?: Prisma.XOR<Prisma.MetaCampaignNullableScalarRelationFilter, Prisma.MetaCampaignWhereInput> | null
 }
 
 export type CampaignOrderByWithRelationInput = {
@@ -306,7 +350,11 @@ export type CampaignOrderByWithRelationInput = {
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   targetAudience?: Prisma.SortOrderInput | Prisma.SortOrder
   platforms?: Prisma.SortOrder
+  offer?: Prisma.SortOrderInput | Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
   aiStrategy?: Prisma.SortOrderInput | Prisma.SortOrder
+  aiStrategyPlan?: Prisma.SortOrderInput | Prisma.SortOrder
+  generateVideo?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -318,6 +366,22 @@ export type CampaignOrderByWithRelationInput = {
   publishedPosts?: Prisma.PublishedPostOrderByRelationAggregateInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotOrderByRelationAggregateInput
   aiJobs?: Prisma.AIJobOrderByRelationAggregateInput
+  campaignPlatforms?: Prisma.CampaignPlatformOrderByRelationAggregateInput
+  agentRuns?: Prisma.AgentRunOrderByRelationAggregateInput
+  brandAnalysis?: Prisma.BrandAnalysisOrderByWithRelationInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisOrderByWithRelationInput
+  campaignStrategy?: Prisma.CampaignStrategyOrderByWithRelationInput
+  campaignCopy?: Prisma.CampaignCopyOrderByWithRelationInput
+  creativeBrief?: Prisma.CreativeBriefOrderByWithRelationInput
+  generatedAssets?: Prisma.GeneratedAssetOrderByRelationAggregateInput
+  publishingPlan?: Prisma.PublishingPlanOrderByWithRelationInput
+  learningInsights?: Prisma.LearningInsightOrderByRelationAggregateInput
+  aiRecommendations?: Prisma.AIRecommendationOrderByRelationAggregateInput
+  drafts?: Prisma.CampaignDraftOrderByRelationAggregateInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsOrderByRelationAggregateInput
+  campaignRecommendations?: Prisma.CampaignRecommendationOrderByRelationAggregateInput
+  history?: Prisma.CampaignHistoryOrderByRelationAggregateInput
+  metaCampaign?: Prisma.MetaCampaignOrderByWithRelationInput
 }
 
 export type CampaignWhereUniqueInput = Prisma.AtLeast<{
@@ -335,7 +399,11 @@ export type CampaignWhereUniqueInput = Prisma.AtLeast<{
   endDate?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
   targetAudience?: Prisma.JsonNullableFilter<"Campaign">
   platforms?: Prisma.EnumSocialPlatformNullableListFilter<"Campaign">
+  offer?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  notes?: Prisma.StringNullableFilter<"Campaign"> | string | null
   aiStrategy?: Prisma.JsonNullableFilter<"Campaign">
+  aiStrategyPlan?: Prisma.JsonNullableFilter<"Campaign">
+  generateVideo?: Prisma.BoolFilter<"Campaign"> | boolean
   createdBy?: Prisma.StringFilter<"Campaign"> | string
   createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
@@ -347,6 +415,22 @@ export type CampaignWhereUniqueInput = Prisma.AtLeast<{
   publishedPosts?: Prisma.PublishedPostListRelationFilter
   analyticsSnapshots?: Prisma.AnalyticsSnapshotListRelationFilter
   aiJobs?: Prisma.AIJobListRelationFilter
+  campaignPlatforms?: Prisma.CampaignPlatformListRelationFilter
+  agentRuns?: Prisma.AgentRunListRelationFilter
+  brandAnalysis?: Prisma.XOR<Prisma.BrandAnalysisNullableScalarRelationFilter, Prisma.BrandAnalysisWhereInput> | null
+  competitorAnalysis?: Prisma.XOR<Prisma.CompetitorAnalysisNullableScalarRelationFilter, Prisma.CompetitorAnalysisWhereInput> | null
+  campaignStrategy?: Prisma.XOR<Prisma.CampaignStrategyNullableScalarRelationFilter, Prisma.CampaignStrategyWhereInput> | null
+  campaignCopy?: Prisma.XOR<Prisma.CampaignCopyNullableScalarRelationFilter, Prisma.CampaignCopyWhereInput> | null
+  creativeBrief?: Prisma.XOR<Prisma.CreativeBriefNullableScalarRelationFilter, Prisma.CreativeBriefWhereInput> | null
+  generatedAssets?: Prisma.GeneratedAssetListRelationFilter
+  publishingPlan?: Prisma.XOR<Prisma.PublishingPlanNullableScalarRelationFilter, Prisma.PublishingPlanWhereInput> | null
+  learningInsights?: Prisma.LearningInsightListRelationFilter
+  aiRecommendations?: Prisma.AIRecommendationListRelationFilter
+  drafts?: Prisma.CampaignDraftListRelationFilter
+  campaignAnalytics?: Prisma.CampaignAnalyticsListRelationFilter
+  campaignRecommendations?: Prisma.CampaignRecommendationListRelationFilter
+  history?: Prisma.CampaignHistoryListRelationFilter
+  metaCampaign?: Prisma.XOR<Prisma.MetaCampaignNullableScalarRelationFilter, Prisma.MetaCampaignWhereInput> | null
 }, "id">
 
 export type CampaignOrderByWithAggregationInput = {
@@ -361,7 +445,11 @@ export type CampaignOrderByWithAggregationInput = {
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   targetAudience?: Prisma.SortOrderInput | Prisma.SortOrder
   platforms?: Prisma.SortOrder
+  offer?: Prisma.SortOrderInput | Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
   aiStrategy?: Prisma.SortOrderInput | Prisma.SortOrder
+  aiStrategyPlan?: Prisma.SortOrderInput | Prisma.SortOrder
+  generateVideo?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -387,7 +475,11 @@ export type CampaignScalarWhereWithAggregatesInput = {
   endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Campaign"> | Date | string | null
   targetAudience?: Prisma.JsonNullableWithAggregatesFilter<"Campaign">
   platforms?: Prisma.EnumSocialPlatformNullableListFilter<"Campaign">
+  offer?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
+  notes?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
   aiStrategy?: Prisma.JsonNullableWithAggregatesFilter<"Campaign">
+  aiStrategyPlan?: Prisma.JsonNullableWithAggregatesFilter<"Campaign">
+  generateVideo?: Prisma.BoolWithAggregatesFilter<"Campaign"> | boolean
   createdBy?: Prisma.StringWithAggregatesFilter<"Campaign"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Campaign"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Campaign"> | Date | string
@@ -404,7 +496,11 @@ export type CampaignCreateInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
@@ -415,6 +511,22 @@ export type CampaignCreateInput = {
   publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateInput = {
@@ -429,7 +541,11 @@ export type CampaignUncheckedCreateInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdBy: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -439,6 +555,22 @@ export type CampaignUncheckedCreateInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUpdateInput = {
@@ -452,7 +584,11 @@ export type CampaignUpdateInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
@@ -463,6 +599,22 @@ export type CampaignUpdateInput = {
   publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateInput = {
@@ -477,7 +629,11 @@ export type CampaignUncheckedUpdateInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -487,6 +643,22 @@ export type CampaignUncheckedUpdateInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignCreateManyInput = {
@@ -501,7 +673,11 @@ export type CampaignCreateManyInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdBy: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -518,7 +694,11 @@ export type CampaignUpdateManyMutationInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -535,7 +715,11 @@ export type CampaignUncheckedUpdateManyInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -571,7 +755,11 @@ export type CampaignCountOrderByAggregateInput = {
   endDate?: Prisma.SortOrder
   targetAudience?: Prisma.SortOrder
   platforms?: Prisma.SortOrder
+  offer?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
   aiStrategy?: Prisma.SortOrder
+  aiStrategyPlan?: Prisma.SortOrder
+  generateVideo?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -591,6 +779,9 @@ export type CampaignMaxOrderByAggregateInput = {
   budget?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
+  offer?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  generateVideo?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -606,6 +797,9 @@ export type CampaignMinOrderByAggregateInput = {
   budget?: Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
+  offer?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  generateVideo?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -721,17 +915,163 @@ export type EnumCampaignStatusFieldUpdateOperationsInput = {
   set?: $Enums.CampaignStatus
 }
 
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
 export type CampaignUpdateplatformsInput = {
   set?: $Enums.SocialPlatform[]
   push?: $Enums.SocialPlatform | $Enums.SocialPlatform[]
+}
+
+export type CampaignCreateNestedOneWithoutCampaignPlatformsInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignPlatformsInput, Prisma.CampaignUncheckedCreateWithoutCampaignPlatformsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCampaignPlatformsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutCampaignPlatformsNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignPlatformsInput, Prisma.CampaignUncheckedCreateWithoutCampaignPlatformsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCampaignPlatformsInput
+  upsert?: Prisma.CampaignUpsertWithoutCampaignPlatformsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutCampaignPlatformsInput, Prisma.CampaignUpdateWithoutCampaignPlatformsInput>, Prisma.CampaignUncheckedUpdateWithoutCampaignPlatformsInput>
+}
+
+export type CampaignCreateNestedOneWithoutAgentRunsInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutAgentRunsInput, Prisma.CampaignUncheckedCreateWithoutAgentRunsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutAgentRunsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutAgentRunsNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutAgentRunsInput, Prisma.CampaignUncheckedCreateWithoutAgentRunsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutAgentRunsInput
+  upsert?: Prisma.CampaignUpsertWithoutAgentRunsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutAgentRunsInput, Prisma.CampaignUpdateWithoutAgentRunsInput>, Prisma.CampaignUncheckedUpdateWithoutAgentRunsInput>
+}
+
+export type CampaignCreateNestedOneWithoutBrandAnalysisInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutBrandAnalysisInput, Prisma.CampaignUncheckedCreateWithoutBrandAnalysisInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutBrandAnalysisInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutBrandAnalysisNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutBrandAnalysisInput, Prisma.CampaignUncheckedCreateWithoutBrandAnalysisInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutBrandAnalysisInput
+  upsert?: Prisma.CampaignUpsertWithoutBrandAnalysisInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutBrandAnalysisInput, Prisma.CampaignUpdateWithoutBrandAnalysisInput>, Prisma.CampaignUncheckedUpdateWithoutBrandAnalysisInput>
+}
+
+export type CampaignCreateNestedOneWithoutCompetitorAnalysisInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCompetitorAnalysisInput, Prisma.CampaignUncheckedCreateWithoutCompetitorAnalysisInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCompetitorAnalysisInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutCompetitorAnalysisNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCompetitorAnalysisInput, Prisma.CampaignUncheckedCreateWithoutCompetitorAnalysisInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCompetitorAnalysisInput
+  upsert?: Prisma.CampaignUpsertWithoutCompetitorAnalysisInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutCompetitorAnalysisInput, Prisma.CampaignUpdateWithoutCompetitorAnalysisInput>, Prisma.CampaignUncheckedUpdateWithoutCompetitorAnalysisInput>
+}
+
+export type CampaignCreateNestedOneWithoutCampaignStrategyInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignStrategyInput, Prisma.CampaignUncheckedCreateWithoutCampaignStrategyInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCampaignStrategyInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutCampaignStrategyNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignStrategyInput, Prisma.CampaignUncheckedCreateWithoutCampaignStrategyInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCampaignStrategyInput
+  upsert?: Prisma.CampaignUpsertWithoutCampaignStrategyInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutCampaignStrategyInput, Prisma.CampaignUpdateWithoutCampaignStrategyInput>, Prisma.CampaignUncheckedUpdateWithoutCampaignStrategyInput>
+}
+
+export type CampaignCreateNestedOneWithoutCampaignCopyInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignCopyInput, Prisma.CampaignUncheckedCreateWithoutCampaignCopyInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCampaignCopyInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutCampaignCopyNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignCopyInput, Prisma.CampaignUncheckedCreateWithoutCampaignCopyInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCampaignCopyInput
+  upsert?: Prisma.CampaignUpsertWithoutCampaignCopyInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutCampaignCopyInput, Prisma.CampaignUpdateWithoutCampaignCopyInput>, Prisma.CampaignUncheckedUpdateWithoutCampaignCopyInput>
+}
+
+export type CampaignCreateNestedOneWithoutCreativeBriefInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCreativeBriefInput, Prisma.CampaignUncheckedCreateWithoutCreativeBriefInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCreativeBriefInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutCreativeBriefNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCreativeBriefInput, Prisma.CampaignUncheckedCreateWithoutCreativeBriefInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCreativeBriefInput
+  upsert?: Prisma.CampaignUpsertWithoutCreativeBriefInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutCreativeBriefInput, Prisma.CampaignUpdateWithoutCreativeBriefInput>, Prisma.CampaignUncheckedUpdateWithoutCreativeBriefInput>
+}
+
+export type CampaignCreateNestedOneWithoutGeneratedAssetsInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutGeneratedAssetsInput, Prisma.CampaignUncheckedCreateWithoutGeneratedAssetsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutGeneratedAssetsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutGeneratedAssetsNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutGeneratedAssetsInput, Prisma.CampaignUncheckedCreateWithoutGeneratedAssetsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutGeneratedAssetsInput
+  upsert?: Prisma.CampaignUpsertWithoutGeneratedAssetsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutGeneratedAssetsInput, Prisma.CampaignUpdateWithoutGeneratedAssetsInput>, Prisma.CampaignUncheckedUpdateWithoutGeneratedAssetsInput>
+}
+
+export type CampaignCreateNestedOneWithoutPublishingPlanInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutPublishingPlanInput, Prisma.CampaignUncheckedCreateWithoutPublishingPlanInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutPublishingPlanInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutPublishingPlanNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutPublishingPlanInput, Prisma.CampaignUncheckedCreateWithoutPublishingPlanInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutPublishingPlanInput
+  upsert?: Prisma.CampaignUpsertWithoutPublishingPlanInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutPublishingPlanInput, Prisma.CampaignUpdateWithoutPublishingPlanInput>, Prisma.CampaignUncheckedUpdateWithoutPublishingPlanInput>
+}
+
+export type CampaignCreateNestedOneWithoutDraftsInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutDraftsInput, Prisma.CampaignUncheckedCreateWithoutDraftsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutDraftsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutDraftsNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutDraftsInput, Prisma.CampaignUncheckedCreateWithoutDraftsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutDraftsInput
+  upsert?: Prisma.CampaignUpsertWithoutDraftsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutDraftsInput, Prisma.CampaignUpdateWithoutDraftsInput>, Prisma.CampaignUncheckedUpdateWithoutDraftsInput>
+}
+
+export type CampaignCreateNestedOneWithoutMetaCampaignInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutMetaCampaignInput, Prisma.CampaignUncheckedCreateWithoutMetaCampaignInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutMetaCampaignInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutMetaCampaignNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutMetaCampaignInput, Prisma.CampaignUncheckedCreateWithoutMetaCampaignInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutMetaCampaignInput
+  upsert?: Prisma.CampaignUpsertWithoutMetaCampaignInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutMetaCampaignInput, Prisma.CampaignUpdateWithoutMetaCampaignInput>, Prisma.CampaignUncheckedUpdateWithoutMetaCampaignInput>
 }
 
 export type CampaignCreateNestedOneWithoutGeneratedPostsInput = {
@@ -806,6 +1146,62 @@ export type CampaignUpdateOneWithoutAnalyticsSnapshotsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutAnalyticsSnapshotsInput, Prisma.CampaignUpdateWithoutAnalyticsSnapshotsInput>, Prisma.CampaignUncheckedUpdateWithoutAnalyticsSnapshotsInput>
 }
 
+export type CampaignCreateNestedOneWithoutCampaignAnalyticsInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignAnalyticsInput, Prisma.CampaignUncheckedCreateWithoutCampaignAnalyticsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCampaignAnalyticsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutCampaignAnalyticsNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignAnalyticsInput, Prisma.CampaignUncheckedCreateWithoutCampaignAnalyticsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCampaignAnalyticsInput
+  upsert?: Prisma.CampaignUpsertWithoutCampaignAnalyticsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutCampaignAnalyticsInput, Prisma.CampaignUpdateWithoutCampaignAnalyticsInput>, Prisma.CampaignUncheckedUpdateWithoutCampaignAnalyticsInput>
+}
+
+export type CampaignCreateNestedOneWithoutCampaignRecommendationsInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignRecommendationsInput, Prisma.CampaignUncheckedCreateWithoutCampaignRecommendationsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCampaignRecommendationsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutCampaignRecommendationsNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignRecommendationsInput, Prisma.CampaignUncheckedCreateWithoutCampaignRecommendationsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutCampaignRecommendationsInput
+  upsert?: Prisma.CampaignUpsertWithoutCampaignRecommendationsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutCampaignRecommendationsInput, Prisma.CampaignUpdateWithoutCampaignRecommendationsInput>, Prisma.CampaignUncheckedUpdateWithoutCampaignRecommendationsInput>
+}
+
+export type CampaignCreateNestedOneWithoutLearningInsightsInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutLearningInsightsInput, Prisma.CampaignUncheckedCreateWithoutLearningInsightsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutLearningInsightsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutLearningInsightsNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutLearningInsightsInput, Prisma.CampaignUncheckedCreateWithoutLearningInsightsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutLearningInsightsInput
+  upsert?: Prisma.CampaignUpsertWithoutLearningInsightsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutLearningInsightsInput, Prisma.CampaignUpdateWithoutLearningInsightsInput>, Prisma.CampaignUncheckedUpdateWithoutLearningInsightsInput>
+}
+
+export type CampaignCreateNestedOneWithoutHistoryInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutHistoryInput, Prisma.CampaignUncheckedCreateWithoutHistoryInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutHistoryInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutHistoryInput, Prisma.CampaignUncheckedCreateWithoutHistoryInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutHistoryInput
+  upsert?: Prisma.CampaignUpsertWithoutHistoryInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutHistoryInput, Prisma.CampaignUpdateWithoutHistoryInput>, Prisma.CampaignUncheckedUpdateWithoutHistoryInput>
+}
+
 export type CampaignCreateNestedOneWithoutAiJobsInput = {
   create?: Prisma.XOR<Prisma.CampaignCreateWithoutAiJobsInput, Prisma.CampaignUncheckedCreateWithoutAiJobsInput>
   connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutAiJobsInput
@@ -820,6 +1216,20 @@ export type CampaignUpdateOneRequiredWithoutAiJobsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutAiJobsInput, Prisma.CampaignUpdateWithoutAiJobsInput>, Prisma.CampaignUncheckedUpdateWithoutAiJobsInput>
 }
 
+export type CampaignCreateNestedOneWithoutAiRecommendationsInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutAiRecommendationsInput, Prisma.CampaignUncheckedCreateWithoutAiRecommendationsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutAiRecommendationsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+}
+
+export type CampaignUpdateOneRequiredWithoutAiRecommendationsNestedInput = {
+  create?: Prisma.XOR<Prisma.CampaignCreateWithoutAiRecommendationsInput, Prisma.CampaignUncheckedCreateWithoutAiRecommendationsInput>
+  connectOrCreate?: Prisma.CampaignCreateOrConnectWithoutAiRecommendationsInput
+  upsert?: Prisma.CampaignUpsertWithoutAiRecommendationsInput
+  connect?: Prisma.CampaignWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CampaignUpdateToOneWithWhereWithoutAiRecommendationsInput, Prisma.CampaignUpdateWithoutAiRecommendationsInput>, Prisma.CampaignUncheckedUpdateWithoutAiRecommendationsInput>
+}
+
 export type CampaignCreateWithoutCreatorInput = {
   id?: string
   name: string
@@ -831,7 +1241,11 @@ export type CampaignCreateWithoutCreatorInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
@@ -841,6 +1255,22 @@ export type CampaignCreateWithoutCreatorInput = {
   publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutCreatorInput = {
@@ -855,7 +1285,11 @@ export type CampaignUncheckedCreateWithoutCreatorInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
@@ -864,6 +1298,22 @@ export type CampaignUncheckedCreateWithoutCreatorInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutCreatorInput = {
@@ -907,7 +1357,11 @@ export type CampaignScalarWhereInput = {
   endDate?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
   targetAudience?: Prisma.JsonNullableFilter<"Campaign">
   platforms?: Prisma.EnumSocialPlatformNullableListFilter<"Campaign">
+  offer?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  notes?: Prisma.StringNullableFilter<"Campaign"> | string | null
   aiStrategy?: Prisma.JsonNullableFilter<"Campaign">
+  aiStrategyPlan?: Prisma.JsonNullableFilter<"Campaign">
+  generateVideo?: Prisma.BoolFilter<"Campaign"> | boolean
   createdBy?: Prisma.StringFilter<"Campaign"> | string
   createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
@@ -924,7 +1378,11 @@ export type CampaignCreateWithoutWorkspaceInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
@@ -934,6 +1392,22 @@ export type CampaignCreateWithoutWorkspaceInput = {
   publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutWorkspaceInput = {
@@ -947,7 +1421,11 @@ export type CampaignUncheckedCreateWithoutWorkspaceInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdBy: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -957,6 +1435,22 @@ export type CampaignUncheckedCreateWithoutWorkspaceInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutWorkspaceInput = {
@@ -985,6 +1479,2074 @@ export type CampaignUpdateManyWithWhereWithoutWorkspaceInput = {
   data: Prisma.XOR<Prisma.CampaignUpdateManyMutationInput, Prisma.CampaignUncheckedUpdateManyWithoutWorkspaceInput>
 }
 
+export type CampaignCreateWithoutCampaignPlatformsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutCampaignPlatformsInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutCampaignPlatformsInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignPlatformsInput, Prisma.CampaignUncheckedCreateWithoutCampaignPlatformsInput>
+}
+
+export type CampaignUpsertWithoutCampaignPlatformsInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutCampaignPlatformsInput, Prisma.CampaignUncheckedUpdateWithoutCampaignPlatformsInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignPlatformsInput, Prisma.CampaignUncheckedCreateWithoutCampaignPlatformsInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutCampaignPlatformsInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutCampaignPlatformsInput, Prisma.CampaignUncheckedUpdateWithoutCampaignPlatformsInput>
+}
+
+export type CampaignUpdateWithoutCampaignPlatformsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutCampaignPlatformsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutAgentRunsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutAgentRunsInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutAgentRunsInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutAgentRunsInput, Prisma.CampaignUncheckedCreateWithoutAgentRunsInput>
+}
+
+export type CampaignUpsertWithoutAgentRunsInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutAgentRunsInput, Prisma.CampaignUncheckedUpdateWithoutAgentRunsInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutAgentRunsInput, Prisma.CampaignUncheckedCreateWithoutAgentRunsInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutAgentRunsInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutAgentRunsInput, Prisma.CampaignUncheckedUpdateWithoutAgentRunsInput>
+}
+
+export type CampaignUpdateWithoutAgentRunsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutAgentRunsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutBrandAnalysisInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutBrandAnalysisInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutBrandAnalysisInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutBrandAnalysisInput, Prisma.CampaignUncheckedCreateWithoutBrandAnalysisInput>
+}
+
+export type CampaignUpsertWithoutBrandAnalysisInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutBrandAnalysisInput, Prisma.CampaignUncheckedUpdateWithoutBrandAnalysisInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutBrandAnalysisInput, Prisma.CampaignUncheckedCreateWithoutBrandAnalysisInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutBrandAnalysisInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutBrandAnalysisInput, Prisma.CampaignUncheckedUpdateWithoutBrandAnalysisInput>
+}
+
+export type CampaignUpdateWithoutBrandAnalysisInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutBrandAnalysisInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutCompetitorAnalysisInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutCompetitorAnalysisInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutCompetitorAnalysisInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCompetitorAnalysisInput, Prisma.CampaignUncheckedCreateWithoutCompetitorAnalysisInput>
+}
+
+export type CampaignUpsertWithoutCompetitorAnalysisInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutCompetitorAnalysisInput, Prisma.CampaignUncheckedUpdateWithoutCompetitorAnalysisInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCompetitorAnalysisInput, Prisma.CampaignUncheckedCreateWithoutCompetitorAnalysisInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutCompetitorAnalysisInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutCompetitorAnalysisInput, Prisma.CampaignUncheckedUpdateWithoutCompetitorAnalysisInput>
+}
+
+export type CampaignUpdateWithoutCompetitorAnalysisInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutCompetitorAnalysisInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutCampaignStrategyInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutCampaignStrategyInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutCampaignStrategyInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignStrategyInput, Prisma.CampaignUncheckedCreateWithoutCampaignStrategyInput>
+}
+
+export type CampaignUpsertWithoutCampaignStrategyInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutCampaignStrategyInput, Prisma.CampaignUncheckedUpdateWithoutCampaignStrategyInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignStrategyInput, Prisma.CampaignUncheckedCreateWithoutCampaignStrategyInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutCampaignStrategyInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutCampaignStrategyInput, Prisma.CampaignUncheckedUpdateWithoutCampaignStrategyInput>
+}
+
+export type CampaignUpdateWithoutCampaignStrategyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutCampaignStrategyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutCampaignCopyInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutCampaignCopyInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutCampaignCopyInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignCopyInput, Prisma.CampaignUncheckedCreateWithoutCampaignCopyInput>
+}
+
+export type CampaignUpsertWithoutCampaignCopyInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutCampaignCopyInput, Prisma.CampaignUncheckedUpdateWithoutCampaignCopyInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignCopyInput, Prisma.CampaignUncheckedCreateWithoutCampaignCopyInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutCampaignCopyInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutCampaignCopyInput, Prisma.CampaignUncheckedUpdateWithoutCampaignCopyInput>
+}
+
+export type CampaignUpdateWithoutCampaignCopyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutCampaignCopyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutCreativeBriefInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutCreativeBriefInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutCreativeBriefInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCreativeBriefInput, Prisma.CampaignUncheckedCreateWithoutCreativeBriefInput>
+}
+
+export type CampaignUpsertWithoutCreativeBriefInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutCreativeBriefInput, Prisma.CampaignUncheckedUpdateWithoutCreativeBriefInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCreativeBriefInput, Prisma.CampaignUncheckedCreateWithoutCreativeBriefInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutCreativeBriefInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutCreativeBriefInput, Prisma.CampaignUncheckedUpdateWithoutCreativeBriefInput>
+}
+
+export type CampaignUpdateWithoutCreativeBriefInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutCreativeBriefInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutGeneratedAssetsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutGeneratedAssetsInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutGeneratedAssetsInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutGeneratedAssetsInput, Prisma.CampaignUncheckedCreateWithoutGeneratedAssetsInput>
+}
+
+export type CampaignUpsertWithoutGeneratedAssetsInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutGeneratedAssetsInput, Prisma.CampaignUncheckedUpdateWithoutGeneratedAssetsInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutGeneratedAssetsInput, Prisma.CampaignUncheckedCreateWithoutGeneratedAssetsInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutGeneratedAssetsInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutGeneratedAssetsInput, Prisma.CampaignUncheckedUpdateWithoutGeneratedAssetsInput>
+}
+
+export type CampaignUpdateWithoutGeneratedAssetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutGeneratedAssetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutPublishingPlanInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutPublishingPlanInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutPublishingPlanInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutPublishingPlanInput, Prisma.CampaignUncheckedCreateWithoutPublishingPlanInput>
+}
+
+export type CampaignUpsertWithoutPublishingPlanInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutPublishingPlanInput, Prisma.CampaignUncheckedUpdateWithoutPublishingPlanInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutPublishingPlanInput, Prisma.CampaignUncheckedCreateWithoutPublishingPlanInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutPublishingPlanInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutPublishingPlanInput, Prisma.CampaignUncheckedUpdateWithoutPublishingPlanInput>
+}
+
+export type CampaignUpdateWithoutPublishingPlanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutPublishingPlanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutDraftsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutDraftsInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutDraftsInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutDraftsInput, Prisma.CampaignUncheckedCreateWithoutDraftsInput>
+}
+
+export type CampaignUpsertWithoutDraftsInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutDraftsInput, Prisma.CampaignUncheckedUpdateWithoutDraftsInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutDraftsInput, Prisma.CampaignUncheckedCreateWithoutDraftsInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutDraftsInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutDraftsInput, Prisma.CampaignUncheckedUpdateWithoutDraftsInput>
+}
+
+export type CampaignUpdateWithoutDraftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutDraftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutMetaCampaignInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutMetaCampaignInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutMetaCampaignInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutMetaCampaignInput, Prisma.CampaignUncheckedCreateWithoutMetaCampaignInput>
+}
+
+export type CampaignUpsertWithoutMetaCampaignInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutMetaCampaignInput, Prisma.CampaignUncheckedUpdateWithoutMetaCampaignInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutMetaCampaignInput, Prisma.CampaignUncheckedCreateWithoutMetaCampaignInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutMetaCampaignInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutMetaCampaignInput, Prisma.CampaignUncheckedUpdateWithoutMetaCampaignInput>
+}
+
+export type CampaignUpdateWithoutMetaCampaignInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutMetaCampaignInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+}
+
 export type CampaignCreateWithoutGeneratedPostsInput = {
   id?: string
   name: string
@@ -996,7 +3558,11 @@ export type CampaignCreateWithoutGeneratedPostsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
@@ -1006,6 +3572,22 @@ export type CampaignCreateWithoutGeneratedPostsInput = {
   publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutGeneratedPostsInput = {
@@ -1020,7 +3602,11 @@ export type CampaignUncheckedCreateWithoutGeneratedPostsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdBy: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1029,6 +3615,22 @@ export type CampaignUncheckedCreateWithoutGeneratedPostsInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutGeneratedPostsInput = {
@@ -1058,7 +3660,11 @@ export type CampaignUpdateWithoutGeneratedPostsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
@@ -1068,6 +3674,22 @@ export type CampaignUpdateWithoutGeneratedPostsInput = {
   publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutGeneratedPostsInput = {
@@ -1082,7 +3704,11 @@ export type CampaignUncheckedUpdateWithoutGeneratedPostsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1091,6 +3717,22 @@ export type CampaignUncheckedUpdateWithoutGeneratedPostsInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignCreateWithoutCampaignAssetsInput = {
@@ -1104,7 +3746,11 @@ export type CampaignCreateWithoutCampaignAssetsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
@@ -1114,6 +3760,22 @@ export type CampaignCreateWithoutCampaignAssetsInput = {
   publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutCampaignAssetsInput = {
@@ -1128,7 +3790,11 @@ export type CampaignUncheckedCreateWithoutCampaignAssetsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdBy: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1137,6 +3803,22 @@ export type CampaignUncheckedCreateWithoutCampaignAssetsInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutCampaignAssetsInput = {
@@ -1166,7 +3848,11 @@ export type CampaignUpdateWithoutCampaignAssetsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
@@ -1176,6 +3862,22 @@ export type CampaignUpdateWithoutCampaignAssetsInput = {
   publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutCampaignAssetsInput = {
@@ -1190,7 +3892,11 @@ export type CampaignUncheckedUpdateWithoutCampaignAssetsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1199,6 +3905,22 @@ export type CampaignUncheckedUpdateWithoutCampaignAssetsInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignCreateWithoutScheduledPostsInput = {
@@ -1212,7 +3934,11 @@ export type CampaignCreateWithoutScheduledPostsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
@@ -1222,6 +3948,22 @@ export type CampaignCreateWithoutScheduledPostsInput = {
   publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutScheduledPostsInput = {
@@ -1236,7 +3978,11 @@ export type CampaignUncheckedCreateWithoutScheduledPostsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdBy: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1245,6 +3991,22 @@ export type CampaignUncheckedCreateWithoutScheduledPostsInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutScheduledPostsInput = {
@@ -1274,7 +4036,11 @@ export type CampaignUpdateWithoutScheduledPostsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
@@ -1284,6 +4050,22 @@ export type CampaignUpdateWithoutScheduledPostsInput = {
   publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutScheduledPostsInput = {
@@ -1298,7 +4080,11 @@ export type CampaignUncheckedUpdateWithoutScheduledPostsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1307,6 +4093,22 @@ export type CampaignUncheckedUpdateWithoutScheduledPostsInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignCreateWithoutPublishedPostsInput = {
@@ -1320,7 +4122,11 @@ export type CampaignCreateWithoutPublishedPostsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
@@ -1330,6 +4136,22 @@ export type CampaignCreateWithoutPublishedPostsInput = {
   scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutPublishedPostsInput = {
@@ -1344,7 +4166,11 @@ export type CampaignUncheckedCreateWithoutPublishedPostsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdBy: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1353,6 +4179,22 @@ export type CampaignUncheckedCreateWithoutPublishedPostsInput = {
   scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutPublishedPostsInput = {
@@ -1382,7 +4224,11 @@ export type CampaignUpdateWithoutPublishedPostsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
@@ -1392,6 +4238,22 @@ export type CampaignUpdateWithoutPublishedPostsInput = {
   scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutPublishedPostsInput = {
@@ -1406,7 +4268,11 @@ export type CampaignUncheckedUpdateWithoutPublishedPostsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1415,6 +4281,22 @@ export type CampaignUncheckedUpdateWithoutPublishedPostsInput = {
   scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignCreateWithoutAnalyticsSnapshotsInput = {
@@ -1428,7 +4310,11 @@ export type CampaignCreateWithoutAnalyticsSnapshotsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
@@ -1438,6 +4324,22 @@ export type CampaignCreateWithoutAnalyticsSnapshotsInput = {
   scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
   publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutAnalyticsSnapshotsInput = {
@@ -1452,7 +4354,11 @@ export type CampaignUncheckedCreateWithoutAnalyticsSnapshotsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdBy: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1461,6 +4367,22 @@ export type CampaignUncheckedCreateWithoutAnalyticsSnapshotsInput = {
   scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
   publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
   aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutAnalyticsSnapshotsInput = {
@@ -1490,7 +4412,11 @@ export type CampaignUpdateWithoutAnalyticsSnapshotsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
@@ -1500,6 +4426,22 @@ export type CampaignUpdateWithoutAnalyticsSnapshotsInput = {
   scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
   publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutAnalyticsSnapshotsInput = {
@@ -1514,7 +4456,11 @@ export type CampaignUncheckedUpdateWithoutAnalyticsSnapshotsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1523,6 +4469,774 @@ export type CampaignUncheckedUpdateWithoutAnalyticsSnapshotsInput = {
   scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
   publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutCampaignAnalyticsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutCampaignAnalyticsInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutCampaignAnalyticsInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignAnalyticsInput, Prisma.CampaignUncheckedCreateWithoutCampaignAnalyticsInput>
+}
+
+export type CampaignUpsertWithoutCampaignAnalyticsInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutCampaignAnalyticsInput, Prisma.CampaignUncheckedUpdateWithoutCampaignAnalyticsInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignAnalyticsInput, Prisma.CampaignUncheckedCreateWithoutCampaignAnalyticsInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutCampaignAnalyticsInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutCampaignAnalyticsInput, Prisma.CampaignUncheckedUpdateWithoutCampaignAnalyticsInput>
+}
+
+export type CampaignUpdateWithoutCampaignAnalyticsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutCampaignAnalyticsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutCampaignRecommendationsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutCampaignRecommendationsInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutCampaignRecommendationsInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignRecommendationsInput, Prisma.CampaignUncheckedCreateWithoutCampaignRecommendationsInput>
+}
+
+export type CampaignUpsertWithoutCampaignRecommendationsInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutCampaignRecommendationsInput, Prisma.CampaignUncheckedUpdateWithoutCampaignRecommendationsInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutCampaignRecommendationsInput, Prisma.CampaignUncheckedCreateWithoutCampaignRecommendationsInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutCampaignRecommendationsInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutCampaignRecommendationsInput, Prisma.CampaignUncheckedUpdateWithoutCampaignRecommendationsInput>
+}
+
+export type CampaignUpdateWithoutCampaignRecommendationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutCampaignRecommendationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutLearningInsightsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutLearningInsightsInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutLearningInsightsInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutLearningInsightsInput, Prisma.CampaignUncheckedCreateWithoutLearningInsightsInput>
+}
+
+export type CampaignUpsertWithoutLearningInsightsInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutLearningInsightsInput, Prisma.CampaignUncheckedUpdateWithoutLearningInsightsInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutLearningInsightsInput, Prisma.CampaignUncheckedCreateWithoutLearningInsightsInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutLearningInsightsInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutLearningInsightsInput, Prisma.CampaignUncheckedUpdateWithoutLearningInsightsInput>
+}
+
+export type CampaignUpdateWithoutLearningInsightsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutLearningInsightsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutHistoryInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutHistoryInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutHistoryInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutHistoryInput, Prisma.CampaignUncheckedCreateWithoutHistoryInput>
+}
+
+export type CampaignUpsertWithoutHistoryInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutHistoryInput, Prisma.CampaignUncheckedUpdateWithoutHistoryInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutHistoryInput, Prisma.CampaignUncheckedCreateWithoutHistoryInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutHistoryInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutHistoryInput, Prisma.CampaignUncheckedUpdateWithoutHistoryInput>
+}
+
+export type CampaignUpdateWithoutHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignCreateWithoutAiJobsInput = {
@@ -1536,7 +5250,11 @@ export type CampaignCreateWithoutAiJobsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
@@ -1546,6 +5264,22 @@ export type CampaignCreateWithoutAiJobsInput = {
   scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
   publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignUncheckedCreateWithoutAiJobsInput = {
@@ -1560,7 +5294,11 @@ export type CampaignUncheckedCreateWithoutAiJobsInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdBy: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1569,6 +5307,22 @@ export type CampaignUncheckedCreateWithoutAiJobsInput = {
   scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
   publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
 }
 
 export type CampaignCreateOrConnectWithoutAiJobsInput = {
@@ -1598,7 +5352,11 @@ export type CampaignUpdateWithoutAiJobsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
@@ -1608,6 +5366,22 @@ export type CampaignUpdateWithoutAiJobsInput = {
   scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
   publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutAiJobsInput = {
@@ -1622,7 +5396,11 @@ export type CampaignUncheckedUpdateWithoutAiJobsInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1631,6 +5409,210 @@ export type CampaignUncheckedUpdateWithoutAiJobsInput = {
   scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
   publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignCreateWithoutAiRecommendationsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  workspace: Prisma.WorkspaceCreateNestedOneWithoutCampaignsInput
+  creator: Prisma.UserCreateNestedOneWithoutCreatedCampaignsInput
+  generatedPosts?: Prisma.GeneratedPostCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignUncheckedCreateWithoutAiRecommendationsInput = {
+  id?: string
+  workspaceId: string
+  name: string
+  description?: string | null
+  goal: $Enums.CampaignGoal
+  status?: $Enums.CampaignStatus
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
+  createdBy: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedCreateNestedManyWithoutCampaignInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedCreateNestedManyWithoutCampaignInput
+  publishedPosts?: Prisma.PublishedPostUncheckedCreateNestedManyWithoutCampaignInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedCreateNestedManyWithoutCampaignInput
+  aiJobs?: Prisma.AIJobUncheckedCreateNestedManyWithoutCampaignInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedCreateNestedManyWithoutCampaignInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutCampaignInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedCreateNestedOneWithoutCampaignInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedCreateNestedOneWithoutCampaignInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedCreateNestedOneWithoutCampaignInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedCreateNestedOneWithoutCampaignInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedCreateNestedManyWithoutCampaignInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedCreateNestedOneWithoutCampaignInput
+  learningInsights?: Prisma.LearningInsightUncheckedCreateNestedManyWithoutCampaignInput
+  drafts?: Prisma.CampaignDraftUncheckedCreateNestedManyWithoutCampaignInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedCreateNestedManyWithoutCampaignInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedCreateNestedManyWithoutCampaignInput
+  history?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutCampaignInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedCreateNestedOneWithoutCampaignInput
+}
+
+export type CampaignCreateOrConnectWithoutAiRecommendationsInput = {
+  where: Prisma.CampaignWhereUniqueInput
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutAiRecommendationsInput, Prisma.CampaignUncheckedCreateWithoutAiRecommendationsInput>
+}
+
+export type CampaignUpsertWithoutAiRecommendationsInput = {
+  update: Prisma.XOR<Prisma.CampaignUpdateWithoutAiRecommendationsInput, Prisma.CampaignUncheckedUpdateWithoutAiRecommendationsInput>
+  create: Prisma.XOR<Prisma.CampaignCreateWithoutAiRecommendationsInput, Prisma.CampaignUncheckedCreateWithoutAiRecommendationsInput>
+  where?: Prisma.CampaignWhereInput
+}
+
+export type CampaignUpdateToOneWithWhereWithoutAiRecommendationsInput = {
+  where?: Prisma.CampaignWhereInput
+  data: Prisma.XOR<Prisma.CampaignUpdateWithoutAiRecommendationsInput, Prisma.CampaignUncheckedUpdateWithoutAiRecommendationsInput>
+}
+
+export type CampaignUpdateWithoutAiRecommendationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
+  generatedPosts?: Prisma.GeneratedPostUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
+}
+
+export type CampaignUncheckedUpdateWithoutAiRecommendationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  goal?: Prisma.EnumCampaignGoalFieldUpdateOperationsInput | $Enums.CampaignGoal
+  status?: Prisma.EnumCampaignStatusFieldUpdateOperationsInput | $Enums.CampaignStatus
+  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAssets?: Prisma.CampaignAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  scheduledPosts?: Prisma.ScheduledPostUncheckedUpdateManyWithoutCampaignNestedInput
+  publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
+  analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
+  aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignCreateManyCreatorInput = {
@@ -1645,7 +5627,11 @@ export type CampaignCreateManyCreatorInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1661,7 +5647,11 @@ export type CampaignUpdateWithoutCreatorInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.WorkspaceUpdateOneRequiredWithoutCampaignsNestedInput
@@ -1671,6 +5661,22 @@ export type CampaignUpdateWithoutCreatorInput = {
   publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutCreatorInput = {
@@ -1685,7 +5691,11 @@ export type CampaignUncheckedUpdateWithoutCreatorInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   generatedPosts?: Prisma.GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput
@@ -1694,6 +5704,22 @@ export type CampaignUncheckedUpdateWithoutCreatorInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateManyWithoutCreatorInput = {
@@ -1708,7 +5734,11 @@ export type CampaignUncheckedUpdateManyWithoutCreatorInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1724,7 +5754,11 @@ export type CampaignCreateManyWorkspaceInput = {
   endDate?: Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignCreateplatformsInput | $Enums.SocialPlatform[]
+  offer?: string | null
+  notes?: string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: boolean
   createdBy: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1741,7 +5775,11 @@ export type CampaignUpdateWithoutWorkspaceInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creator?: Prisma.UserUpdateOneRequiredWithoutCreatedCampaignsNestedInput
@@ -1751,6 +5789,22 @@ export type CampaignUpdateWithoutWorkspaceInput = {
   publishedPosts?: Prisma.PublishedPostUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateWithoutWorkspaceInput = {
@@ -1764,7 +5818,11 @@ export type CampaignUncheckedUpdateWithoutWorkspaceInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1774,6 +5832,22 @@ export type CampaignUncheckedUpdateWithoutWorkspaceInput = {
   publishedPosts?: Prisma.PublishedPostUncheckedUpdateManyWithoutCampaignNestedInput
   analyticsSnapshots?: Prisma.AnalyticsSnapshotUncheckedUpdateManyWithoutCampaignNestedInput
   aiJobs?: Prisma.AIJobUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignPlatforms?: Prisma.CampaignPlatformUncheckedUpdateManyWithoutCampaignNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutCampaignNestedInput
+  brandAnalysis?: Prisma.BrandAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  competitorAnalysis?: Prisma.CompetitorAnalysisUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignStrategy?: Prisma.CampaignStrategyUncheckedUpdateOneWithoutCampaignNestedInput
+  campaignCopy?: Prisma.CampaignCopyUncheckedUpdateOneWithoutCampaignNestedInput
+  creativeBrief?: Prisma.CreativeBriefUncheckedUpdateOneWithoutCampaignNestedInput
+  generatedAssets?: Prisma.GeneratedAssetUncheckedUpdateManyWithoutCampaignNestedInput
+  publishingPlan?: Prisma.PublishingPlanUncheckedUpdateOneWithoutCampaignNestedInput
+  learningInsights?: Prisma.LearningInsightUncheckedUpdateManyWithoutCampaignNestedInput
+  aiRecommendations?: Prisma.AIRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  drafts?: Prisma.CampaignDraftUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignAnalytics?: Prisma.CampaignAnalyticsUncheckedUpdateManyWithoutCampaignNestedInput
+  campaignRecommendations?: Prisma.CampaignRecommendationUncheckedUpdateManyWithoutCampaignNestedInput
+  history?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutCampaignNestedInput
+  metaCampaign?: Prisma.MetaCampaignUncheckedUpdateOneWithoutCampaignNestedInput
 }
 
 export type CampaignUncheckedUpdateManyWithoutWorkspaceInput = {
@@ -1787,7 +5861,11 @@ export type CampaignUncheckedUpdateManyWithoutWorkspaceInput = {
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   targetAudience?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   platforms?: Prisma.CampaignUpdateplatformsInput | $Enums.SocialPlatform[]
+  offer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiStrategy?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aiStrategyPlan?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  generateVideo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1805,6 +5883,15 @@ export type CampaignCountOutputType = {
   publishedPosts: number
   analyticsSnapshots: number
   aiJobs: number
+  campaignPlatforms: number
+  agentRuns: number
+  generatedAssets: number
+  learningInsights: number
+  aiRecommendations: number
+  drafts: number
+  campaignAnalytics: number
+  campaignRecommendations: number
+  history: number
 }
 
 export type CampaignCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1814,6 +5901,15 @@ export type CampaignCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   publishedPosts?: boolean | CampaignCountOutputTypeCountPublishedPostsArgs
   analyticsSnapshots?: boolean | CampaignCountOutputTypeCountAnalyticsSnapshotsArgs
   aiJobs?: boolean | CampaignCountOutputTypeCountAiJobsArgs
+  campaignPlatforms?: boolean | CampaignCountOutputTypeCountCampaignPlatformsArgs
+  agentRuns?: boolean | CampaignCountOutputTypeCountAgentRunsArgs
+  generatedAssets?: boolean | CampaignCountOutputTypeCountGeneratedAssetsArgs
+  learningInsights?: boolean | CampaignCountOutputTypeCountLearningInsightsArgs
+  aiRecommendations?: boolean | CampaignCountOutputTypeCountAiRecommendationsArgs
+  drafts?: boolean | CampaignCountOutputTypeCountDraftsArgs
+  campaignAnalytics?: boolean | CampaignCountOutputTypeCountCampaignAnalyticsArgs
+  campaignRecommendations?: boolean | CampaignCountOutputTypeCountCampaignRecommendationsArgs
+  history?: boolean | CampaignCountOutputTypeCountHistoryArgs
 }
 
 /**
@@ -1868,6 +5964,69 @@ export type CampaignCountOutputTypeCountAiJobsArgs<ExtArgs extends runtime.Types
   where?: Prisma.AIJobWhereInput
 }
 
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountCampaignPlatformsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignPlatformWhereInput
+}
+
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountAgentRunsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AgentRunWhereInput
+}
+
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountGeneratedAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GeneratedAssetWhereInput
+}
+
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountLearningInsightsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LearningInsightWhereInput
+}
+
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountAiRecommendationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AIRecommendationWhereInput
+}
+
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignDraftWhereInput
+}
+
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountCampaignAnalyticsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignAnalyticsWhereInput
+}
+
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountCampaignRecommendationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignRecommendationWhereInput
+}
+
+/**
+ * CampaignCountOutputType without action
+ */
+export type CampaignCountOutputTypeCountHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignHistoryWhereInput
+}
+
 
 export type CampaignSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1881,7 +6040,11 @@ export type CampaignSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   endDate?: boolean
   targetAudience?: boolean
   platforms?: boolean
+  offer?: boolean
+  notes?: boolean
   aiStrategy?: boolean
+  aiStrategyPlan?: boolean
+  generateVideo?: boolean
   createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1893,6 +6056,22 @@ export type CampaignSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   publishedPosts?: boolean | Prisma.Campaign$publishedPostsArgs<ExtArgs>
   analyticsSnapshots?: boolean | Prisma.Campaign$analyticsSnapshotsArgs<ExtArgs>
   aiJobs?: boolean | Prisma.Campaign$aiJobsArgs<ExtArgs>
+  campaignPlatforms?: boolean | Prisma.Campaign$campaignPlatformsArgs<ExtArgs>
+  agentRuns?: boolean | Prisma.Campaign$agentRunsArgs<ExtArgs>
+  brandAnalysis?: boolean | Prisma.Campaign$brandAnalysisArgs<ExtArgs>
+  competitorAnalysis?: boolean | Prisma.Campaign$competitorAnalysisArgs<ExtArgs>
+  campaignStrategy?: boolean | Prisma.Campaign$campaignStrategyArgs<ExtArgs>
+  campaignCopy?: boolean | Prisma.Campaign$campaignCopyArgs<ExtArgs>
+  creativeBrief?: boolean | Prisma.Campaign$creativeBriefArgs<ExtArgs>
+  generatedAssets?: boolean | Prisma.Campaign$generatedAssetsArgs<ExtArgs>
+  publishingPlan?: boolean | Prisma.Campaign$publishingPlanArgs<ExtArgs>
+  learningInsights?: boolean | Prisma.Campaign$learningInsightsArgs<ExtArgs>
+  aiRecommendations?: boolean | Prisma.Campaign$aiRecommendationsArgs<ExtArgs>
+  drafts?: boolean | Prisma.Campaign$draftsArgs<ExtArgs>
+  campaignAnalytics?: boolean | Prisma.Campaign$campaignAnalyticsArgs<ExtArgs>
+  campaignRecommendations?: boolean | Prisma.Campaign$campaignRecommendationsArgs<ExtArgs>
+  history?: boolean | Prisma.Campaign$historyArgs<ExtArgs>
+  metaCampaign?: boolean | Prisma.Campaign$metaCampaignArgs<ExtArgs>
   _count?: boolean | Prisma.CampaignCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["campaign"]>
 
@@ -1908,7 +6087,11 @@ export type CampaignSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   endDate?: boolean
   targetAudience?: boolean
   platforms?: boolean
+  offer?: boolean
+  notes?: boolean
   aiStrategy?: boolean
+  aiStrategyPlan?: boolean
+  generateVideo?: boolean
   createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1928,7 +6111,11 @@ export type CampaignSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   endDate?: boolean
   targetAudience?: boolean
   platforms?: boolean
+  offer?: boolean
+  notes?: boolean
   aiStrategy?: boolean
+  aiStrategyPlan?: boolean
+  generateVideo?: boolean
   createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1948,13 +6135,17 @@ export type CampaignSelectScalar = {
   endDate?: boolean
   targetAudience?: boolean
   platforms?: boolean
+  offer?: boolean
+  notes?: boolean
   aiStrategy?: boolean
+  aiStrategyPlan?: boolean
+  generateVideo?: boolean
   createdBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CampaignOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "workspaceId" | "name" | "description" | "goal" | "status" | "budget" | "startDate" | "endDate" | "targetAudience" | "platforms" | "aiStrategy" | "createdBy" | "createdAt" | "updatedAt", ExtArgs["result"]["campaign"]>
+export type CampaignOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "workspaceId" | "name" | "description" | "goal" | "status" | "budget" | "startDate" | "endDate" | "targetAudience" | "platforms" | "offer" | "notes" | "aiStrategy" | "aiStrategyPlan" | "generateVideo" | "createdBy" | "createdAt" | "updatedAt", ExtArgs["result"]["campaign"]>
 export type CampaignInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspace?: boolean | Prisma.WorkspaceDefaultArgs<ExtArgs>
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1964,6 +6155,22 @@ export type CampaignInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   publishedPosts?: boolean | Prisma.Campaign$publishedPostsArgs<ExtArgs>
   analyticsSnapshots?: boolean | Prisma.Campaign$analyticsSnapshotsArgs<ExtArgs>
   aiJobs?: boolean | Prisma.Campaign$aiJobsArgs<ExtArgs>
+  campaignPlatforms?: boolean | Prisma.Campaign$campaignPlatformsArgs<ExtArgs>
+  agentRuns?: boolean | Prisma.Campaign$agentRunsArgs<ExtArgs>
+  brandAnalysis?: boolean | Prisma.Campaign$brandAnalysisArgs<ExtArgs>
+  competitorAnalysis?: boolean | Prisma.Campaign$competitorAnalysisArgs<ExtArgs>
+  campaignStrategy?: boolean | Prisma.Campaign$campaignStrategyArgs<ExtArgs>
+  campaignCopy?: boolean | Prisma.Campaign$campaignCopyArgs<ExtArgs>
+  creativeBrief?: boolean | Prisma.Campaign$creativeBriefArgs<ExtArgs>
+  generatedAssets?: boolean | Prisma.Campaign$generatedAssetsArgs<ExtArgs>
+  publishingPlan?: boolean | Prisma.Campaign$publishingPlanArgs<ExtArgs>
+  learningInsights?: boolean | Prisma.Campaign$learningInsightsArgs<ExtArgs>
+  aiRecommendations?: boolean | Prisma.Campaign$aiRecommendationsArgs<ExtArgs>
+  drafts?: boolean | Prisma.Campaign$draftsArgs<ExtArgs>
+  campaignAnalytics?: boolean | Prisma.Campaign$campaignAnalyticsArgs<ExtArgs>
+  campaignRecommendations?: boolean | Prisma.Campaign$campaignRecommendationsArgs<ExtArgs>
+  history?: boolean | Prisma.Campaign$historyArgs<ExtArgs>
+  metaCampaign?: boolean | Prisma.Campaign$metaCampaignArgs<ExtArgs>
   _count?: boolean | Prisma.CampaignCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CampaignIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1986,6 +6193,22 @@ export type $CampaignPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     publishedPosts: Prisma.$PublishedPostPayload<ExtArgs>[]
     analyticsSnapshots: Prisma.$AnalyticsSnapshotPayload<ExtArgs>[]
     aiJobs: Prisma.$AIJobPayload<ExtArgs>[]
+    campaignPlatforms: Prisma.$CampaignPlatformPayload<ExtArgs>[]
+    agentRuns: Prisma.$AgentRunPayload<ExtArgs>[]
+    brandAnalysis: Prisma.$BrandAnalysisPayload<ExtArgs> | null
+    competitorAnalysis: Prisma.$CompetitorAnalysisPayload<ExtArgs> | null
+    campaignStrategy: Prisma.$CampaignStrategyPayload<ExtArgs> | null
+    campaignCopy: Prisma.$CampaignCopyPayload<ExtArgs> | null
+    creativeBrief: Prisma.$CreativeBriefPayload<ExtArgs> | null
+    generatedAssets: Prisma.$GeneratedAssetPayload<ExtArgs>[]
+    publishingPlan: Prisma.$PublishingPlanPayload<ExtArgs> | null
+    learningInsights: Prisma.$LearningInsightPayload<ExtArgs>[]
+    aiRecommendations: Prisma.$AIRecommendationPayload<ExtArgs>[]
+    drafts: Prisma.$CampaignDraftPayload<ExtArgs>[]
+    campaignAnalytics: Prisma.$CampaignAnalyticsPayload<ExtArgs>[]
+    campaignRecommendations: Prisma.$CampaignRecommendationPayload<ExtArgs>[]
+    history: Prisma.$CampaignHistoryPayload<ExtArgs>[]
+    metaCampaign: Prisma.$MetaCampaignPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1999,7 +6222,11 @@ export type $CampaignPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     endDate: Date | null
     targetAudience: runtime.JsonValue | null
     platforms: $Enums.SocialPlatform[]
+    offer: string | null
+    notes: string | null
     aiStrategy: runtime.JsonValue | null
+    aiStrategyPlan: runtime.JsonValue | null
+    generateVideo: boolean
     createdBy: string
     createdAt: Date
     updatedAt: Date
@@ -2405,6 +6632,22 @@ export interface Prisma__CampaignClient<T, Null = never, ExtArgs extends runtime
   publishedPosts<T extends Prisma.Campaign$publishedPostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$publishedPostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PublishedPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   analyticsSnapshots<T extends Prisma.Campaign$analyticsSnapshotsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$analyticsSnapshotsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnalyticsSnapshotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   aiJobs<T extends Prisma.Campaign$aiJobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$aiJobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AIJobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  campaignPlatforms<T extends Prisma.Campaign$campaignPlatformsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$campaignPlatformsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignPlatformPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  agentRuns<T extends Prisma.Campaign$agentRunsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$agentRunsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgentRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  brandAnalysis<T extends Prisma.Campaign$brandAnalysisArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$brandAnalysisArgs<ExtArgs>>): Prisma.Prisma__BrandAnalysisClient<runtime.Types.Result.GetResult<Prisma.$BrandAnalysisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  competitorAnalysis<T extends Prisma.Campaign$competitorAnalysisArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$competitorAnalysisArgs<ExtArgs>>): Prisma.Prisma__CompetitorAnalysisClient<runtime.Types.Result.GetResult<Prisma.$CompetitorAnalysisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  campaignStrategy<T extends Prisma.Campaign$campaignStrategyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$campaignStrategyArgs<ExtArgs>>): Prisma.Prisma__CampaignStrategyClient<runtime.Types.Result.GetResult<Prisma.$CampaignStrategyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  campaignCopy<T extends Prisma.Campaign$campaignCopyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$campaignCopyArgs<ExtArgs>>): Prisma.Prisma__CampaignCopyClient<runtime.Types.Result.GetResult<Prisma.$CampaignCopyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  creativeBrief<T extends Prisma.Campaign$creativeBriefArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$creativeBriefArgs<ExtArgs>>): Prisma.Prisma__CreativeBriefClient<runtime.Types.Result.GetResult<Prisma.$CreativeBriefPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  generatedAssets<T extends Prisma.Campaign$generatedAssetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$generatedAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeneratedAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  publishingPlan<T extends Prisma.Campaign$publishingPlanArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$publishingPlanArgs<ExtArgs>>): Prisma.Prisma__PublishingPlanClient<runtime.Types.Result.GetResult<Prisma.$PublishingPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  learningInsights<T extends Prisma.Campaign$learningInsightsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$learningInsightsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LearningInsightPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  aiRecommendations<T extends Prisma.Campaign$aiRecommendationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$aiRecommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AIRecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  drafts<T extends Prisma.Campaign$draftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$draftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  campaignAnalytics<T extends Prisma.Campaign$campaignAnalyticsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$campaignAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  campaignRecommendations<T extends Prisma.Campaign$campaignRecommendationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$campaignRecommendationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignRecommendationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  history<T extends Prisma.Campaign$historyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$historyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  metaCampaign<T extends Prisma.Campaign$metaCampaignArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Campaign$metaCampaignArgs<ExtArgs>>): Prisma.Prisma__MetaCampaignClient<runtime.Types.Result.GetResult<Prisma.$MetaCampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2445,7 +6688,11 @@ export interface CampaignFieldRefs {
   readonly endDate: Prisma.FieldRef<"Campaign", 'DateTime'>
   readonly targetAudience: Prisma.FieldRef<"Campaign", 'Json'>
   readonly platforms: Prisma.FieldRef<"Campaign", 'SocialPlatform[]'>
+  readonly offer: Prisma.FieldRef<"Campaign", 'String'>
+  readonly notes: Prisma.FieldRef<"Campaign", 'String'>
   readonly aiStrategy: Prisma.FieldRef<"Campaign", 'Json'>
+  readonly aiStrategyPlan: Prisma.FieldRef<"Campaign", 'Json'>
+  readonly generateVideo: Prisma.FieldRef<"Campaign", 'Boolean'>
   readonly createdBy: Prisma.FieldRef<"Campaign", 'String'>
   readonly createdAt: Prisma.FieldRef<"Campaign", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Campaign", 'DateTime'>
@@ -2991,6 +7238,355 @@ export type Campaign$aiJobsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.AIJobScalarFieldEnum | Prisma.AIJobScalarFieldEnum[]
+}
+
+/**
+ * Campaign.campaignPlatforms
+ */
+export type Campaign$campaignPlatformsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignPlatform
+   */
+  select?: Prisma.CampaignPlatformSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignPlatform
+   */
+  omit?: Prisma.CampaignPlatformOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignPlatformInclude<ExtArgs> | null
+  where?: Prisma.CampaignPlatformWhereInput
+  orderBy?: Prisma.CampaignPlatformOrderByWithRelationInput | Prisma.CampaignPlatformOrderByWithRelationInput[]
+  cursor?: Prisma.CampaignPlatformWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CampaignPlatformScalarFieldEnum | Prisma.CampaignPlatformScalarFieldEnum[]
+}
+
+/**
+ * Campaign.agentRuns
+ */
+export type Campaign$agentRunsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AgentRun
+   */
+  select?: Prisma.AgentRunSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AgentRun
+   */
+  omit?: Prisma.AgentRunOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgentRunInclude<ExtArgs> | null
+  where?: Prisma.AgentRunWhereInput
+  orderBy?: Prisma.AgentRunOrderByWithRelationInput | Prisma.AgentRunOrderByWithRelationInput[]
+  cursor?: Prisma.AgentRunWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AgentRunScalarFieldEnum | Prisma.AgentRunScalarFieldEnum[]
+}
+
+/**
+ * Campaign.brandAnalysis
+ */
+export type Campaign$brandAnalysisArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BrandAnalysis
+   */
+  select?: Prisma.BrandAnalysisSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BrandAnalysis
+   */
+  omit?: Prisma.BrandAnalysisOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BrandAnalysisInclude<ExtArgs> | null
+  where?: Prisma.BrandAnalysisWhereInput
+}
+
+/**
+ * Campaign.competitorAnalysis
+ */
+export type Campaign$competitorAnalysisArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompetitorAnalysis
+   */
+  select?: Prisma.CompetitorAnalysisSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CompetitorAnalysis
+   */
+  omit?: Prisma.CompetitorAnalysisOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompetitorAnalysisInclude<ExtArgs> | null
+  where?: Prisma.CompetitorAnalysisWhereInput
+}
+
+/**
+ * Campaign.campaignStrategy
+ */
+export type Campaign$campaignStrategyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignStrategy
+   */
+  select?: Prisma.CampaignStrategySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignStrategy
+   */
+  omit?: Prisma.CampaignStrategyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignStrategyInclude<ExtArgs> | null
+  where?: Prisma.CampaignStrategyWhereInput
+}
+
+/**
+ * Campaign.campaignCopy
+ */
+export type Campaign$campaignCopyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignCopy
+   */
+  select?: Prisma.CampaignCopySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignCopy
+   */
+  omit?: Prisma.CampaignCopyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignCopyInclude<ExtArgs> | null
+  where?: Prisma.CampaignCopyWhereInput
+}
+
+/**
+ * Campaign.creativeBrief
+ */
+export type Campaign$creativeBriefArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CreativeBrief
+   */
+  select?: Prisma.CreativeBriefSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CreativeBrief
+   */
+  omit?: Prisma.CreativeBriefOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CreativeBriefInclude<ExtArgs> | null
+  where?: Prisma.CreativeBriefWhereInput
+}
+
+/**
+ * Campaign.generatedAssets
+ */
+export type Campaign$generatedAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GeneratedAsset
+   */
+  select?: Prisma.GeneratedAssetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GeneratedAsset
+   */
+  omit?: Prisma.GeneratedAssetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GeneratedAssetInclude<ExtArgs> | null
+  where?: Prisma.GeneratedAssetWhereInput
+  orderBy?: Prisma.GeneratedAssetOrderByWithRelationInput | Prisma.GeneratedAssetOrderByWithRelationInput[]
+  cursor?: Prisma.GeneratedAssetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GeneratedAssetScalarFieldEnum | Prisma.GeneratedAssetScalarFieldEnum[]
+}
+
+/**
+ * Campaign.publishingPlan
+ */
+export type Campaign$publishingPlanArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PublishingPlan
+   */
+  select?: Prisma.PublishingPlanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PublishingPlan
+   */
+  omit?: Prisma.PublishingPlanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PublishingPlanInclude<ExtArgs> | null
+  where?: Prisma.PublishingPlanWhereInput
+}
+
+/**
+ * Campaign.learningInsights
+ */
+export type Campaign$learningInsightsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LearningInsight
+   */
+  select?: Prisma.LearningInsightSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LearningInsight
+   */
+  omit?: Prisma.LearningInsightOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LearningInsightInclude<ExtArgs> | null
+  where?: Prisma.LearningInsightWhereInput
+  orderBy?: Prisma.LearningInsightOrderByWithRelationInput | Prisma.LearningInsightOrderByWithRelationInput[]
+  cursor?: Prisma.LearningInsightWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LearningInsightScalarFieldEnum | Prisma.LearningInsightScalarFieldEnum[]
+}
+
+/**
+ * Campaign.aiRecommendations
+ */
+export type Campaign$aiRecommendationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AIRecommendation
+   */
+  select?: Prisma.AIRecommendationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AIRecommendation
+   */
+  omit?: Prisma.AIRecommendationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AIRecommendationInclude<ExtArgs> | null
+  where?: Prisma.AIRecommendationWhereInput
+  orderBy?: Prisma.AIRecommendationOrderByWithRelationInput | Prisma.AIRecommendationOrderByWithRelationInput[]
+  cursor?: Prisma.AIRecommendationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AIRecommendationScalarFieldEnum | Prisma.AIRecommendationScalarFieldEnum[]
+}
+
+/**
+ * Campaign.drafts
+ */
+export type Campaign$draftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignDraft
+   */
+  select?: Prisma.CampaignDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignDraft
+   */
+  omit?: Prisma.CampaignDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignDraftInclude<ExtArgs> | null
+  where?: Prisma.CampaignDraftWhereInput
+  orderBy?: Prisma.CampaignDraftOrderByWithRelationInput | Prisma.CampaignDraftOrderByWithRelationInput[]
+  cursor?: Prisma.CampaignDraftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CampaignDraftScalarFieldEnum | Prisma.CampaignDraftScalarFieldEnum[]
+}
+
+/**
+ * Campaign.campaignAnalytics
+ */
+export type Campaign$campaignAnalyticsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignAnalytics
+   */
+  select?: Prisma.CampaignAnalyticsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignAnalytics
+   */
+  omit?: Prisma.CampaignAnalyticsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignAnalyticsInclude<ExtArgs> | null
+  where?: Prisma.CampaignAnalyticsWhereInput
+  orderBy?: Prisma.CampaignAnalyticsOrderByWithRelationInput | Prisma.CampaignAnalyticsOrderByWithRelationInput[]
+  cursor?: Prisma.CampaignAnalyticsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CampaignAnalyticsScalarFieldEnum | Prisma.CampaignAnalyticsScalarFieldEnum[]
+}
+
+/**
+ * Campaign.campaignRecommendations
+ */
+export type Campaign$campaignRecommendationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignRecommendation
+   */
+  select?: Prisma.CampaignRecommendationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignRecommendation
+   */
+  omit?: Prisma.CampaignRecommendationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignRecommendationInclude<ExtArgs> | null
+  where?: Prisma.CampaignRecommendationWhereInput
+  orderBy?: Prisma.CampaignRecommendationOrderByWithRelationInput | Prisma.CampaignRecommendationOrderByWithRelationInput[]
+  cursor?: Prisma.CampaignRecommendationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CampaignRecommendationScalarFieldEnum | Prisma.CampaignRecommendationScalarFieldEnum[]
+}
+
+/**
+ * Campaign.history
+ */
+export type Campaign$historyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignHistory
+   */
+  select?: Prisma.CampaignHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignHistory
+   */
+  omit?: Prisma.CampaignHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignHistoryInclude<ExtArgs> | null
+  where?: Prisma.CampaignHistoryWhereInput
+  orderBy?: Prisma.CampaignHistoryOrderByWithRelationInput | Prisma.CampaignHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.CampaignHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CampaignHistoryScalarFieldEnum | Prisma.CampaignHistoryScalarFieldEnum[]
+}
+
+/**
+ * Campaign.metaCampaign
+ */
+export type Campaign$metaCampaignArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MetaCampaign
+   */
+  select?: Prisma.MetaCampaignSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MetaCampaign
+   */
+  omit?: Prisma.MetaCampaignOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MetaCampaignInclude<ExtArgs> | null
+  where?: Prisma.MetaCampaignWhereInput
 }
 
 /**

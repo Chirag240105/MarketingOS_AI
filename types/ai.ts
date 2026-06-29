@@ -6,6 +6,10 @@ export type BrandContext = {
   industry?: string | null;
   toneOfVoice?: string | null;
   targetAudience?: unknown;
+  primaryGoal?: string | null;
+  budget?: unknown;
+  location?: string | null;
+  productsServices?: string[];
   values: string[];
   competitors: string[];
 };
@@ -17,6 +21,8 @@ export type CampaignBrief = {
   goal: CampaignGoal;
   platforms: SocialPlatform[];
   targetAudience?: unknown;
+  offer?: string | null;
+  notes?: string | null;
   brand: BrandContext;
 };
 
@@ -50,3 +56,57 @@ export type CampaignStrategy = {
   cadence: string;
   budgetRecommendation?: string;
 };
+
+export type CampaignPlannerOutput = {
+  brandAnalysis: string;
+  targetAudience: string;
+  competitorPositioning: string;
+  strategy: CampaignStrategy;
+};
+
+export type CompetitorAnalyzerOutput = {
+  sourceNote: string;
+  competitors: Array<{
+    name: string;
+    positioning: string;
+    strengths: string[];
+    weaknesses: string[];
+  }>;
+  positioningGaps: string[];
+  differentiationAngle: string;
+  recommendedContentGaps: string[];
+};
+
+export type CampaignCopyOutput = {
+  captions: string[];
+  adCopy: string[];
+  hashtags: string[];
+  posts: GeneratedContent[];
+};
+
+export type CampaignTextPostOutput = {
+  campaignName: string;
+  primaryText: string;
+  headline: string;
+  description: string;
+  callToAction: string;
+  instagramCaption: string;
+  facebookCaption: string;
+  caption: string;
+  pinterestTitle: string;
+  pinterestDescription: string;
+  hashtags: string[];
+  cta: string;
+  altText: string;
+  creativeDirection: string;
+  contentAngle?: string;
+  contentType: "CAPTION_ONLY";
+};
+
+export type CreativePromptOutput = {
+  posterPrompt: string;
+  imagePrompts: string[];
+  videoPromptIdeas: string[];
+};
+
+export type CampaignGenerationStatus = "generated" | "fallback";

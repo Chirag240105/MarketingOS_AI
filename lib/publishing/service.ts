@@ -1,5 +1,17 @@
 import { prisma } from "@/lib/db";
-import { mockPublisher } from "@/lib/publishing/provider";
+import { PLATFORMS } from "@/config/platforms";
+import { linkedInPublisher } from "@/lib/publishing/linkedin";
+import { metaPublisher } from "@/lib/publishing/meta";
+import type { SocialPublisher } from "@/lib/publishing/provider";
+import { xPublisher } from "@/lib/publishing/x";
+
+function publisherFor(platform: "INSTAGRAM" | "FACEBOOK" | "X" | "LINKEDIN" | "TIKTOK" | "YOUTUBE" | "PINTEREST"): SocialPublisher {
+  if (!PLATFORMS[platform].publishingSupported) throw new Error(`${PLATFORMS[platform].label} publishing is coming soon.`);
+  if (platform === "INSTAGRAM" || platform === "FACEBOOK") return metaPublisher;
+  if (platform === "LINKEDIN") return linkedInPublisher;
+  if (platform === "X") return xPublisher;
+  throw new Error(`${platform} publishing is not supported yet.`);
+}
 
 export async function publishScheduledPost(scheduleId: string) {
   const schedule = await prisma.scheduledPost.findUnique({
@@ -25,7 +37,10 @@ export async function publishScheduledPost(scheduleId: string) {
   }
 
   try {
-    const result = await mockPublisher.publish(schedule.platform, account.accountName, {
+    if (schedule.platform === "INSTAGRAM" && !schedule.post.mediaUrls.length) {
+      throw new Error("Instagram publishing requires a public image URL. Generate or attach an image before approving this post.");
+    }
+    const result = await publisherFor(schedule.platform).publish(account, {
       body: schedule.post.body,
       caption: schedule.post.caption,
       mediaUrls: schedule.post.mediaUrls,
@@ -33,7 +48,7 @@ export async function publishScheduledPost(scheduleId: string) {
     await prisma.$transaction([
       prisma.publishedPost.upsert({
         where: { postId: schedule.postId },
-        update: { status: "PUBLISHED", publishedAt: new Date(), externalId: result.externalId, externalUrl: result.externalUrl },
+        update: { status: "PUBLISHED", publishedAt: new Date(), externalId: result.externalId, externalUrl: result.externalUrl, metadata: result.response as never },
         create: {
           postId: schedule.postId,
           scheduledPostId: schedule.id,
@@ -43,6 +58,7 @@ export async function publishScheduledPost(scheduleId: string) {
           externalId: result.externalId,
           externalUrl: result.externalUrl,
           publishedAt: new Date(),
+          metadata: result.response as never,
         },
       }),
       prisma.scheduledPost.update({ where: { id: schedule.id }, data: { status: "PUBLISHED", publishedAt: new Date(), errorMessage: null } }),

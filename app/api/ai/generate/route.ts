@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     await requireWorkspaceMembership(campaign.workspaceId, "EDITOR");
     const result = await generateCampaign(campaign.id, session.user.id);
     await writeAuditLog({ action: "AI_GENERATE", entityType: "campaign", entityId: campaign.id, userId: session.user.id, workspaceId: campaign.workspaceId });
-    return NextResponse.json({ ok: true, data: result });
+    return NextResponse.json({ ok: true, data: result, warning: result.warning });
   } catch (error) {
     return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : "Generation failed" }, { status: 400 });
   }

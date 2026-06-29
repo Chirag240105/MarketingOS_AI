@@ -222,6 +222,7 @@ export type UserWhereInput = {
   aiUsage?: Prisma.AIUsageListRelationFilter
   createdCampaigns?: Prisma.CampaignListRelationFilter
   approvals?: Prisma.ApprovalListRelationFilter
+  campaignHistory?: Prisma.CampaignHistoryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -242,6 +243,7 @@ export type UserOrderByWithRelationInput = {
   aiUsage?: Prisma.AIUsageOrderByRelationAggregateInput
   createdCampaigns?: Prisma.CampaignOrderByRelationAggregateInput
   approvals?: Prisma.ApprovalOrderByRelationAggregateInput
+  campaignHistory?: Prisma.CampaignHistoryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -265,6 +267,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   aiUsage?: Prisma.AIUsageListRelationFilter
   createdCampaigns?: Prisma.CampaignListRelationFilter
   approvals?: Prisma.ApprovalListRelationFilter
+  campaignHistory?: Prisma.CampaignHistoryListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -315,6 +318,7 @@ export type UserCreateInput = {
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -335,6 +339,7 @@ export type UserUncheckedCreateInput = {
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -355,6 +360,7 @@ export type UserUpdateInput = {
   aiUsage?: Prisma.AIUsageUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -375,6 +381,7 @@ export type UserUncheckedUpdateInput = {
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUncheckedUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -563,6 +570,22 @@ export type UserUpdateOneRequiredWithoutApprovalsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutApprovalsInput, Prisma.UserUpdateWithoutApprovalsInput>, Prisma.UserUncheckedUpdateWithoutApprovalsInput>
 }
 
+export type UserCreateNestedOneWithoutCampaignHistoryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCampaignHistoryInput, Prisma.UserUncheckedCreateWithoutCampaignHistoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCampaignHistoryInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCampaignHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCampaignHistoryInput, Prisma.UserUncheckedCreateWithoutCampaignHistoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCampaignHistoryInput
+  upsert?: Prisma.UserUpsertWithoutCampaignHistoryInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCampaignHistoryInput, Prisma.UserUpdateWithoutCampaignHistoryInput>, Prisma.UserUncheckedUpdateWithoutCampaignHistoryInput>
+}
+
 export type UserCreateNestedOneWithoutAiUsageInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAiUsageInput, Prisma.UserUncheckedCreateWithoutAiUsageInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAiUsageInput
@@ -610,6 +633,7 @@ export type UserCreateWithoutAccountsInput = {
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -629,6 +653,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -664,6 +689,7 @@ export type UserUpdateWithoutAccountsInput = {
   aiUsage?: Prisma.AIUsageUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -683,6 +709,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUncheckedUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -702,6 +729,7 @@ export type UserCreateWithoutSessionsInput = {
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -721,6 +749,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -756,6 +785,7 @@ export type UserUpdateWithoutSessionsInput = {
   aiUsage?: Prisma.AIUsageUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -775,6 +805,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUncheckedUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOwnedWorkspacesInput = {
@@ -794,6 +825,7 @@ export type UserCreateWithoutOwnedWorkspacesInput = {
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedWorkspacesInput = {
@@ -813,6 +845,7 @@ export type UserUncheckedCreateWithoutOwnedWorkspacesInput = {
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedWorkspacesInput = {
@@ -848,6 +881,7 @@ export type UserUpdateWithoutOwnedWorkspacesInput = {
   aiUsage?: Prisma.AIUsageUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedWorkspacesInput = {
@@ -867,6 +901,7 @@ export type UserUncheckedUpdateWithoutOwnedWorkspacesInput = {
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUncheckedUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMembershipsInput = {
@@ -886,6 +921,7 @@ export type UserCreateWithoutMembershipsInput = {
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -905,6 +941,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -940,6 +977,7 @@ export type UserUpdateWithoutMembershipsInput = {
   aiUsage?: Prisma.AIUsageUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -959,6 +997,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUncheckedUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedCampaignsInput = {
@@ -978,6 +1017,7 @@ export type UserCreateWithoutCreatedCampaignsInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutUserInput
   approvals?: Prisma.ApprovalCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedCampaignsInput = {
@@ -997,6 +1037,7 @@ export type UserUncheckedCreateWithoutCreatedCampaignsInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutUserInput
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedCampaignsInput = {
@@ -1032,6 +1073,7 @@ export type UserUpdateWithoutCreatedCampaignsInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   aiUsage?: Prisma.AIUsageUpdateManyWithoutUserNestedInput
   approvals?: Prisma.ApprovalUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedCampaignsInput = {
@@ -1051,6 +1093,7 @@ export type UserUncheckedUpdateWithoutCreatedCampaignsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutUserNestedInput
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutApprovalsInput = {
@@ -1070,6 +1113,7 @@ export type UserCreateWithoutApprovalsInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignCreateNestedManyWithoutCreatorInput
+  campaignHistory?: Prisma.CampaignHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutApprovalsInput = {
@@ -1089,6 +1133,7 @@ export type UserUncheckedCreateWithoutApprovalsInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutCreatorInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutApprovalsInput = {
@@ -1124,6 +1169,7 @@ export type UserUpdateWithoutApprovalsInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   aiUsage?: Prisma.AIUsageUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUpdateManyWithoutCreatorNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovalsInput = {
@@ -1143,6 +1189,103 @@ export type UserUncheckedUpdateWithoutApprovalsInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUncheckedUpdateManyWithoutCreatorNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCampaignHistoryInput = {
+  id?: string
+  email: string
+  emailVerified?: Date | string | null
+  name?: string | null
+  image?: string | null
+  password?: string | null
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MembershipCreateNestedManyWithoutUserInput
+  ownedWorkspaces?: Prisma.WorkspaceCreateNestedManyWithoutOwnerInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  aiUsage?: Prisma.AIUsageCreateNestedManyWithoutUserInput
+  createdCampaigns?: Prisma.CampaignCreateNestedManyWithoutCreatorInput
+  approvals?: Prisma.ApprovalCreateNestedManyWithoutReviewerInput
+}
+
+export type UserUncheckedCreateWithoutCampaignHistoryInput = {
+  id?: string
+  email: string
+  emailVerified?: Date | string | null
+  name?: string | null
+  image?: string | null
+  password?: string | null
+  role?: $Enums.UserRole
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  memberships?: Prisma.MembershipUncheckedCreateNestedManyWithoutUserInput
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedCreateNestedManyWithoutOwnerInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutUserInput
+  createdCampaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutCreatorInput
+  approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutReviewerInput
+}
+
+export type UserCreateOrConnectWithoutCampaignHistoryInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCampaignHistoryInput, Prisma.UserUncheckedCreateWithoutCampaignHistoryInput>
+}
+
+export type UserUpsertWithoutCampaignHistoryInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCampaignHistoryInput, Prisma.UserUncheckedUpdateWithoutCampaignHistoryInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCampaignHistoryInput, Prisma.UserUncheckedCreateWithoutCampaignHistoryInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCampaignHistoryInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCampaignHistoryInput, Prisma.UserUncheckedUpdateWithoutCampaignHistoryInput>
+}
+
+export type UserUpdateWithoutCampaignHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MembershipUpdateManyWithoutUserNestedInput
+  ownedWorkspaces?: Prisma.WorkspaceUpdateManyWithoutOwnerNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  aiUsage?: Prisma.AIUsageUpdateManyWithoutUserNestedInput
+  createdCampaigns?: Prisma.CampaignUpdateManyWithoutCreatorNestedInput
+  approvals?: Prisma.ApprovalUpdateManyWithoutReviewerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCampaignHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  memberships?: Prisma.MembershipUncheckedUpdateManyWithoutUserNestedInput
+  ownedWorkspaces?: Prisma.WorkspaceUncheckedUpdateManyWithoutOwnerNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutUserNestedInput
+  createdCampaigns?: Prisma.CampaignUncheckedUpdateManyWithoutCreatorNestedInput
+  approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutReviewerNestedInput
 }
 
 export type UserCreateWithoutAiUsageInput = {
@@ -1162,6 +1305,7 @@ export type UserCreateWithoutAiUsageInput = {
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAiUsageInput = {
@@ -1181,6 +1325,7 @@ export type UserUncheckedCreateWithoutAiUsageInput = {
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAiUsageInput = {
@@ -1216,6 +1361,7 @@ export type UserUpdateWithoutAiUsageInput = {
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAiUsageInput = {
@@ -1235,6 +1381,7 @@ export type UserUncheckedUpdateWithoutAiUsageInput = {
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUncheckedUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAuditLogsInput = {
@@ -1254,6 +1401,7 @@ export type UserCreateWithoutAuditLogsInput = {
   aiUsage?: Prisma.AIUsageCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -1273,6 +1421,7 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   aiUsage?: Prisma.AIUsageUncheckedCreateNestedManyWithoutUserInput
   createdCampaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutCreatorInput
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutReviewerInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -1308,6 +1457,7 @@ export type UserUpdateWithoutAuditLogsInput = {
   aiUsage?: Prisma.AIUsageUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -1327,6 +1477,7 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   aiUsage?: Prisma.AIUsageUncheckedUpdateManyWithoutUserNestedInput
   createdCampaigns?: Prisma.CampaignUncheckedUpdateManyWithoutCreatorNestedInput
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+  campaignHistory?: Prisma.CampaignHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1343,6 +1494,7 @@ export type UserCountOutputType = {
   aiUsage: number
   createdCampaigns: number
   approvals: number
+  campaignHistory: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1354,6 +1506,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   aiUsage?: boolean | UserCountOutputTypeCountAiUsageArgs
   createdCampaigns?: boolean | UserCountOutputTypeCountCreatedCampaignsArgs
   approvals?: boolean | UserCountOutputTypeCountApprovalsArgs
+  campaignHistory?: boolean | UserCountOutputTypeCountCampaignHistoryArgs
 }
 
 /**
@@ -1422,6 +1575,13 @@ export type UserCountOutputTypeCountApprovalsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.ApprovalWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCampaignHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignHistoryWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1441,6 +1601,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   aiUsage?: boolean | Prisma.User$aiUsageArgs<ExtArgs>
   createdCampaigns?: boolean | Prisma.User$createdCampaignsArgs<ExtArgs>
   approvals?: boolean | Prisma.User$approvalsArgs<ExtArgs>
+  campaignHistory?: boolean | Prisma.User$campaignHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1490,6 +1651,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   aiUsage?: boolean | Prisma.User$aiUsageArgs<ExtArgs>
   createdCampaigns?: boolean | Prisma.User$createdCampaignsArgs<ExtArgs>
   approvals?: boolean | Prisma.User$approvalsArgs<ExtArgs>
+  campaignHistory?: boolean | Prisma.User$campaignHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1506,6 +1668,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     aiUsage: Prisma.$AIUsagePayload<ExtArgs>[]
     createdCampaigns: Prisma.$CampaignPayload<ExtArgs>[]
     approvals: Prisma.$ApprovalPayload<ExtArgs>[]
+    campaignHistory: Prisma.$CampaignHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1919,6 +2082,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   aiUsage<T extends Prisma.User$aiUsageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$aiUsageArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AIUsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdCampaigns<T extends Prisma.User$createdCampaignsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdCampaignsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   approvals<T extends Prisma.User$approvalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$approvalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  campaignHistory<T extends Prisma.User$campaignHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$campaignHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2539,6 +2703,30 @@ export type User$approvalsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ApprovalScalarFieldEnum | Prisma.ApprovalScalarFieldEnum[]
+}
+
+/**
+ * User.campaignHistory
+ */
+export type User$campaignHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CampaignHistory
+   */
+  select?: Prisma.CampaignHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CampaignHistory
+   */
+  omit?: Prisma.CampaignHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignHistoryInclude<ExtArgs> | null
+  where?: Prisma.CampaignHistoryWhereInput
+  orderBy?: Prisma.CampaignHistoryOrderByWithRelationInput | Prisma.CampaignHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.CampaignHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CampaignHistoryScalarFieldEnum | Prisma.CampaignHistoryScalarFieldEnum[]
 }
 
 /**

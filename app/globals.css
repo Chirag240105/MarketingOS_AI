@@ -1,11 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #070b18;
-  --foreground: #e7edf8;
-  --muted: #94a3b8;
-  --card: rgba(15, 23, 42, 0.72);
-  --border: rgba(148, 163, 184, 0.16);
+  --bg-base: #050A14;
+  --bg-surface: #0C1425;
+  --bg-elevated: #111827;
+  --border: #1E2D45;
+  --border-bright: #2D4060;
+  --accent: #6366F1;
+  --accent-glow: #6366F133;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #475569;
+  --background: var(--bg-base);
+  --foreground: var(--text-primary);
+  --muted: var(--text-secondary);
+  --card: var(--bg-surface);
 }
 
 @theme inline {
@@ -23,9 +35,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  background-image:
-    radial-gradient(circle at 10% -10%, rgba(99, 102, 241, 0.28), transparent 30rem),
-    radial-gradient(circle at 100% 0%, rgba(14, 165, 233, 0.18), transparent 26rem);
+  background-image: linear-gradient(180deg, rgba(99, 102, 241, 0.08), transparent 320px);
 }
 
 ::selection {
@@ -35,10 +45,150 @@ body {
 .glass {
   background: var(--card);
   border: 1px solid var(--border);
-  box-shadow: 0 18px 48px rgba(2, 6, 23, 0.18);
+  box-shadow: 0 18px 48px rgba(2, 6, 23, 0.24);
   backdrop-filter: blur(18px);
 }
 
 .text-balance {
   text-wrap: balance;
+}
+
+.agent-output {
+  color: var(--text-secondary);
+  scrollbar-color: rgba(148, 163, 184, 0.35) transparent;
+}
+
+.agent-output-stack,
+.agent-output-nested-stack {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.agent-output-nested-stack {
+  gap: 0.75rem;
+}
+
+.agent-output-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 0.9rem;
+}
+
+.agent-output-section,
+.agent-output-card {
+  min-width: 0;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.86), rgba(8, 13, 25, 0.9)),
+    var(--bg-base);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.agent-output-section {
+  padding: 0.95rem;
+}
+
+.agent-output-section-wide {
+  grid-column: 1 / -1;
+}
+
+.agent-output-section h3 {
+  margin: 0 0 0.65rem;
+  color: #cbd5e1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.agent-output-card {
+  padding: 0.9rem;
+}
+
+.agent-output-summary {
+  margin: 0;
+  border-left: 3px solid rgba(45, 212, 191, 0.7);
+  border-radius: 0.45rem;
+  background: rgba(20, 184, 166, 0.08);
+  padding: 0.9rem 1rem;
+  color: #dbeafe;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.agent-output-list {
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+  padding: 0;
+  list-style: none;
+}
+
+.agent-output-list li {
+  position: relative;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 0.45rem;
+  background: rgba(255, 255, 255, 0.025);
+  padding: 0.65rem 0.75rem 0.65rem 1.9rem;
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.agent-output-list li::before {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  top: 1.05rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: #2dd4bf;
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.14);
+}
+
+.agent-output-chip,
+.agent-output-empty {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  overflow-wrap: anywhere;
+  border-radius: 999px;
+  padding: 0.38rem 0.65rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.agent-output-chip {
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  background: rgba(14, 165, 233, 0.08);
+  color: #bae6fd;
+}
+
+.agent-output-chip-good {
+  border-color: rgba(52, 211, 153, 0.22);
+  background: rgba(16, 185, 129, 0.1);
+  color: #bbf7d0;
+}
+
+.agent-output-chip-number {
+  border-color: rgba(251, 191, 36, 0.22);
+  background: rgba(245, 158, 11, 0.1);
+  color: #fde68a;
+  font-variant-numeric: tabular-nums;
+}
+
+.agent-output-empty {
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: rgba(148, 163, 184, 0.06);
+  color: var(--text-muted);
+}
+
+.agent-output-longtext {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 0.84rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
 }

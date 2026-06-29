@@ -11,6 +11,9 @@ export async function reviewPost(input: unknown) {
   const post = await prisma.generatedPost.findUnique({ where: { id: data.postId }, include: { campaign: true } });
   if (!post) throw new Error("Post not found.");
   const { user, workspace } = await requireWorkspaceMembership(post.campaign.workspaceId, "EDITOR");
+  if (data.status === "APPROVED" && post.platform === "INSTAGRAM" && !post.mediaUrls.length) {
+    throw new Error("Instagram posts need a generated or uploaded image before approval.");
+  }
   const approval = await prisma.approval.upsert({
     where: { postId_reviewerId: { postId: post.id, reviewerId: user.id } },
     update: { status: data.status, feedback: data.feedback, reviewedAt: new Date() },

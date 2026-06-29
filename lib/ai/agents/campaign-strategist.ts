@@ -1,29 +1,32 @@
 import { z } from "zod";
 import { runStructuredAgent } from "@/lib/ai/agent-utils";
 import { campaignStrategyPrompt } from "@/lib/ai/prompts/campaign-strategy";
+import { aiOptionalString, aiString, aiStringArray } from "@/lib/ai/schema-utils";
 import type { CampaignBrief, CampaignStrategy } from "@/types/ai";
 
 const schema = z.object({
-  positioning: z.string(),
-  audienceInsight: z.string(),
-  keyMessages: z.array(z.string()).min(2),
-  campaignPillars: z.array(z.string()).min(2),
-  cadence: z.string(),
-  budgetRecommendation: z.string().optional(),
+  positioning: aiString,
+  audienceInsight: aiString,
+  keyMessages: aiStringArray(2),
+  campaignPillars: aiStringArray(2),
+  cadence: aiString,
+  budgetRecommendation: aiOptionalString(),
 });
 
 export function createCampaignStrategy(brief: CampaignBrief) {
   return runStructuredAgent<CampaignStrategy>({
+    agentName: "Campaign Strategist Agent",
+    modelProfile: "campaignPlanner",
     system: campaignStrategyPrompt,
     input: brief,
     schema,
-    fallback: () => ({
-      positioning: brief.name + " makes the next best action feel obvious.",
-      audienceInsight: "Prioritize people who need momentum, clarity, and proof before they buy.",
-      keyMessages: ["Move faster with confidence", "Create once, adapt everywhere", "Measure what changes"],
-      campaignPillars: ["The before-and-after", "Practical proof", "Customer momentum"],
-      cadence: "Three platform-native posts per week, with one deeper story-led asset.",
-      budgetRecommendation: "Start with a focused test budget, then move spend toward the highest-intent creative.",
-    }),
+    fallback: {
+      positioning: `${brief.brand.companyName} should focus on the clearest customer problem and a simple conversion path.`,
+      audienceInsight: "Prioritize the audience segment with the strongest need and easiest next step.",
+      keyMessages: ["Clear offer", "Credible proof", "Low-friction action"],
+      campaignPillars: ["Awareness", "Trust", "Conversion"],
+      cadence: "Publish 3-4 posts per week and promote the strongest message.",
+      budgetRecommendation: "Start with a small test budget, then scale the best-performing platform.",
+    },
   });
 }

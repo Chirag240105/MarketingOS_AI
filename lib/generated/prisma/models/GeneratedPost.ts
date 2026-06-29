@@ -49,6 +49,11 @@ export type GeneratedPostMinAggregateOutputType = {
   aiConfidence: number | null
   aiReasoning: string | null
   status: $Enums.PostStatus | null
+  adCampaignId: string | null
+  adSetId: string | null
+  adCreativeId: string | null
+  adId: string | null
+  adStatus: string | null
   version: number | null
   parentId: string | null
   createdAt: Date | null
@@ -68,6 +73,11 @@ export type GeneratedPostMaxAggregateOutputType = {
   aiConfidence: number | null
   aiReasoning: string | null
   status: $Enums.PostStatus | null
+  adCampaignId: string | null
+  adSetId: string | null
+  adCreativeId: string | null
+  adId: string | null
+  adStatus: string | null
   version: number | null
   parentId: string | null
   createdAt: Date | null
@@ -90,6 +100,11 @@ export type GeneratedPostCountAggregateOutputType = {
   aiConfidence: number
   aiReasoning: number
   status: number
+  adCampaignId: number
+  adSetId: number
+  adCreativeId: number
+  adId: number
+  adStatus: number
   version: number
   parentId: number
   createdAt: number
@@ -121,6 +136,11 @@ export type GeneratedPostMinAggregateInputType = {
   aiConfidence?: true
   aiReasoning?: true
   status?: true
+  adCampaignId?: true
+  adSetId?: true
+  adCreativeId?: true
+  adId?: true
+  adStatus?: true
   version?: true
   parentId?: true
   createdAt?: true
@@ -140,6 +160,11 @@ export type GeneratedPostMaxAggregateInputType = {
   aiConfidence?: true
   aiReasoning?: true
   status?: true
+  adCampaignId?: true
+  adSetId?: true
+  adCreativeId?: true
+  adId?: true
+  adStatus?: true
   version?: true
   parentId?: true
   createdAt?: true
@@ -162,6 +187,11 @@ export type GeneratedPostCountAggregateInputType = {
   aiConfidence?: true
   aiReasoning?: true
   status?: true
+  adCampaignId?: true
+  adSetId?: true
+  adCreativeId?: true
+  adId?: true
+  adStatus?: true
   version?: true
   parentId?: true
   createdAt?: true
@@ -271,6 +301,11 @@ export type GeneratedPostGroupByOutputType = {
   aiConfidence: number | null
   aiReasoning: string | null
   status: $Enums.PostStatus
+  adCampaignId: string | null
+  adSetId: string | null
+  adCreativeId: string | null
+  adId: string | null
+  adStatus: string | null
   version: number
   parentId: string | null
   createdAt: Date
@@ -316,6 +351,11 @@ export type GeneratedPostWhereInput = {
   aiConfidence?: Prisma.FloatNullableFilter<"GeneratedPost"> | number | null
   aiReasoning?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
   status?: Prisma.EnumPostStatusFilter<"GeneratedPost"> | $Enums.PostStatus
+  adCampaignId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adSetId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adCreativeId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adStatus?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
   version?: Prisma.IntFilter<"GeneratedPost"> | number
   parentId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GeneratedPost"> | Date | string
@@ -324,6 +364,7 @@ export type GeneratedPostWhereInput = {
   approvals?: Prisma.ApprovalListRelationFilter
   scheduledPost?: Prisma.XOR<Prisma.ScheduledPostNullableScalarRelationFilter, Prisma.ScheduledPostWhereInput> | null
   publishedPost?: Prisma.XOR<Prisma.PublishedPostNullableScalarRelationFilter, Prisma.PublishedPostWhereInput> | null
+  metaAds?: Prisma.MetaAdListRelationFilter
 }
 
 export type GeneratedPostOrderByWithRelationInput = {
@@ -342,6 +383,11 @@ export type GeneratedPostOrderByWithRelationInput = {
   aiConfidence?: Prisma.SortOrderInput | Prisma.SortOrder
   aiReasoning?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  adCampaignId?: Prisma.SortOrderInput | Prisma.SortOrder
+  adSetId?: Prisma.SortOrderInput | Prisma.SortOrder
+  adCreativeId?: Prisma.SortOrderInput | Prisma.SortOrder
+  adId?: Prisma.SortOrderInput | Prisma.SortOrder
+  adStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   version?: Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -350,6 +396,7 @@ export type GeneratedPostOrderByWithRelationInput = {
   approvals?: Prisma.ApprovalOrderByRelationAggregateInput
   scheduledPost?: Prisma.ScheduledPostOrderByWithRelationInput
   publishedPost?: Prisma.PublishedPostOrderByWithRelationInput
+  metaAds?: Prisma.MetaAdOrderByRelationAggregateInput
 }
 
 export type GeneratedPostWhereUniqueInput = Prisma.AtLeast<{
@@ -371,6 +418,11 @@ export type GeneratedPostWhereUniqueInput = Prisma.AtLeast<{
   aiConfidence?: Prisma.FloatNullableFilter<"GeneratedPost"> | number | null
   aiReasoning?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
   status?: Prisma.EnumPostStatusFilter<"GeneratedPost"> | $Enums.PostStatus
+  adCampaignId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adSetId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adCreativeId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adStatus?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
   version?: Prisma.IntFilter<"GeneratedPost"> | number
   parentId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GeneratedPost"> | Date | string
@@ -379,6 +431,7 @@ export type GeneratedPostWhereUniqueInput = Prisma.AtLeast<{
   approvals?: Prisma.ApprovalListRelationFilter
   scheduledPost?: Prisma.XOR<Prisma.ScheduledPostNullableScalarRelationFilter, Prisma.ScheduledPostWhereInput> | null
   publishedPost?: Prisma.XOR<Prisma.PublishedPostNullableScalarRelationFilter, Prisma.PublishedPostWhereInput> | null
+  metaAds?: Prisma.MetaAdListRelationFilter
 }, "id">
 
 export type GeneratedPostOrderByWithAggregationInput = {
@@ -397,6 +450,11 @@ export type GeneratedPostOrderByWithAggregationInput = {
   aiConfidence?: Prisma.SortOrderInput | Prisma.SortOrder
   aiReasoning?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  adCampaignId?: Prisma.SortOrderInput | Prisma.SortOrder
+  adSetId?: Prisma.SortOrderInput | Prisma.SortOrder
+  adCreativeId?: Prisma.SortOrderInput | Prisma.SortOrder
+  adId?: Prisma.SortOrderInput | Prisma.SortOrder
+  adStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   version?: Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -427,6 +485,11 @@ export type GeneratedPostScalarWhereWithAggregatesInput = {
   aiConfidence?: Prisma.FloatNullableWithAggregatesFilter<"GeneratedPost"> | number | null
   aiReasoning?: Prisma.StringNullableWithAggregatesFilter<"GeneratedPost"> | string | null
   status?: Prisma.EnumPostStatusWithAggregatesFilter<"GeneratedPost"> | $Enums.PostStatus
+  adCampaignId?: Prisma.StringNullableWithAggregatesFilter<"GeneratedPost"> | string | null
+  adSetId?: Prisma.StringNullableWithAggregatesFilter<"GeneratedPost"> | string | null
+  adCreativeId?: Prisma.StringNullableWithAggregatesFilter<"GeneratedPost"> | string | null
+  adId?: Prisma.StringNullableWithAggregatesFilter<"GeneratedPost"> | string | null
+  adStatus?: Prisma.StringNullableWithAggregatesFilter<"GeneratedPost"> | string | null
   version?: Prisma.IntWithAggregatesFilter<"GeneratedPost"> | number
   parentId?: Prisma.StringNullableWithAggregatesFilter<"GeneratedPost"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"GeneratedPost"> | Date | string
@@ -448,6 +511,11 @@ export type GeneratedPostCreateInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
@@ -456,6 +524,7 @@ export type GeneratedPostCreateInput = {
   approvals?: Prisma.ApprovalCreateNestedManyWithoutPostInput
   scheduledPost?: Prisma.ScheduledPostCreateNestedOneWithoutPostInput
   publishedPost?: Prisma.PublishedPostCreateNestedOneWithoutPostInput
+  metaAds?: Prisma.MetaAdCreateNestedManyWithoutGeneratedPostInput
 }
 
 export type GeneratedPostUncheckedCreateInput = {
@@ -474,6 +543,11 @@ export type GeneratedPostUncheckedCreateInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
@@ -481,6 +555,7 @@ export type GeneratedPostUncheckedCreateInput = {
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutPostInput
   scheduledPost?: Prisma.ScheduledPostUncheckedCreateNestedOneWithoutPostInput
   publishedPost?: Prisma.PublishedPostUncheckedCreateNestedOneWithoutPostInput
+  metaAds?: Prisma.MetaAdUncheckedCreateNestedManyWithoutGeneratedPostInput
 }
 
 export type GeneratedPostUpdateInput = {
@@ -498,6 +573,11 @@ export type GeneratedPostUpdateInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -506,6 +586,7 @@ export type GeneratedPostUpdateInput = {
   approvals?: Prisma.ApprovalUpdateManyWithoutPostNestedInput
   scheduledPost?: Prisma.ScheduledPostUpdateOneWithoutPostNestedInput
   publishedPost?: Prisma.PublishedPostUpdateOneWithoutPostNestedInput
+  metaAds?: Prisma.MetaAdUpdateManyWithoutGeneratedPostNestedInput
 }
 
 export type GeneratedPostUncheckedUpdateInput = {
@@ -524,6 +605,11 @@ export type GeneratedPostUncheckedUpdateInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -531,6 +617,7 @@ export type GeneratedPostUncheckedUpdateInput = {
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutPostNestedInput
   scheduledPost?: Prisma.ScheduledPostUncheckedUpdateOneWithoutPostNestedInput
   publishedPost?: Prisma.PublishedPostUncheckedUpdateOneWithoutPostNestedInput
+  metaAds?: Prisma.MetaAdUncheckedUpdateManyWithoutGeneratedPostNestedInput
 }
 
 export type GeneratedPostCreateManyInput = {
@@ -549,6 +636,11 @@ export type GeneratedPostCreateManyInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
@@ -570,6 +662,11 @@ export type GeneratedPostUpdateManyMutationInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -592,6 +689,11 @@ export type GeneratedPostUncheckedUpdateManyInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -606,6 +708,11 @@ export type GeneratedPostListRelationFilter = {
 
 export type GeneratedPostOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type GeneratedPostNullableScalarRelationFilter = {
+  is?: Prisma.GeneratedPostWhereInput | null
+  isNot?: Prisma.GeneratedPostWhereInput | null
 }
 
 export type GeneratedPostCountOrderByAggregateInput = {
@@ -624,6 +731,11 @@ export type GeneratedPostCountOrderByAggregateInput = {
   aiConfidence?: Prisma.SortOrder
   aiReasoning?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  adCampaignId?: Prisma.SortOrder
+  adSetId?: Prisma.SortOrder
+  adCreativeId?: Prisma.SortOrder
+  adId?: Prisma.SortOrder
+  adStatus?: Prisma.SortOrder
   version?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -648,6 +760,11 @@ export type GeneratedPostMaxOrderByAggregateInput = {
   aiConfidence?: Prisma.SortOrder
   aiReasoning?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  adCampaignId?: Prisma.SortOrder
+  adSetId?: Prisma.SortOrder
+  adCreativeId?: Prisma.SortOrder
+  adId?: Prisma.SortOrder
+  adStatus?: Prisma.SortOrder
   version?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -667,6 +784,11 @@ export type GeneratedPostMinOrderByAggregateInput = {
   aiConfidence?: Prisma.SortOrder
   aiReasoning?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  adCampaignId?: Prisma.SortOrder
+  adSetId?: Prisma.SortOrder
+  adCreativeId?: Prisma.SortOrder
+  adId?: Prisma.SortOrder
+  adStatus?: Prisma.SortOrder
   version?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -725,6 +847,22 @@ export type GeneratedPostUncheckedUpdateManyWithoutCampaignNestedInput = {
   deleteMany?: Prisma.GeneratedPostScalarWhereInput | Prisma.GeneratedPostScalarWhereInput[]
 }
 
+export type GeneratedPostCreateNestedOneWithoutMetaAdsInput = {
+  create?: Prisma.XOR<Prisma.GeneratedPostCreateWithoutMetaAdsInput, Prisma.GeneratedPostUncheckedCreateWithoutMetaAdsInput>
+  connectOrCreate?: Prisma.GeneratedPostCreateOrConnectWithoutMetaAdsInput
+  connect?: Prisma.GeneratedPostWhereUniqueInput
+}
+
+export type GeneratedPostUpdateOneWithoutMetaAdsNestedInput = {
+  create?: Prisma.XOR<Prisma.GeneratedPostCreateWithoutMetaAdsInput, Prisma.GeneratedPostUncheckedCreateWithoutMetaAdsInput>
+  connectOrCreate?: Prisma.GeneratedPostCreateOrConnectWithoutMetaAdsInput
+  upsert?: Prisma.GeneratedPostUpsertWithoutMetaAdsInput
+  disconnect?: Prisma.GeneratedPostWhereInput | boolean
+  delete?: Prisma.GeneratedPostWhereInput | boolean
+  connect?: Prisma.GeneratedPostWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GeneratedPostUpdateToOneWithWhereWithoutMetaAdsInput, Prisma.GeneratedPostUpdateWithoutMetaAdsInput>, Prisma.GeneratedPostUncheckedUpdateWithoutMetaAdsInput>
+}
+
 export type GeneratedPostCreatehashtagsInput = {
   set: string[]
 }
@@ -762,18 +900,6 @@ export type NullableEnumMediaTypeFieldUpdateOperationsInput = {
 
 export type NullableFloatFieldUpdateOperationsInput = {
   set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type EnumPostStatusFieldUpdateOperationsInput = {
-  set?: $Enums.PostStatus
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
   increment?: number
   decrement?: number
   multiply?: number
@@ -837,6 +963,11 @@ export type GeneratedPostCreateWithoutCampaignInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
@@ -844,6 +975,7 @@ export type GeneratedPostCreateWithoutCampaignInput = {
   approvals?: Prisma.ApprovalCreateNestedManyWithoutPostInput
   scheduledPost?: Prisma.ScheduledPostCreateNestedOneWithoutPostInput
   publishedPost?: Prisma.PublishedPostCreateNestedOneWithoutPostInput
+  metaAds?: Prisma.MetaAdCreateNestedManyWithoutGeneratedPostInput
 }
 
 export type GeneratedPostUncheckedCreateWithoutCampaignInput = {
@@ -861,6 +993,11 @@ export type GeneratedPostUncheckedCreateWithoutCampaignInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
@@ -868,6 +1005,7 @@ export type GeneratedPostUncheckedCreateWithoutCampaignInput = {
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutPostInput
   scheduledPost?: Prisma.ScheduledPostUncheckedCreateNestedOneWithoutPostInput
   publishedPost?: Prisma.PublishedPostUncheckedCreateNestedOneWithoutPostInput
+  metaAds?: Prisma.MetaAdUncheckedCreateNestedManyWithoutGeneratedPostInput
 }
 
 export type GeneratedPostCreateOrConnectWithoutCampaignInput = {
@@ -915,10 +1053,151 @@ export type GeneratedPostScalarWhereInput = {
   aiConfidence?: Prisma.FloatNullableFilter<"GeneratedPost"> | number | null
   aiReasoning?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
   status?: Prisma.EnumPostStatusFilter<"GeneratedPost"> | $Enums.PostStatus
+  adCampaignId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adSetId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adCreativeId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
+  adStatus?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
   version?: Prisma.IntFilter<"GeneratedPost"> | number
   parentId?: Prisma.StringNullableFilter<"GeneratedPost"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GeneratedPost"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"GeneratedPost"> | Date | string
+}
+
+export type GeneratedPostCreateWithoutMetaAdsInput = {
+  id?: string
+  platform: $Enums.SocialPlatform
+  contentType: $Enums.ContentType
+  title?: string | null
+  body: string
+  caption?: string | null
+  hashtags?: Prisma.GeneratedPostCreatehashtagsInput | string[]
+  mentions?: Prisma.GeneratedPostCreatementionsInput | string[]
+  mediaUrls?: Prisma.GeneratedPostCreatemediaUrlsInput | string[]
+  mediaType?: $Enums.MediaType | null
+  callToAction?: string | null
+  aiConfidence?: number | null
+  aiReasoning?: string | null
+  status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
+  version?: number
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  campaign: Prisma.CampaignCreateNestedOneWithoutGeneratedPostsInput
+  approvals?: Prisma.ApprovalCreateNestedManyWithoutPostInput
+  scheduledPost?: Prisma.ScheduledPostCreateNestedOneWithoutPostInput
+  publishedPost?: Prisma.PublishedPostCreateNestedOneWithoutPostInput
+}
+
+export type GeneratedPostUncheckedCreateWithoutMetaAdsInput = {
+  id?: string
+  campaignId: string
+  platform: $Enums.SocialPlatform
+  contentType: $Enums.ContentType
+  title?: string | null
+  body: string
+  caption?: string | null
+  hashtags?: Prisma.GeneratedPostCreatehashtagsInput | string[]
+  mentions?: Prisma.GeneratedPostCreatementionsInput | string[]
+  mediaUrls?: Prisma.GeneratedPostCreatemediaUrlsInput | string[]
+  mediaType?: $Enums.MediaType | null
+  callToAction?: string | null
+  aiConfidence?: number | null
+  aiReasoning?: string | null
+  status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
+  version?: number
+  parentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutPostInput
+  scheduledPost?: Prisma.ScheduledPostUncheckedCreateNestedOneWithoutPostInput
+  publishedPost?: Prisma.PublishedPostUncheckedCreateNestedOneWithoutPostInput
+}
+
+export type GeneratedPostCreateOrConnectWithoutMetaAdsInput = {
+  where: Prisma.GeneratedPostWhereUniqueInput
+  create: Prisma.XOR<Prisma.GeneratedPostCreateWithoutMetaAdsInput, Prisma.GeneratedPostUncheckedCreateWithoutMetaAdsInput>
+}
+
+export type GeneratedPostUpsertWithoutMetaAdsInput = {
+  update: Prisma.XOR<Prisma.GeneratedPostUpdateWithoutMetaAdsInput, Prisma.GeneratedPostUncheckedUpdateWithoutMetaAdsInput>
+  create: Prisma.XOR<Prisma.GeneratedPostCreateWithoutMetaAdsInput, Prisma.GeneratedPostUncheckedCreateWithoutMetaAdsInput>
+  where?: Prisma.GeneratedPostWhereInput
+}
+
+export type GeneratedPostUpdateToOneWithWhereWithoutMetaAdsInput = {
+  where?: Prisma.GeneratedPostWhereInput
+  data: Prisma.XOR<Prisma.GeneratedPostUpdateWithoutMetaAdsInput, Prisma.GeneratedPostUncheckedUpdateWithoutMetaAdsInput>
+}
+
+export type GeneratedPostUpdateWithoutMetaAdsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  platform?: Prisma.EnumSocialPlatformFieldUpdateOperationsInput | $Enums.SocialPlatform
+  contentType?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hashtags?: Prisma.GeneratedPostUpdatehashtagsInput | string[]
+  mentions?: Prisma.GeneratedPostUpdatementionsInput | string[]
+  mediaUrls?: Prisma.GeneratedPostUpdatemediaUrlsInput | string[]
+  mediaType?: Prisma.NullableEnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType | null
+  callToAction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  campaign?: Prisma.CampaignUpdateOneRequiredWithoutGeneratedPostsNestedInput
+  approvals?: Prisma.ApprovalUpdateManyWithoutPostNestedInput
+  scheduledPost?: Prisma.ScheduledPostUpdateOneWithoutPostNestedInput
+  publishedPost?: Prisma.PublishedPostUpdateOneWithoutPostNestedInput
+}
+
+export type GeneratedPostUncheckedUpdateWithoutMetaAdsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  campaignId?: Prisma.StringFieldUpdateOperationsInput | string
+  platform?: Prisma.EnumSocialPlatformFieldUpdateOperationsInput | $Enums.SocialPlatform
+  contentType?: Prisma.EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hashtags?: Prisma.GeneratedPostUpdatehashtagsInput | string[]
+  mentions?: Prisma.GeneratedPostUpdatementionsInput | string[]
+  mediaUrls?: Prisma.GeneratedPostUpdatemediaUrlsInput | string[]
+  mediaType?: Prisma.NullableEnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType | null
+  callToAction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutPostNestedInput
+  scheduledPost?: Prisma.ScheduledPostUncheckedUpdateOneWithoutPostNestedInput
+  publishedPost?: Prisma.PublishedPostUncheckedUpdateOneWithoutPostNestedInput
 }
 
 export type GeneratedPostCreateWithoutApprovalsInput = {
@@ -936,6 +1215,11 @@ export type GeneratedPostCreateWithoutApprovalsInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
@@ -943,6 +1227,7 @@ export type GeneratedPostCreateWithoutApprovalsInput = {
   campaign: Prisma.CampaignCreateNestedOneWithoutGeneratedPostsInput
   scheduledPost?: Prisma.ScheduledPostCreateNestedOneWithoutPostInput
   publishedPost?: Prisma.PublishedPostCreateNestedOneWithoutPostInput
+  metaAds?: Prisma.MetaAdCreateNestedManyWithoutGeneratedPostInput
 }
 
 export type GeneratedPostUncheckedCreateWithoutApprovalsInput = {
@@ -961,12 +1246,18 @@ export type GeneratedPostUncheckedCreateWithoutApprovalsInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   scheduledPost?: Prisma.ScheduledPostUncheckedCreateNestedOneWithoutPostInput
   publishedPost?: Prisma.PublishedPostUncheckedCreateNestedOneWithoutPostInput
+  metaAds?: Prisma.MetaAdUncheckedCreateNestedManyWithoutGeneratedPostInput
 }
 
 export type GeneratedPostCreateOrConnectWithoutApprovalsInput = {
@@ -1000,6 +1291,11 @@ export type GeneratedPostUpdateWithoutApprovalsInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1007,6 +1303,7 @@ export type GeneratedPostUpdateWithoutApprovalsInput = {
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutGeneratedPostsNestedInput
   scheduledPost?: Prisma.ScheduledPostUpdateOneWithoutPostNestedInput
   publishedPost?: Prisma.PublishedPostUpdateOneWithoutPostNestedInput
+  metaAds?: Prisma.MetaAdUpdateManyWithoutGeneratedPostNestedInput
 }
 
 export type GeneratedPostUncheckedUpdateWithoutApprovalsInput = {
@@ -1025,12 +1322,18 @@ export type GeneratedPostUncheckedUpdateWithoutApprovalsInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scheduledPost?: Prisma.ScheduledPostUncheckedUpdateOneWithoutPostNestedInput
   publishedPost?: Prisma.PublishedPostUncheckedUpdateOneWithoutPostNestedInput
+  metaAds?: Prisma.MetaAdUncheckedUpdateManyWithoutGeneratedPostNestedInput
 }
 
 export type GeneratedPostCreateWithoutScheduledPostInput = {
@@ -1048,6 +1351,11 @@ export type GeneratedPostCreateWithoutScheduledPostInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
@@ -1055,6 +1363,7 @@ export type GeneratedPostCreateWithoutScheduledPostInput = {
   campaign: Prisma.CampaignCreateNestedOneWithoutGeneratedPostsInput
   approvals?: Prisma.ApprovalCreateNestedManyWithoutPostInput
   publishedPost?: Prisma.PublishedPostCreateNestedOneWithoutPostInput
+  metaAds?: Prisma.MetaAdCreateNestedManyWithoutGeneratedPostInput
 }
 
 export type GeneratedPostUncheckedCreateWithoutScheduledPostInput = {
@@ -1073,12 +1382,18 @@ export type GeneratedPostUncheckedCreateWithoutScheduledPostInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutPostInput
   publishedPost?: Prisma.PublishedPostUncheckedCreateNestedOneWithoutPostInput
+  metaAds?: Prisma.MetaAdUncheckedCreateNestedManyWithoutGeneratedPostInput
 }
 
 export type GeneratedPostCreateOrConnectWithoutScheduledPostInput = {
@@ -1112,6 +1427,11 @@ export type GeneratedPostUpdateWithoutScheduledPostInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1119,6 +1439,7 @@ export type GeneratedPostUpdateWithoutScheduledPostInput = {
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutGeneratedPostsNestedInput
   approvals?: Prisma.ApprovalUpdateManyWithoutPostNestedInput
   publishedPost?: Prisma.PublishedPostUpdateOneWithoutPostNestedInput
+  metaAds?: Prisma.MetaAdUpdateManyWithoutGeneratedPostNestedInput
 }
 
 export type GeneratedPostUncheckedUpdateWithoutScheduledPostInput = {
@@ -1137,12 +1458,18 @@ export type GeneratedPostUncheckedUpdateWithoutScheduledPostInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutPostNestedInput
   publishedPost?: Prisma.PublishedPostUncheckedUpdateOneWithoutPostNestedInput
+  metaAds?: Prisma.MetaAdUncheckedUpdateManyWithoutGeneratedPostNestedInput
 }
 
 export type GeneratedPostCreateWithoutPublishedPostInput = {
@@ -1160,6 +1487,11 @@ export type GeneratedPostCreateWithoutPublishedPostInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
@@ -1167,6 +1499,7 @@ export type GeneratedPostCreateWithoutPublishedPostInput = {
   campaign: Prisma.CampaignCreateNestedOneWithoutGeneratedPostsInput
   approvals?: Prisma.ApprovalCreateNestedManyWithoutPostInput
   scheduledPost?: Prisma.ScheduledPostCreateNestedOneWithoutPostInput
+  metaAds?: Prisma.MetaAdCreateNestedManyWithoutGeneratedPostInput
 }
 
 export type GeneratedPostUncheckedCreateWithoutPublishedPostInput = {
@@ -1185,12 +1518,18 @@ export type GeneratedPostUncheckedCreateWithoutPublishedPostInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   approvals?: Prisma.ApprovalUncheckedCreateNestedManyWithoutPostInput
   scheduledPost?: Prisma.ScheduledPostUncheckedCreateNestedOneWithoutPostInput
+  metaAds?: Prisma.MetaAdUncheckedCreateNestedManyWithoutGeneratedPostInput
 }
 
 export type GeneratedPostCreateOrConnectWithoutPublishedPostInput = {
@@ -1224,6 +1563,11 @@ export type GeneratedPostUpdateWithoutPublishedPostInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1231,6 +1575,7 @@ export type GeneratedPostUpdateWithoutPublishedPostInput = {
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutGeneratedPostsNestedInput
   approvals?: Prisma.ApprovalUpdateManyWithoutPostNestedInput
   scheduledPost?: Prisma.ScheduledPostUpdateOneWithoutPostNestedInput
+  metaAds?: Prisma.MetaAdUpdateManyWithoutGeneratedPostNestedInput
 }
 
 export type GeneratedPostUncheckedUpdateWithoutPublishedPostInput = {
@@ -1249,12 +1594,18 @@ export type GeneratedPostUncheckedUpdateWithoutPublishedPostInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutPostNestedInput
   scheduledPost?: Prisma.ScheduledPostUncheckedUpdateOneWithoutPostNestedInput
+  metaAds?: Prisma.MetaAdUncheckedUpdateManyWithoutGeneratedPostNestedInput
 }
 
 export type GeneratedPostCreateManyCampaignInput = {
@@ -1272,6 +1623,11 @@ export type GeneratedPostCreateManyCampaignInput = {
   aiConfidence?: number | null
   aiReasoning?: string | null
   status?: $Enums.PostStatus
+  adCampaignId?: string | null
+  adSetId?: string | null
+  adCreativeId?: string | null
+  adId?: string | null
+  adStatus?: string | null
   version?: number
   parentId?: string | null
   createdAt?: Date | string
@@ -1293,6 +1649,11 @@ export type GeneratedPostUpdateWithoutCampaignInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1300,6 +1661,7 @@ export type GeneratedPostUpdateWithoutCampaignInput = {
   approvals?: Prisma.ApprovalUpdateManyWithoutPostNestedInput
   scheduledPost?: Prisma.ScheduledPostUpdateOneWithoutPostNestedInput
   publishedPost?: Prisma.PublishedPostUpdateOneWithoutPostNestedInput
+  metaAds?: Prisma.MetaAdUpdateManyWithoutGeneratedPostNestedInput
 }
 
 export type GeneratedPostUncheckedUpdateWithoutCampaignInput = {
@@ -1317,6 +1679,11 @@ export type GeneratedPostUncheckedUpdateWithoutCampaignInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1324,6 +1691,7 @@ export type GeneratedPostUncheckedUpdateWithoutCampaignInput = {
   approvals?: Prisma.ApprovalUncheckedUpdateManyWithoutPostNestedInput
   scheduledPost?: Prisma.ScheduledPostUncheckedUpdateOneWithoutPostNestedInput
   publishedPost?: Prisma.PublishedPostUncheckedUpdateOneWithoutPostNestedInput
+  metaAds?: Prisma.MetaAdUncheckedUpdateManyWithoutGeneratedPostNestedInput
 }
 
 export type GeneratedPostUncheckedUpdateManyWithoutCampaignInput = {
@@ -1341,6 +1709,11 @@ export type GeneratedPostUncheckedUpdateManyWithoutCampaignInput = {
   aiConfidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   aiReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+  adCampaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adSetId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adCreativeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  adStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1354,10 +1727,12 @@ export type GeneratedPostUncheckedUpdateManyWithoutCampaignInput = {
 
 export type GeneratedPostCountOutputType = {
   approvals: number
+  metaAds: number
 }
 
 export type GeneratedPostCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   approvals?: boolean | GeneratedPostCountOutputTypeCountApprovalsArgs
+  metaAds?: boolean | GeneratedPostCountOutputTypeCountMetaAdsArgs
 }
 
 /**
@@ -1377,6 +1752,13 @@ export type GeneratedPostCountOutputTypeCountApprovalsArgs<ExtArgs extends runti
   where?: Prisma.ApprovalWhereInput
 }
 
+/**
+ * GeneratedPostCountOutputType without action
+ */
+export type GeneratedPostCountOutputTypeCountMetaAdsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MetaAdWhereInput
+}
+
 
 export type GeneratedPostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1394,6 +1776,11 @@ export type GeneratedPostSelect<ExtArgs extends runtime.Types.Extensions.Interna
   aiConfidence?: boolean
   aiReasoning?: boolean
   status?: boolean
+  adCampaignId?: boolean
+  adSetId?: boolean
+  adCreativeId?: boolean
+  adId?: boolean
+  adStatus?: boolean
   version?: boolean
   parentId?: boolean
   createdAt?: boolean
@@ -1402,6 +1789,7 @@ export type GeneratedPostSelect<ExtArgs extends runtime.Types.Extensions.Interna
   approvals?: boolean | Prisma.GeneratedPost$approvalsArgs<ExtArgs>
   scheduledPost?: boolean | Prisma.GeneratedPost$scheduledPostArgs<ExtArgs>
   publishedPost?: boolean | Prisma.GeneratedPost$publishedPostArgs<ExtArgs>
+  metaAds?: boolean | Prisma.GeneratedPost$metaAdsArgs<ExtArgs>
   _count?: boolean | Prisma.GeneratedPostCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["generatedPost"]>
 
@@ -1421,6 +1809,11 @@ export type GeneratedPostSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   aiConfidence?: boolean
   aiReasoning?: boolean
   status?: boolean
+  adCampaignId?: boolean
+  adSetId?: boolean
+  adCreativeId?: boolean
+  adId?: boolean
+  adStatus?: boolean
   version?: boolean
   parentId?: boolean
   createdAt?: boolean
@@ -1444,6 +1837,11 @@ export type GeneratedPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   aiConfidence?: boolean
   aiReasoning?: boolean
   status?: boolean
+  adCampaignId?: boolean
+  adSetId?: boolean
+  adCreativeId?: boolean
+  adId?: boolean
+  adStatus?: boolean
   version?: boolean
   parentId?: boolean
   createdAt?: boolean
@@ -1467,18 +1865,24 @@ export type GeneratedPostSelectScalar = {
   aiConfidence?: boolean
   aiReasoning?: boolean
   status?: boolean
+  adCampaignId?: boolean
+  adSetId?: boolean
+  adCreativeId?: boolean
+  adId?: boolean
+  adStatus?: boolean
   version?: boolean
   parentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type GeneratedPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "campaignId" | "platform" | "contentType" | "title" | "body" | "caption" | "hashtags" | "mentions" | "mediaUrls" | "mediaType" | "callToAction" | "aiConfidence" | "aiReasoning" | "status" | "version" | "parentId" | "createdAt" | "updatedAt", ExtArgs["result"]["generatedPost"]>
+export type GeneratedPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "campaignId" | "platform" | "contentType" | "title" | "body" | "caption" | "hashtags" | "mentions" | "mediaUrls" | "mediaType" | "callToAction" | "aiConfidence" | "aiReasoning" | "status" | "adCampaignId" | "adSetId" | "adCreativeId" | "adId" | "adStatus" | "version" | "parentId" | "createdAt" | "updatedAt", ExtArgs["result"]["generatedPost"]>
 export type GeneratedPostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
   approvals?: boolean | Prisma.GeneratedPost$approvalsArgs<ExtArgs>
   scheduledPost?: boolean | Prisma.GeneratedPost$scheduledPostArgs<ExtArgs>
   publishedPost?: boolean | Prisma.GeneratedPost$publishedPostArgs<ExtArgs>
+  metaAds?: boolean | Prisma.GeneratedPost$metaAdsArgs<ExtArgs>
   _count?: boolean | Prisma.GeneratedPostCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type GeneratedPostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1495,6 +1899,7 @@ export type $GeneratedPostPayload<ExtArgs extends runtime.Types.Extensions.Inter
     approvals: Prisma.$ApprovalPayload<ExtArgs>[]
     scheduledPost: Prisma.$ScheduledPostPayload<ExtArgs> | null
     publishedPost: Prisma.$PublishedPostPayload<ExtArgs> | null
+    metaAds: Prisma.$MetaAdPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1512,6 +1917,11 @@ export type $GeneratedPostPayload<ExtArgs extends runtime.Types.Extensions.Inter
     aiConfidence: number | null
     aiReasoning: string | null
     status: $Enums.PostStatus
+    adCampaignId: string | null
+    adSetId: string | null
+    adCreativeId: string | null
+    adId: string | null
+    adStatus: string | null
     version: number
     parentId: string | null
     createdAt: Date
@@ -1914,6 +2324,7 @@ export interface Prisma__GeneratedPostClient<T, Null = never, ExtArgs extends ru
   approvals<T extends Prisma.GeneratedPost$approvalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GeneratedPost$approvalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   scheduledPost<T extends Prisma.GeneratedPost$scheduledPostArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GeneratedPost$scheduledPostArgs<ExtArgs>>): Prisma.Prisma__ScheduledPostClient<runtime.Types.Result.GetResult<Prisma.$ScheduledPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   publishedPost<T extends Prisma.GeneratedPost$publishedPostArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GeneratedPost$publishedPostArgs<ExtArgs>>): Prisma.Prisma__PublishedPostClient<runtime.Types.Result.GetResult<Prisma.$PublishedPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  metaAds<T extends Prisma.GeneratedPost$metaAdsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GeneratedPost$metaAdsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MetaAdPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1958,6 +2369,11 @@ export interface GeneratedPostFieldRefs {
   readonly aiConfidence: Prisma.FieldRef<"GeneratedPost", 'Float'>
   readonly aiReasoning: Prisma.FieldRef<"GeneratedPost", 'String'>
   readonly status: Prisma.FieldRef<"GeneratedPost", 'PostStatus'>
+  readonly adCampaignId: Prisma.FieldRef<"GeneratedPost", 'String'>
+  readonly adSetId: Prisma.FieldRef<"GeneratedPost", 'String'>
+  readonly adCreativeId: Prisma.FieldRef<"GeneratedPost", 'String'>
+  readonly adId: Prisma.FieldRef<"GeneratedPost", 'String'>
+  readonly adStatus: Prisma.FieldRef<"GeneratedPost", 'String'>
   readonly version: Prisma.FieldRef<"GeneratedPost", 'Int'>
   readonly parentId: Prisma.FieldRef<"GeneratedPost", 'String'>
   readonly createdAt: Prisma.FieldRef<"GeneratedPost", 'DateTime'>
@@ -2422,6 +2838,30 @@ export type GeneratedPost$publishedPostArgs<ExtArgs extends runtime.Types.Extens
    */
   include?: Prisma.PublishedPostInclude<ExtArgs> | null
   where?: Prisma.PublishedPostWhereInput
+}
+
+/**
+ * GeneratedPost.metaAds
+ */
+export type GeneratedPost$metaAdsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MetaAd
+   */
+  select?: Prisma.MetaAdSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MetaAd
+   */
+  omit?: Prisma.MetaAdOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MetaAdInclude<ExtArgs> | null
+  where?: Prisma.MetaAdWhereInput
+  orderBy?: Prisma.MetaAdOrderByWithRelationInput | Prisma.MetaAdOrderByWithRelationInput[]
+  cursor?: Prisma.MetaAdWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MetaAdScalarFieldEnum | Prisma.MetaAdScalarFieldEnum[]
 }
 
 /**

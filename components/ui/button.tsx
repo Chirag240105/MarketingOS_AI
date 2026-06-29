@@ -7,10 +7,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const variants = {
-  primary: "bg-indigo-500 text-white hover:bg-indigo-400 shadow-lg shadow-indigo-500/20",
-  secondary: "border border-white/10 bg-white/8 text-slate-100 hover:bg-white/12",
-  ghost: "text-slate-300 hover:bg-white/8 hover:text-white",
-  danger: "bg-rose-500 text-white hover:bg-rose-400",
+  primary: "bg-accent text-white hover:bg-indigo-500 shadow-lg shadow-indigo-500/20",
+  secondary: "border border-border bg-bg-elevated text-slate-100 hover:border-border-bright hover:bg-slate-800",
+  ghost: "text-slate-300 hover:bg-bg-elevated hover:text-white",
+  danger: "bg-danger text-white hover:bg-red-500",
 };
 
 const sizes = {
@@ -29,7 +29,7 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-xl font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 disabled:pointer-events-none disabled:opacity-50",
+        "inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
         variants[variant],
         sizes[size],
         className,
