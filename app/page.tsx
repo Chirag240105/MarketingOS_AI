@@ -10,13 +10,12 @@ import {
   ImageIcon,
   Layers3,
   Megaphone,
-  PlayCircle,
   Search,
   ShieldCheck,
   Sparkles,
   Target,
-  Video,
 } from "lucide-react";
+import { LandingHero } from "@/components/landing/hero";
 
 const workflow = [
   "Enter business details",
@@ -58,40 +57,7 @@ const tech = ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Prisma 7"
 export default function Home() {
   return (
     <main className="min-h-screen bg-bg-base text-slate-100">
-      <section className="relative min-h-[92vh] overflow-hidden border-b border-white/10">
-        <DashboardScene />
-        <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 sm:px-10">
-          <Link href="/" className="flex items-center gap-2 font-semibold text-white">
-            <span className="grid size-9 place-items-center rounded-lg bg-cyan-300 text-slate-950"><Sparkles className="size-5" /></span>
-            MarketingOS AI
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link href="/login" className="rounded-lg px-4 py-2 text-sm text-slate-300 hover:text-white">Sign in</Link>
-            <Link href="/register" className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-950 hover:bg-slate-200">Create Your First Campaign</Link>
-          </div>
-        </nav>
-
-        <div className="relative z-10 mx-auto flex min-h-[calc(92vh-88px)] max-w-7xl flex-col justify-center px-6 pb-20 pt-10 sm:px-10">
-          <div className="max-w-3xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-slate-950/70 px-3 py-1.5 text-xs font-medium text-cyan-100">
-              <span className="size-1.5 rounded-full bg-cyan-300" />
-              AI-powered marketing operating system
-            </p>
-            <h1 className="mt-6 text-5xl font-semibold text-white sm:text-7xl">
-              Your AI-powered marketing team in one dashboard.
-            </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-200">
-              MarketingOS AI helps businesses plan, create, publish, analyze, and improve marketing campaigns using specialized AI agents.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="/register" className="inline-flex h-12 items-center gap-2 rounded-lg bg-cyan-300 px-5 text-sm font-semibold text-slate-950 hover:bg-cyan-200">
-                Create Your First Campaign <ArrowRight className="size-4" />
-              </Link>
-              <a href="#how-it-works" className="inline-flex h-12 items-center rounded-lg border border-white/15 bg-slate-950/70 px-5 text-sm font-medium text-slate-100 hover:bg-white/10">See how it works</a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <LandingHero />
 
       <section className="mx-auto max-w-7xl px-6 py-16 sm:px-10">
         <div className="grid gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-start">
@@ -214,44 +180,6 @@ export default function Home() {
         MarketingOS AI. Built for a clean judge demo: local Docker by default, Aurora only when needed, demo mode when credits matter.
       </footer>
     </main>
-  );
-}
-
-function DashboardScene() {
-  return (
-    <div className="absolute inset-0 bg-slate-950">
-      <div className="absolute inset-x-0 bottom-0 top-24 mx-auto max-w-7xl px-6 opacity-55 sm:px-10">
-        <div className="grid h-full content-end gap-4 pb-10 lg:grid-cols-[1.2fr_.8fr]">
-          <div className="rounded-lg border border-white/10 bg-slate-950/80 p-4 shadow-2xl shadow-black/40">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <div>
-                <p className="text-xs text-cyan-200">Campaign pipeline</p>
-                <p className="mt-1 text-sm font-medium text-white">Summer launch</p>
-              </div>
-              <span className="rounded-full bg-emerald-300/10 px-2.5 py-1 text-xs text-emerald-200">Ready to publish</span>
-            </div>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {["Brand", "Competitors", "Strategy", "Copy", "Creative", "Publishing"].map((item) => (
-                <div key={item} className="rounded-md border border-white/10 bg-white/[0.04] p-3">
-                  <p className="text-xs text-slate-400">{item} Agent</p>
-                  <div className="mt-3 h-2 rounded-full bg-slate-800"><div className="h-2 rounded-full bg-cyan-300" style={{ width: "84%" }} /></div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="grid gap-4">
-            <div className="rounded-lg border border-white/10 bg-slate-950/80 p-4">
-              <div className="flex items-center gap-3"><PlayCircle className="size-5 text-cyan-200" /><span className="text-sm font-medium text-white">Product reel</span></div>
-              <div className="mt-4 aspect-video rounded-md border border-white/10 bg-slate-900" />
-            </div>
-            <div className="rounded-lg border border-white/10 bg-slate-950/80 p-4">
-              <div className="flex items-center gap-3"><Video className="size-5 text-cyan-200" /><span className="text-sm font-medium text-white">Learning insight</span></div>
-              <p className="mt-3 text-xs leading-5 text-slate-400">Reels with clear workflow visuals produced the strongest saves and demo starts.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 
