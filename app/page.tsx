@@ -5,7 +5,6 @@ import {
   BarChart3,
   Brain,
   CalendarCheck,
-  CheckCircle2,
   FileText,
   ImageIcon,
   Layers3,
@@ -19,7 +18,7 @@ import { LandingHero } from "@/components/landing/hero";
 
 const workflow = [
   "Enter business details",
-  "Create campaign brief",
+  "Draft campaign direction",
   "AI analyzes brand",
   "AI studies competitors",
   "AI builds campaign strategy",
@@ -41,15 +40,6 @@ const agents = [
   { name: "Publishing Agent", icon: CalendarCheck, output: "Publishing plan and approval checklist", why: "Keeps launch timing and review steps visible." },
   { name: "Analytics Agent", icon: BarChart3, output: "Metric readout and recommendations", why: "Explains what happened after the campaign runs." },
   { name: "Learning Agent", icon: Brain, output: "Wins, losses, and future experiments", why: "Feeds results back into the next campaign." },
-];
-
-const features = [
-  "Database-backed AI agent pipeline",
-  "Campaign creation, approvals, scheduling, and analytics",
-  "Hugging Face image generation and Kling video fallback",
-  "Demo mode for safe hackathon walkthroughs",
-  "Docker PostgreSQL locally, Aurora PostgreSQL for showcase",
-  "S3-ready generated asset storage",
 ];
 
 const tech = ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Prisma 7", "PostgreSQL", "Auth.js", "Hugging Face", "Kling AI", "AWS S3", "Aurora PostgreSQL"];
@@ -109,39 +99,6 @@ export default function Home() {
               </article>
             );
           })}
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-slate-950/50">
-        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-16 sm:px-10 lg:grid-cols-2">
-          <div>
-            <p className="text-sm font-medium text-cyan-200">Demo campaign example</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white">Show judges a full campaign without live provider risk.</h2>
-            <p className="mt-5 text-sm leading-6 text-slate-300">Turn on demo mode, create a campaign, run the pipeline, then open the campaign detail page to show every stored output: brief, brand analysis, competitor analysis, strategy, copy, creative brief, generated media records, publishing plan, analytics, and learning insights.</p>
-          </div>
-          <div className="grid gap-3">
-            {["Create campaign brief", "Run full pipeline", "Review generated outputs", "Analyze results", "Update learning"].map((item) => (
-              <div key={item} className="flex items-center gap-3 rounded-lg border border-white/10 bg-bg-surface p-4">
-                <CheckCircle2 className="size-5 text-emerald-300" />
-                <span className="text-sm text-slate-200">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 sm:px-10 lg:grid-cols-3">
-        <div>
-          <p className="text-sm font-medium text-cyan-200">Key features</p>
-          <h2 className="mt-3 text-3xl font-semibold text-white">Built for a real operating workflow.</h2>
-        </div>
-        <div className="grid gap-3 lg:col-span-2 sm:grid-cols-2">
-          {features.map((feature) => (
-            <div key={feature} className="flex gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-4 text-sm text-slate-200">
-              <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-300" />
-              {feature}
-            </div>
-          ))}
         </div>
       </section>
 
