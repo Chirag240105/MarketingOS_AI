@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { getSafeAbsoluteUrl } from "@/lib/app-url";
 import { generateMarketingImage, getImageTypeForPlatform } from "@/lib/ai/image-service";
 import { writeAuditLog } from "@/lib/audit";
 import { prisma } from "@/lib/db";
@@ -115,7 +116,7 @@ export async function launchAdFromPost(input: string | LaunchAdInput) {
     const data = typeof input === "string"
       ? launchAdSchema.parse({
         postId: input,
-        linkUrl: brandProfile?.website || process.env.APP_URL || process.env.AUTH_URL || "http://localhost:3000",
+        linkUrl: getSafeAbsoluteUrl(brandProfile?.website),
         adMessage: post.caption || post.body || "Learn more about this offer.",
         dailyBudgetDollars: positiveNumber(brandProfile?.budget) || 1,
         campaignName: post.campaign.name || post.title || "MarketingOS AI Campaign",

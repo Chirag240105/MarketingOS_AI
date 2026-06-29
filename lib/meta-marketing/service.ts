@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { getSafeAbsoluteUrl } from "@/lib/app-url";
 import type { GeneratedPost, SocialAccount } from "@/lib/generated/prisma/client";
 
 type MetaStatus = "ACTIVE" | "PAUSED" | "DELETED";
@@ -129,6 +130,7 @@ export async function createMetaAd(campaignId: string, post?: GeneratedPost) {
   if (!selectedPost) throw new Error("Generate campaign copy before creating a Meta ad.");
   const context = getMetaContext(campaign.workspace.socialAccounts);
   if (!context.pageId) throw new Error("Meta Page ID is missing. Store pageId in account metadata or set META_PAGE_ID.");
+  const destinationUrl = getSafeAbsoluteUrl(process.env.META_DEFAULT_DESTINATION_URL);
 
   const creative = await graphRequest<{ id?: string }>(`${context.adAccountId}/adcreatives`, context.account.accessToken!, {
     name: `${campaign.name} Creative`,
@@ -138,8 +140,8 @@ export async function createMetaAd(campaignId: string, post?: GeneratedPost) {
         message: selectedPost.caption || selectedPost.body,
         name: selectedPost.title || campaign.name,
         description: selectedPost.body,
-        link: process.env.META_DEFAULT_DESTINATION_URL || process.env.NEXT_PUBLIC_APP_URL || "https://example.com",
-        call_to_action: { type: "LEARN_MORE", value: { link: process.env.META_DEFAULT_DESTINATION_URL || process.env.NEXT_PUBLIC_APP_URL || "https://example.com" } },
+        link: destinationUrl,
+        call_to_action: { type: "LEARN_MORE", value: { link: destinationUrl } },
       },
     }),
   });

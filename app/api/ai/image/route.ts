@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
+import { getSafeAbsoluteUrl } from "@/lib/app-url";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { generateRunwayProductCampaignImage } from "@/lib/ai/runway-recipe-service";
@@ -63,7 +64,7 @@ async function generateImage(prompt: string, productImageUri?: string) {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": process.env.OPENROUTER_HTTP_REFERER || process.env.APP_URL || "http://localhost:3000",
+        "HTTP-Referer": getSafeAbsoluteUrl(process.env.OPENROUTER_HTTP_REFERER),
         "X-OpenRouter-Title": process.env.OPENROUTER_APP_TITLE || "MarketingOS AI",
       },
       body: JSON.stringify({

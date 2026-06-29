@@ -1,4 +1,5 @@
 import { createHmac, timingSafeEqual } from "crypto";
+import { getAppUrl } from "@/lib/app-url";
 
 export type SocialOAuthPlatform = "instagram" | "facebook" | "linkedin" | "x";
 
@@ -31,5 +32,5 @@ export function verifySocialOAuthState(value: string | null): State {
 }
 
 export function appUrl() {
-  return (process.env.AUTH_URL || "http://localhost:3000").replace(/\/$/, "");
+  return getAppUrl();
 }

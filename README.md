@@ -74,11 +74,11 @@ NEXT_PUBLIC_DEMO_MODE=false
 ## Local setup
 
 1. Copy `.env.example` to `.env`.
-2. Use the local Docker database URL:
+2. Use your local Docker database host in the connection strings:
 
 ```bash
-DATABASE_URL="postgresql://marketingos:marketingos@localhost:5432/marketingos?schema=public"
-REDIS_URL="redis://localhost:6379"
+DATABASE_URL="postgresql://marketingos:marketingos@DB_HOST:5432/marketingos?schema=public"
+REDIS_URL="redis://REDIS_HOST:6379"
 NEXT_PUBLIC_DEMO_MODE=true
 ```
 
